@@ -1,0 +1,3977 @@
+;/*****************************************************
+;Chip type               : ATmega128A
+;Program type            : Application
+;AVR Core Clock frequency: 11,059200 MHz
+;Memory model            : Small
+;External RAM size       : 0
+;Data Stack size         : 1024
+;*****************************************************/
+;
+;#include <mega128a.h>
+;PCODE: $00000000 VOL: 0
+	#ifndef __SLEEP_DEFINED__
+;PCODE: $00000001 VOL: 0
+	#define __SLEEP_DEFINED__
+;PCODE: $00000002 VOL: 0
+	.EQU __se_bit=0x20
+;PCODE: $00000003 VOL: 0
+	.EQU __sm_mask=0x1C
+;PCODE: $00000004 VOL: 0
+	.EQU __sm_powerdown=0x10
+;PCODE: $00000005 VOL: 0
+	.EQU __sm_powersave=0x18
+;PCODE: $00000006 VOL: 0
+	.EQU __sm_standby=0x14
+;PCODE: $00000007 VOL: 0
+	.EQU __sm_ext_standby=0x1C
+;PCODE: $00000008 VOL: 0
+	.EQU __sm_adc_noise_red=0x08
+;PCODE: $00000009 VOL: 0
+	.SET power_ctrl_reg=mcucr
+;PCODE: $0000000A VOL: 0
+	#endif
+;PCODE: $0000000B VOL: 0
+;PCODE: $0000000C VOL: 0
+;#include <delay.h>
+;// I2C Bus functions
+;#include <i2c.h>
+;// Standard Input/Output functions
+;#include <stdio.h>
+;
+;
+;#define DDR_SPI DDRB
+;#define PORT_SPI PORTB
+;#define SS 0
+;
+;#define ADC_VREF_TYPE 0xC0
+;#ifndef UDRE
+;#define UDRE 5
+;#endif
+;#define DATA_REGISTER_EMPTY (1<<UDRE)
+;#define AD7799_DDRDY PINB.3
+;
+;
+;
+;
+;#define AVERAGE_NUMBER 15
+;
+;#define FIXWEIGHT //закоментить отрубить фиксированный вес
+;#define SPEEDFILTER //закоментить отрубить медианный фильтр скорости
+;#define ADC_FAULT_RESET //закоментить отрубить отрубание телеги при неправильной иниц ADC
+;
+;//#define ADC_TO_KG//Раскометить для поверки Закоментить чтоб измерять
+;
+;#define IKS00  //номер телеги!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;
+;
+;//Список необходимых изменений
+;//5)АЦП периодически не инициализируется исправить
+;//6)Показания аккумулятора фильтрануть ++++++++++++++++++++
+;
+;//Формула
+;
+;//В проге мобилы:
+;//2)Задание Скольж убрать
+;//3)Скорость мерять правильно
+;//4)пароль сделать из файла
+;//5)выводить код ошибки и саму ошибку
+;
+;
+;eeprom unsigned char EEP_SETUP_MAS[8];
+;eeprom unsigned char EEP_CALIBR_MAS[10];
+;
+;
+;
+;#ifdef IKS01
+;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CALIBR_MAIN_DATA N01
+;#define N_string "AT+NAMEIKSEM#01\r\n"
+;//unsigned int WEIGHT_NULL=7039, LOADCELL_NULL=1807, DELTA_WEIGHT10KG=842, DELTA_LOADCELL10KG=513;
+;//unsigned int WEIGHT_NULL=7023, LOADCELL_NULL=1900, DELTA_WEIGHT10KG=834, DELTA_LOADCELL10KG=508;
+;unsigned int WEIGHT_NULL=6752, LOADCELL_NULL=2089, DELTA_WEIGHT10KG=800, DELTA_LOADCELL10KG=475; //march 17 2023 Mishanj ...
+;unsigned int R_IK=202, R_TK=333 , ZADANIE_S=15;
+;unsigned char SETUP_MAS[8]={0,0,0,0,0,0,0,0};
+;unsigned char CALIBR_MAS[10]={0,0,0,0,0,0,0,0,0,0};
+;unsigned char DEFAULT_SETUP_MAS[8]={248,202,133,15,1,0,0,(202+133+15+1)/6};
+;//unsigned char DEFAULT_CALIBR_MAS[10]={249,70,39,18,7,8,42,5,13,(70+39+18+7+8+42+5+13)/8};
+;//unsigned char DEFAULT_CALIBR_MAS[10]={249,70,23,19,0,8,34,5,8,(70+23+19+0+8+34+5+8)/8};
+;unsigned char DEFAULT_CALIBR_MAS[10]={249,67,52,20,89,8,0,4,75,(67+52+20+89+8+0+4+75)/8};
+;int ADC_0_KG=1524,ADC_100_KG=6759;
+;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CALIBR_MAIN_DATA N01
+;#endif
+;
+;#ifdef IKS02
+;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CALIBR_MAIN_DATA N02
+;#define N_string "AT+NAMEIKSEM#02\r\n"
+;//unsigned int WEIGHT_NULL=6846, LOADCELL_NULL=400, DELTA_WEIGHT10KG=835, DELTA_LOADCELL10KG=495;
+;//unsigned int WEIGHT_NULL=6914, LOADCELL_NULL=395, DELTA_WEIGHT10KG=863, DELTA_LOADCELL10KG=511;
+;unsigned int WEIGHT_NULL=6838, LOADCELL_NULL=364, DELTA_WEIGHT10KG=856, DELTA_LOADCELL10KG=516;
+;unsigned int R_IK=202, R_TK=333 , ZADANIE_S=15;
+;unsigned char SETUP_MAS[8]={0,0,0,0,0,0,0,0};
+;unsigned char CALIBR_MAS[10]={0,0,0,0,0,0,0,0,0,0};
+;unsigned char DEFAULT_SETUP_MAS[8]={248,202,133,15,1,0,0,(202+133+15+1)/6};
+;//unsigned char DEFAULT_CALIBR_MAS[10]={249,68,46,4,0,8,35,4,95,(68+46+4+0+8+35+4+95)/8};
+;//unsigned char DEFAULT_CALIBR_MAS[10]={249,69,14,3,95,8,63,5,11,(69+14+3+95+8+63+5+11)/8};
+;unsigned char DEFAULT_CALIBR_MAS[10]={249,68,38,3,64,8,56,5,16,(68+38+3+64+8+56+5+16)/8};
+;
+;unsigned char ADC_0_KG=88,ADC_100_KG=6759;
+;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CALIBR_MAIN_DATA N02
+;#endif
+;
+;#ifdef IKS03
+;////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CALIBR_MAIN_DATA N03
+;#define N_string "AT+NAMEIKSEM#03\r\n"
+;//unsigned int WEIGHT_NULL=6944, LOADCELL_NULL=313, DELTA_WEIGHT10KG=825, DELTA_LOADCELL10KG=495;
+;unsigned int WEIGHT_NULL=7093, LOADCELL_NULL=402, DELTA_WEIGHT10KG=843, DELTA_LOADCELL10KG=500;
+;unsigned int R_IK=202, R_TK=333 , ZADANIE_S=15;
+;unsigned char SETUP_MAS[8]={0,0,0,0,0,0,0,0};
+;unsigned char CALIBR_MAS[10]={0,0,0,0,0,0,0,0,0,0};
+;unsigned char DEFAULT_SETUP_MAS[8]={248,202,133,15,1,0,0,(202+133+15+1)/6};
+;//unsigned char DEFAULT_CALIBR_MAS[10]={249,69,44,3,13,8,25,4,95,(69+44+3+13+8+25+4+95)/8};
+;unsigned char DEFAULT_CALIBR_MAS[10]={249,70,93,4,2,8,43,5,0,(70+93+4+2+8+43+5+0)/8};
+;
+;unsigned char ADC_0_KG=88,ADC_100_KG=6759;
+;////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!CALIBR_MAIN_DATA N03
+;#endif
+;
+;#ifdef IKS00
+;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!PCS_WITHOUT_TELEGA
+;#define N_string "AT+NAMEIKSEM#00\r\n"
+;unsigned int WEIGHT_NULL=6752, LOADCELL_NULL=2089, DELTA_WEIGHT10KG=800, DELTA_LOADCELL10KG=475; //march 17 2023 Mishanj ...
+;unsigned int R_IK=202, R_TK=333 , ZADANIE_S=15;
+
+	.DSEG
+;unsigned char SETUP_MAS[8]={0,0,0,0,0,0,0,0};
+;unsigned char CALIBR_MAS[10]={0,0,0,0,0,0,0,0,0,0};
+;unsigned char DEFAULT_SETUP_MAS[8]={248,202,133,15,1,0,0,(202+133+15+1)/6};
+;unsigned char DEFAULT_CALIBR_MAS[10]={249,67,52,20,89,8,0,4,75,(67+52+20+89+8+0+4+75)/8};
+;int ADC_0_KG=1524,ADC_100_KG=6759;
+;#endif
+;
+;
+;unsigned flag_transmission=255;
+;unsigned flag_receive=0,receive_counter=0;
+;
+;unsigned char SEND_MAS[26]={255,5,55,4,49,6,21,7,50,5,80,75,0,3598/60,3598%60,31,22,1819/60,1819%60,55,24,'N','E',50,0,3 ...
+;
+;
+;unsigned char program_cycle_flag=0,program_cycle_counter=0;
+;
+;unsigned char ovf_IK=0, ovf_TK=0;
+;unsigned long IK_COUNT[2]={0,0}, TK_COUNT[2]={0,0}, IK_DELTA=0, TK_DELTA=0;
+;unsigned int IK_SPEED_KM_H=0,TK_SPEED_KM_H=0;
+;unsigned int IK_SPEED_MAS[3]={0,0,0},TK_SPEED_MAS[3]={0,0,0};
+;
+;unsigned int ADC_BAT=0,ADC_I=0;
+;unsigned int BAT_SUM=0;
+;long I_NULL=0;
+;unsigned char flag_I_NULL=0;
+;//  unsigned int A_BAT=0,A_I=0;
+;
+;unsigned char GPS_zap_counter=0,GPS_sim_counter=0,GPS_flag_ready=0;//1-ustanovlen 0-ne ustanovlen
+;unsigned char GPS_string_name[3]={0,0,0},GPS_flag_gp=0;//0-no 1-1 bukva posle P, 2-2ya, 3-3ya, 4-GGA
+;unsigned int GPS_shir[4]={1,1,1,1},GPS_dolg[4]={1,1,1,1};//grad min .xxxx  NSWE
+;unsigned char GPS_solve=0;
+;unsigned char GPS_ON_COUNTER=0;
+;unsigned char flag_start=0;
+;unsigned char measuring_start_counter=0;
+;int load_cell=0,load_cell_MAS[20];
+;unsigned char ADC_fault_counter=0;
+;
+;
+;int PID_I_S=800;
+;
+;
+;interrupt [EXT_INT7] void ext_int7_isr(void);
+;interrupt [EXT_INT6] void ext_int6_isr(void);
+;void init_all(void);
+;void led_zero(void);
+;void led_one(void);
+;void lights(char G, char R, char B);
+;unsigned int K_BY_KOEFFICIENTS_REAL(unsigned int M);
+;unsigned int K_BY_KOEFFICIENTS_ASFT(unsigned int M);
+;void Read_Setup_Calibr(void);
+;void Control_Sum_Send(void);
+;void Control_Sum_Calibr(void);
+;void Control_Sum_Setup(void);
+;interrupt [TIM1_OVF] void timer1_ovf_isr(void);
+;void delay(unsigned int d);
+;void SPI_MasterInit(void);
+;unsigned char SPI_MasterReceive(void);
+;void SPI_MasterTransmit(unsigned char x);
+;void SET_AD7799(void);
+;unsigned int READ_AD7799(void);
+;void uart1SendByte(char data);
+;void uart1SendString(char *str);
+;void uart1SendArray(unsigned char *array, unsigned char size);
+;interrupt [USART0_RXC] void usart0_rx_isr(void);
+;interrupt [USART1_RXC] void usart1_rx_isr(void);
+;unsigned int read_adc(unsigned char adc_input);
+;interrupt [TIM2_OVF] void timer2_ovf_isr(void);
+;
+;void load_from_eeprom(void);
+;void save_to_eeprom(void);
+;
+;unsigned int load_cell_filter(void)
+; 0000 00BD {
+
+	.CSEG
+;PCODE: $0000000D VOL: 0
+;PCODE: $0000000E VOL: 0
+; 0000 00BE  unsigned char tmp;
+; 0000 00BF  unsigned long int sum=0;
+; 0000 00C0 
+; 0000 00C1  if(measuring_start_counter<2)
+;PCODE: $0000000F VOL: 0
+;PCODE: $00000010 VOL: 0
+;PCODE: $00000011 VOL: 0
+;PCODE: $00000012 VOL: 0
+;PCODE: $00000013 VOL: 0
+;PCODE: $00000014 VOL: 0
+;PCODE: $00000015 VOL: 0
+;PCODE: $00000016 VOL: 0
+;PCODE: $00000017 VOL: 0
+;PCODE: $00000018 VOL: 0
+;	tmp -> R17
+;	sum -> Y+1
+;PCODE: $00000019 VOL: 0
+;PCODE: $0000001A VOL: 0
+;PCODE: $0000001B VOL: 0
+; 0000 00C2  {
+; 0000 00C3   for(tmp=(AVERAGE_NUMBER-1);tmp>0;tmp--)
+;PCODE: $0000001C VOL: 0
+;PCODE: $0000001D VOL: 0
+;PCODE: $0000001E VOL: 0
+;PCODE: $0000001F VOL: 0
+;PCODE: $00000020 VOL: 0
+;PCODE: $00000021 VOL: 0
+;PCODE: $00000022 VOL: 0
+;PCODE: $00000023 VOL: 0
+;PCODE: $00000024 VOL: 0
+; 0000 00C4   {
+; 0000 00C5     load_cell_MAS[tmp]=load_cell;
+;PCODE: $00000025 VOL: 0
+;PCODE: $00000026 VOL: 0
+;PCODE: $00000027 VOL: 0
+;PCODE: $00000028 VOL: 0
+;PCODE: $00000029 VOL: 0
+;PCODE: $0000002A VOL: 0
+;PCODE: $0000002B VOL: 0
+; 0000 00C6     sum=sum+load_cell;
+;PCODE: $0000002C VOL: 0
+;PCODE: $0000002D VOL: 0
+;PCODE: $0000002E VOL: 0
+;PCODE: $0000002F VOL: 0
+;PCODE: $00000030 VOL: 0
+; 0000 00C7   }
+;PCODE: $00000031 VOL: 0
+;PCODE: $00000032 VOL: 0
+;PCODE: $00000033 VOL: 0
+;PCODE: $00000034 VOL: 0
+;PCODE: $00000035 VOL: 0
+; 0000 00C8  }
+; 0000 00C9  else
+;PCODE: $00000036 VOL: 0
+;PCODE: $00000037 VOL: 0
+; 0000 00CA  {
+; 0000 00CB   for(tmp=(AVERAGE_NUMBER-1);tmp>0;tmp--)
+;PCODE: $00000038 VOL: 0
+;PCODE: $00000039 VOL: 0
+;PCODE: $0000003A VOL: 0
+;PCODE: $0000003B VOL: 0
+;PCODE: $0000003C VOL: 0
+;PCODE: $0000003D VOL: 0
+;PCODE: $0000003E VOL: 0
+;PCODE: $0000003F VOL: 0
+;PCODE: $00000040 VOL: 0
+; 0000 00CC   {
+; 0000 00CD     load_cell_MAS[tmp]=load_cell_MAS[tmp-1];
+;PCODE: $00000041 VOL: 0
+;PCODE: $00000042 VOL: 0
+;PCODE: $00000043 VOL: 0
+;PCODE: $00000044 VOL: 0
+;PCODE: $00000045 VOL: 0
+;PCODE: $00000046 VOL: 0
+;PCODE: $00000047 VOL: 0
+;PCODE: $00000048 VOL: 0
+;PCODE: $00000049 VOL: 0
+;PCODE: $0000004A VOL: 0
+;PCODE: $0000004B VOL: 0
+;PCODE: $0000004C VOL: 0
+;PCODE: $0000004D VOL: 0
+;PCODE: $0000004E VOL: 0
+;PCODE: $0000004F VOL: 0
+; 0000 00CE     sum=sum+load_cell_MAS[tmp];
+;PCODE: $00000050 VOL: 0
+;PCODE: $00000051 VOL: 0
+;PCODE: $00000052 VOL: 0
+;PCODE: $00000053 VOL: 0
+;PCODE: $00000054 VOL: 0
+;PCODE: $00000055 VOL: 0
+;PCODE: $00000056 VOL: 0
+;PCODE: $00000057 VOL: 0
+;PCODE: $00000058 VOL: 0
+;PCODE: $00000059 VOL: 0
+; 0000 00CF   }
+;PCODE: $0000005A VOL: 0
+;PCODE: $0000005B VOL: 0
+;PCODE: $0000005C VOL: 0
+;PCODE: $0000005D VOL: 0
+;PCODE: $0000005E VOL: 0
+; 0000 00D0  }
+;PCODE: $0000005F VOL: 0
+; 0000 00D1  load_cell_MAS[0]=load_cell;
+;PCODE: $00000060 VOL: 0
+;PCODE: $00000061 VOL: 0
+; 0000 00D2  sum=sum+load_cell;
+;PCODE: $00000062 VOL: 0
+;PCODE: $00000063 VOL: 0
+;PCODE: $00000064 VOL: 0
+;PCODE: $00000065 VOL: 0
+;PCODE: $00000066 VOL: 0
+; 0000 00D3  sum=sum/AVERAGE_NUMBER;
+;PCODE: $00000067 VOL: 0
+;PCODE: $00000068 VOL: 0
+;PCODE: $00000069 VOL: 0
+;PCODE: $0000006A VOL: 0
+; 0000 00D4  return (unsigned int)sum;
+;PCODE: $0000006B VOL: 0
+;PCODE: $0000006C VOL: 0
+;PCODE: $0000006D VOL: 0
+;PCODE: $0000006E VOL: 0
+;PCODE: $0000006F VOL: 0
+; 0000 00D5 }
+;PCODE: $00000070 VOL: 0
+;
+;// Write a character to the USART1 Transmitter
+;#pragma used+
+;void putchar1(char c)
+; 0000 00DA {
+;PCODE: $00000071 VOL: 0
+;PCODE: $00000072 VOL: 0
+; 0000 00DB  while ((UCSR1A & DATA_REGISTER_EMPTY)==0);
+;PCODE: $00000073 VOL: 0
+;	c -> Y+0
+;PCODE: $00000074 VOL: 0
+;PCODE: $00000075 VOL: 0
+;PCODE: $00000076 VOL: 0
+;PCODE: $00000077 VOL: 0
+;PCODE: $00000078 VOL: 0
+;PCODE: $00000079 VOL: 0
+; 0000 00DC   UDR1=c;
+;PCODE: $0000007A VOL: 0
+;PCODE: $0000007B VOL: 0
+; 0000 00DD }
+;PCODE: $0000007C VOL: 0
+;PCODE: $0000007D VOL: 0
+;PCODE: $0000007E VOL: 0
+;#pragma used-
+;
+;//
+;unsigned int middle(unsigned int d1, unsigned int d2, unsigned int d3)
+; 0000 00E2 {
+;PCODE: $0000007F VOL: 0
+;PCODE: $00000080 VOL: 0
+; 0000 00E3  if(d1>=d2)
+;PCODE: $00000081 VOL: 0
+;	d1 -> Y+4
+;	d2 -> Y+2
+;	d3 -> Y+0
+;PCODE: $00000082 VOL: 0
+;PCODE: $00000083 VOL: 0
+;PCODE: $00000084 VOL: 0
+;PCODE: $00000085 VOL: 0
+; 0000 00E4  {
+; 0000 00E5   if(d1<=d3) return d1;
+;PCODE: $00000086 VOL: 0
+;PCODE: $00000087 VOL: 0
+;PCODE: $00000088 VOL: 0
+;PCODE: $00000089 VOL: 0
+;PCODE: $0000008A VOL: 0
+;PCODE: $0000008B VOL: 0
+;PCODE: $0000008C VOL: 0
+; 0000 00E6   else
+;PCODE: $0000008D VOL: 0
+; 0000 00E7   {
+; 0000 00E8    if(d2>=d3)
+;PCODE: $0000008E VOL: 0
+;PCODE: $0000008F VOL: 0
+;PCODE: $00000090 VOL: 0
+;PCODE: $00000091 VOL: 0
+; 0000 00E9     return d2;
+;PCODE: $00000092 VOL: 0
+;PCODE: $00000093 VOL: 0
+;PCODE: $00000094 VOL: 0
+; 0000 00EA    else
+;PCODE: $00000095 VOL: 0
+; 0000 00EB     return d3;
+;PCODE: $00000096 VOL: 0
+;PCODE: $00000097 VOL: 0
+;PCODE: $00000098 VOL: 0
+; 0000 00EC   }
+;PCODE: $00000099 VOL: 0
+;PCODE: $0000009A VOL: 0
+; 0000 00ED  }
+; 0000 00EE  else
+;PCODE: $0000009B VOL: 0
+;PCODE: $0000009C VOL: 0
+; 0000 00EF  {
+; 0000 00F0   if(d2<=d3) return d2;
+;PCODE: $0000009D VOL: 0
+;PCODE: $0000009E VOL: 0
+;PCODE: $0000009F VOL: 0
+;PCODE: $000000A0 VOL: 0
+;PCODE: $000000A1 VOL: 0
+;PCODE: $000000A2 VOL: 0
+;PCODE: $000000A3 VOL: 0
+; 0000 00F1   else
+;PCODE: $000000A4 VOL: 0
+; 0000 00F2   {
+; 0000 00F3    if(d1>=d3)
+;PCODE: $000000A5 VOL: 0
+;PCODE: $000000A6 VOL: 0
+;PCODE: $000000A7 VOL: 0
+;PCODE: $000000A8 VOL: 0
+; 0000 00F4     return d1;
+;PCODE: $000000A9 VOL: 0
+;PCODE: $000000AA VOL: 0
+;PCODE: $000000AB VOL: 0
+; 0000 00F5    else
+;PCODE: $000000AC VOL: 0
+; 0000 00F6     return d3;
+;PCODE: $000000AD VOL: 0
+;PCODE: $000000AE VOL: 0
+;PCODE: $000000AF VOL: 0
+; 0000 00F7   }
+;PCODE: $000000B0 VOL: 0
+;PCODE: $000000B1 VOL: 0
+; 0000 00F8  }
+;PCODE: $000000B2 VOL: 0
+; 0000 00F9 }
+;PCODE: $000000B3 VOL: 0
+;PCODE: $000000B4 VOL: 0
+;PCODE: $000000B5 VOL: 0
+;
+;void main(void)
+; 0000 00FC {
+;PCODE: $000000B6 VOL: 0
+; 0000 00FD // Declare your local variables here
+; 0000 00FE unsigned char main_cycle=0,flag_led_direction=0,led_cycle=0;
+; 0000 00FF unsigned int BAT=0;
+; 0000 0100 unsigned int K=0;
+; 0000 0101 unsigned int TMP,TMPL;
+; 0000 0102 
+; 0000 0103 int M=0;
+; 0000 0104 int I=0;
+; 0000 0105 unsigned int TIME_OUT=10*60*30;
+; 0000 0106 
+; 0000 0107 Control_Sum_Calibr();
+;PCODE: $000000B7 VOL: 0
+;PCODE: $000000B8 VOL: 0
+;PCODE: $000000B9 VOL: 0
+;PCODE: $000000BA VOL: 0
+;PCODE: $000000BB VOL: 0
+;	main_cycle -> R17
+;	flag_led_direction -> R16
+;	led_cycle -> R19
+;	BAT -> R20,R21
+;	K -> Y+10
+;	TMP -> Y+8
+;	TMPL -> Y+6
+;	M -> Y+4
+;	I -> Y+2
+;	TIME_OUT -> Y+0
+;PCODE: $000000BC VOL: 0
+;PCODE: $000000BD VOL: 0
+;PCODE: $000000BE VOL: 0
+;PCODE: $000000BF VOL: 0
+;PCODE: $000000C0 VOL: 0
+;PCODE: $000000C1 VOL: 0
+;PCODE: $000000C2 VOL: 0
+;PCODE: $000000C3 VOL: 0
+;PCODE: $000000C4 VOL: 0
+; 0000 0108 Control_Sum_Setup();
+;PCODE: $000000C5 VOL: 0
+; 0000 0109 load_from_eeprom();
+;PCODE: $000000C6 VOL: 0
+; 0000 010A Read_Setup_Calibr();
+;PCODE: $000000C7 VOL: 0
+; 0000 010B 
+; 0000 010C 
+; 0000 010D 
+; 0000 010E 
+; 0000 010F init_all();
+;PCODE: $000000C8 VOL: 0
+; 0000 0110 // I2C Port: PORTD
+; 0000 0111 // I2C SDA bit: 1
+; 0000 0112 // I2C SCL bit: 0
+; 0000 0113 // Bit Rate: 100 kHz
+; 0000 0114 i2c_init();
+;PCODE: $000000C9 VOL: 0
+; 0000 0115 
+; 0000 0116 SPI_MasterInit();
+;PCODE: $000000CA VOL: 0
+; 0000 0117 
+; 0000 0118 // Global enable interrupts
+; 0000 0119 
+; 0000 011A 
+; 0000 011B PORTC.0 = 1;//iksem - on
+;PCODE: $000000CB VOL: 0
+;PCODE: $000000CC VOL: 0
+; 0000 011C 
+; 0000 011D //PORTC.1 = 1;//fonar on
+; 0000 011E 
+; 0000 011F 
+; 0000 0120 delay_ms(100);
+;PCODE: $000000CD VOL: 0
+;PCODE: $000000CE VOL: 0
+;PCODE: $000000CF VOL: 0
+; 0000 0121 SET_AD7799();
+;PCODE: $000000D0 VOL: 0
+; 0000 0122 delay_ms(100);
+;PCODE: $000000D1 VOL: 0
+;PCODE: $000000D2 VOL: 0
+;PCODE: $000000D3 VOL: 0
+; 0000 0123 SET_AD7799();
+;PCODE: $000000D4 VOL: 0
+; 0000 0124 delay_ms(100);
+;PCODE: $000000D5 VOL: 0
+;PCODE: $000000D6 VOL: 0
+;PCODE: $000000D7 VOL: 0
+; 0000 0125 uart1SendString(N_string);//Set BLUETOOTH NAME
+;PCODE: $000000D8 VOL: 0
+;PCODE: $000000D9 VOL: 0
+;PCODE: $000000DA VOL: 0
+; 0000 0126 #asm("sei");
+;PCODE: $000000DB VOL: 0
+	sei
+;PCODE: $000000DC VOL: 0
+; 0000 0127 
+; 0000 0128 while (1)
+;PCODE: $000000DD VOL: 0
+; 0000 0129     {
+; 0000 012A      /*
+; 0000 012B       program_cycle_flag=0;
+; 0000 012C       while(program_cycle_flag!=1)
+; 0000 012D       {}
+; 0000 012E       program_cycle_flag=0;
+; 0000 012F      */
+; 0000 0130 
+; 0000 0131       #ifdef SPEEDFILTER
+; 0000 0132       TMP=middle(TK_SPEED_MAS[0],TK_SPEED_MAS[1],TK_SPEED_MAS[2]);
+;PCODE: $000000DE VOL: 0
+;PCODE: $000000DF VOL: 0
+;PCODE: $000000E0 VOL: 0
+;PCODE: $000000E1 VOL: 0
+;PCODE: $000000E2 VOL: 0
+;PCODE: $000000E3 VOL: 0
+;PCODE: $000000E4 VOL: 0
+;PCODE: $000000E5 VOL: 0
+;PCODE: $000000E6 VOL: 0
+; 0000 0133       SEND_MAS[1]= TMP/100;
+;PCODE: $000000E7 VOL: 0
+;PCODE: $000000E8 VOL: 0
+;PCODE: $000000E9 VOL: 0
+;PCODE: $000000EA VOL: 0
+;PCODE: $000000EB VOL: 0
+; 0000 0134       SEND_MAS[2]= TMP%100;
+;PCODE: $000000EC VOL: 0
+;PCODE: $000000ED VOL: 0
+;PCODE: $000000EE VOL: 0
+;PCODE: $000000EF VOL: 0
+;PCODE: $000000F0 VOL: 0
+; 0000 0135       TMP=middle(IK_SPEED_MAS[0],IK_SPEED_MAS[1],IK_SPEED_MAS[2]);
+;PCODE: $000000F1 VOL: 0
+;PCODE: $000000F2 VOL: 0
+;PCODE: $000000F3 VOL: 0
+;PCODE: $000000F4 VOL: 0
+;PCODE: $000000F5 VOL: 0
+;PCODE: $000000F6 VOL: 0
+;PCODE: $000000F7 VOL: 0
+;PCODE: $000000F8 VOL: 0
+;PCODE: $000000F9 VOL: 0
+; 0000 0136       SEND_MAS[3]= TMP/100;
+;PCODE: $000000FA VOL: 0
+;PCODE: $000000FB VOL: 0
+;PCODE: $000000FC VOL: 0
+;PCODE: $000000FD VOL: 0
+;PCODE: $000000FE VOL: 0
+; 0000 0137       SEND_MAS[4]= TMP%100;
+;PCODE: $000000FF VOL: 0
+;PCODE: $00000100 VOL: 0
+;PCODE: $00000101 VOL: 0
+;PCODE: $00000102 VOL: 0
+;PCODE: $00000103 VOL: 0
+; 0000 0138       #else
+; 0000 0139       SEND_MAS[1]= TK_SPEED_KM_H/100;
+; 0000 013A       SEND_MAS[2]= TK_SPEED_KM_H%100;
+; 0000 013B       SEND_MAS[3]= IK_SPEED_KM_H/100;
+; 0000 013C       SEND_MAS[4]= IK_SPEED_KM_H%100;
+; 0000 013D       #endif
+; 0000 013E 
+; 0000 013F        if(flag_start==1)
+;PCODE: $00000104 VOL: 0
+;PCODE: $00000105 VOL: 0
+;PCODE: $00000106 VOL: 0
+; 0000 0140        {
+; 0000 0141         TIME_OUT=10*60*30;
+;PCODE: $00000107 VOL: 0
+;PCODE: $00000108 VOL: 0
+; 0000 0142 
+; 0000 0143        // measuring_start_counter++;
+; 0000 0144        }//30 min
+; 0000 0145        else
+;PCODE: $00000109 VOL: 0
+;PCODE: $0000010A VOL: 0
+; 0000 0146        {
+; 0000 0147         if(TIME_OUT==0)
+;PCODE: $0000010B VOL: 0
+;PCODE: $0000010C VOL: 0
+;PCODE: $0000010D VOL: 0
+; 0000 0148          PORTC.0 = 0;//iksem - off
+;PCODE: $0000010E VOL: 0
+;PCODE: $0000010F VOL: 0
+; 0000 0149         else
+;PCODE: $00000110 VOL: 0
+;PCODE: $00000111 VOL: 0
+; 0000 014A          TIME_OUT--;
+;PCODE: $00000112 VOL: 0
+;PCODE: $00000113 VOL: 0
+;PCODE: $00000114 VOL: 0
+; 0000 014B        }
+;PCODE: $00000115 VOL: 0
+;PCODE: $00000116 VOL: 0
+; 0000 014C 
+; 0000 014D 
+; 0000 014E       while(AD7799_DDRDY==0) //!DDRDY
+;PCODE: $00000117 VOL: 0
+;PCODE: $00000118 VOL: 0
+;PCODE: $00000119 VOL: 0
+;PCODE: $0000011A VOL: 0
+; 0000 014F       {}
+;PCODE: $0000011B VOL: 0
+;PCODE: $0000011C VOL: 0
+; 0000 0150 
+; 0000 0151       #ifdef ADC_FAULT_RESET
+; 0000 0152        TMPL=TCNT3L;//read low first
+;PCODE: $0000011D VOL: 0
+;PCODE: $0000011E VOL: 0
+;PCODE: $0000011F VOL: 0
+; 0000 0153        TMP=TCNT3H;
+;PCODE: $00000120 VOL: 0
+;PCODE: $00000121 VOL: 0
+;PCODE: $00000122 VOL: 0
+; 0000 0154        TMP=(TMP<<8)+TMPL;
+;PCODE: $00000123 VOL: 0
+;PCODE: $00000124 VOL: 0
+;PCODE: $00000125 VOL: 0
+;PCODE: $00000126 VOL: 0
+;PCODE: $00000127 VOL: 0
+; 0000 0155        if((TMP<(1080-250))||(TMP>(1080+250)))
+;PCODE: $00000128 VOL: 0
+;PCODE: $00000129 VOL: 0
+;PCODE: $0000012A VOL: 0
+;PCODE: $0000012B VOL: 0
+;PCODE: $0000012C VOL: 0
+;PCODE: $0000012D VOL: 0
+;PCODE: $0000012E VOL: 0
+;PCODE: $0000012F VOL: 0
+; 0000 0156        {
+; 0000 0157         if(ADC_fault_counter>5)
+;PCODE: $00000130 VOL: 0
+;PCODE: $00000131 VOL: 0
+;PCODE: $00000132 VOL: 0
+; 0000 0158         {
+; 0000 0159          PORTC.0 = 0;//iksem - off
+;PCODE: $00000133 VOL: 0
+;PCODE: $00000134 VOL: 0
+; 0000 015A         }
+; 0000 015B         else
+;PCODE: $00000135 VOL: 0
+;PCODE: $00000136 VOL: 0
+; 0000 015C         {
+; 0000 015D          ADC_fault_counter++;
+;PCODE: $00000137 VOL: 0
+;PCODE: $00000138 VOL: 0
+;PCODE: $00000139 VOL: 0
+; 0000 015E         }
+;PCODE: $0000013A VOL: 0
+; 0000 015F        }
+; 0000 0160        else
+;PCODE: $0000013B VOL: 0
+;PCODE: $0000013C VOL: 0
+; 0000 0161        {
+; 0000 0162         ADC_fault_counter=0;
+;PCODE: $0000013D VOL: 0
+;PCODE: $0000013E VOL: 0
+; 0000 0163         PORTC.0 = 1;//iksem - on
+;PCODE: $0000013F VOL: 0
+;PCODE: $00000140 VOL: 0
+; 0000 0164        }
+;PCODE: $00000141 VOL: 0
+; 0000 0165        TCNT3H=0;//write high first
+;PCODE: $00000142 VOL: 0
+;PCODE: $00000143 VOL: 0
+; 0000 0166        TCNT3L=0;
+;PCODE: $00000144 VOL: 0
+;PCODE: $00000145 VOL: 0
+; 0000 0167       #endif
+; 0000 0168 
+; 0000 0169       delay_ms(1);
+;PCODE: $00000146 VOL: 0
+;PCODE: $00000147 VOL: 0
+;PCODE: $00000148 VOL: 0
+; 0000 016A       load_cell=READ_AD7799();
+;PCODE: $00000149 VOL: 0
+;PCODE: $0000014A VOL: 0
+; 0000 016B       delay_ms(1);
+;PCODE: $0000014B VOL: 0
+;PCODE: $0000014C VOL: 0
+;PCODE: $0000014D VOL: 0
+; 0000 016C 
+; 0000 016D      //M----------------------------------------------
+; 0000 016E      #ifdef ADC_TO_KG
+; 0000 016F      load_cell=load_cell-ADC_0_KG;
+; 0000 0170      load_cell=(int)(((long int)load_cell*10000)/(long int)ADC_100_KG);
+; 0000 0171      if(load_cell<0)
+; 0000 0172      {load_cell=0;}
+; 0000 0173      #endif
+; 0000 0174      //load_cell=88 - 0kg
+; 0000 0175      //load_cell=835 - 11,1kg
+; 0000 0176      // 1 adc = 0,01486 kg
+; 0000 0177 
+; 0000 0178 
+; 0000 0179       M=load_cell_filter();
+;PCODE: $0000014E VOL: 0
+;PCODE: $0000014F VOL: 0
+; 0000 017A       if(M<0)
+;PCODE: $00000150 VOL: 0
+;PCODE: $00000151 VOL: 0
+;PCODE: $00000152 VOL: 0
+; 0000 017B       M=0;
+;PCODE: $00000153 VOL: 0
+;PCODE: $00000154 VOL: 0
+; 0000 017C       if(M>10000)
+;PCODE: $00000155 VOL: 0
+;PCODE: $00000156 VOL: 0
+;PCODE: $00000157 VOL: 0
+;PCODE: $00000158 VOL: 0
+; 0000 017D       M=10000;
+;PCODE: $00000159 VOL: 0
+;PCODE: $0000015A VOL: 0
+; 0000 017E       if(flag_start==0)
+;PCODE: $0000015B VOL: 0
+;PCODE: $0000015C VOL: 0
+;PCODE: $0000015D VOL: 0
+;PCODE: $0000015E VOL: 0
+; 0000 017F       {
+; 0000 0180        measuring_start_counter=0;
+;PCODE: $0000015F VOL: 0
+;PCODE: $00000160 VOL: 0
+; 0000 0181       }
+; 0000 0182       else
+;PCODE: $00000161 VOL: 0
+;PCODE: $00000162 VOL: 0
+; 0000 0183       {
+; 0000 0184        if(measuring_start_counter<30)
+;PCODE: $00000163 VOL: 0
+;PCODE: $00000164 VOL: 0
+;PCODE: $00000165 VOL: 0
+; 0000 0185         {measuring_start_counter++;}
+;PCODE: $00000166 VOL: 0
+;PCODE: $00000167 VOL: 0
+;PCODE: $00000168 VOL: 0
+; 0000 0186       }
+;PCODE: $00000169 VOL: 0
+;PCODE: $0000016A VOL: 0
+; 0000 0187 
+; 0000 0188       SEND_MAS[7]=M/100;
+;PCODE: $0000016B VOL: 0
+;PCODE: $0000016C VOL: 0
+;PCODE: $0000016D VOL: 0
+;PCODE: $0000016E VOL: 0
+;PCODE: $0000016F VOL: 0
+; 0000 0189       SEND_MAS[8]=M%100;
+;PCODE: $00000170 VOL: 0
+;PCODE: $00000171 VOL: 0
+;PCODE: $00000172 VOL: 0
+;PCODE: $00000173 VOL: 0
+;PCODE: $00000174 VOL: 0
+; 0000 018A       //---------------------------------------------
+; 0000 018B 
+; 0000 018C 
+; 0000 018D      //KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+; 0000 018E       if(ZADANIE_S==15)
+;PCODE: $00000175 VOL: 0
+;PCODE: $00000176 VOL: 0
+;PCODE: $00000177 VOL: 0
+; 0000 018F        K=K_BY_KOEFFICIENTS_ASFT(M);
+;PCODE: $00000178 VOL: 0
+;PCODE: $00000179 VOL: 0
+;PCODE: $0000017A VOL: 0
+; 0000 0190       else
+;PCODE: $0000017B VOL: 0
+;PCODE: $0000017C VOL: 0
+; 0000 0191        K=K_BY_KOEFFICIENTS_REAL(M);
+;PCODE: $0000017D VOL: 0
+;PCODE: $0000017E VOL: 0
+;PCODE: $0000017F VOL: 0
+; 0000 0192 
+; 0000 0193       SEND_MAS[5]=K/100;
+;PCODE: $00000180 VOL: 0
+;PCODE: $00000181 VOL: 0
+;PCODE: $00000182 VOL: 0
+;PCODE: $00000183 VOL: 0
+;PCODE: $00000184 VOL: 0
+;PCODE: $00000185 VOL: 0
+; 0000 0194       SEND_MAS[6]=K%100;
+;PCODE: $00000186 VOL: 0
+;PCODE: $00000187 VOL: 0
+;PCODE: $00000188 VOL: 0
+;PCODE: $00000189 VOL: 0
+;PCODE: $0000018A VOL: 0
+; 0000 0195 
+; 0000 0196      //KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+; 0000 0197 
+; 0000 0198      ADC_BAT=read_adc(0);
+;PCODE: $0000018B VOL: 0
+;PCODE: $0000018C VOL: 0
+;PCODE: $0000018D VOL: 0
+; 0000 0199      ADC_I=read_adc(1);//0.021В датчика = 1А = 2.1*4 = 8.4 АЦП (1024 = 2.56в)
+;PCODE: $0000018E VOL: 0
+;PCODE: $0000018F VOL: 0
+;PCODE: $00000190 VOL: 0
+; 0000 019A      BAT_SUM=(BAT_SUM*9)/10+ADC_BAT;
+;PCODE: $00000191 VOL: 0
+;PCODE: $00000192 VOL: 0
+;PCODE: $00000193 VOL: 0
+;PCODE: $00000194 VOL: 0
+;PCODE: $00000195 VOL: 0
+;PCODE: $00000196 VOL: 0
+;PCODE: $00000197 VOL: 0
+;PCODE: $00000198 VOL: 0
+;PCODE: $00000199 VOL: 0
+; 0000 019B      ADC_BAT=BAT_SUM/10;
+;PCODE: $0000019A VOL: 0
+;PCODE: $0000019B VOL: 0
+;PCODE: $0000019C VOL: 0
+;PCODE: $0000019D VOL: 0
+; 0000 019C      if(flag_I_NULL<10)
+;PCODE: $0000019E VOL: 0
+;PCODE: $0000019F VOL: 0
+;PCODE: $000001A0 VOL: 0
+; 0000 019D      {
+; 0000 019E       I_NULL=I_NULL+ADC_I;
+;PCODE: $000001A1 VOL: 0
+;PCODE: $000001A2 VOL: 0
+;PCODE: $000001A3 VOL: 0
+;PCODE: $000001A4 VOL: 0
+;PCODE: $000001A5 VOL: 0
+; 0000 019F 
+; 0000 01A0       if(flag_I_NULL==9)
+;PCODE: $000001A6 VOL: 0
+;PCODE: $000001A7 VOL: 0
+;PCODE: $000001A8 VOL: 0
+; 0000 01A1       I_NULL=I_NULL/10;
+;PCODE: $000001A9 VOL: 0
+;PCODE: $000001AA VOL: 0
+;PCODE: $000001AB VOL: 0
+;PCODE: $000001AC VOL: 0
+; 0000 01A2 
+; 0000 01A3       flag_I_NULL++;
+;PCODE: $000001AD VOL: 0
+;PCODE: $000001AE VOL: 0
+;PCODE: $000001AF VOL: 0
+;PCODE: $000001B0 VOL: 0
+; 0000 01A4      }
+; 0000 01A5      //BATTERY LEVEL--------------------------------------------------------
+; 0000 01A6       BAT=ADC_BAT;//163*4-100%(12.7) 150*4-0%(11.7)
+;PCODE: $000001B1 VOL: 0
+;PCODE: $000001B2 VOL: 0
+;PCODE: $000001B3 VOL: 0
+; 0000 01A7 
+; 0000 01A8      // if(ADC_I>=(252*4))
+; 0000 01A9      //  I=0;
+; 0000 01AA      // else
+; 0000 01AB 
+; 0000 01AC 
+; 0000 01AD 
+; 0000 01AE       if(BAT<=610)
+;PCODE: $000001B4 VOL: 0
+;PCODE: $000001B5 VOL: 0
+;PCODE: $000001B6 VOL: 0
+; 0000 01AF        {
+; 0000 01B0         SEND_MAS[23]=0;
+;PCODE: $000001B7 VOL: 0
+;PCODE: $000001B8 VOL: 0
+;PCODE: $000001B9 VOL: 0
+; 0000 01B1        }
+; 0000 01B2        else
+;PCODE: $000001BA VOL: 0
+;PCODE: $000001BB VOL: 0
+; 0000 01B3        {
+; 0000 01B4         if(BAT>=660)
+;PCODE: $000001BC VOL: 0
+;PCODE: $000001BD VOL: 0
+;PCODE: $000001BE VOL: 0
+; 0000 01B5          SEND_MAS[23]=100;
+;PCODE: $000001BF VOL: 0
+;PCODE: $000001C0 VOL: 0
+;PCODE: $000001C1 VOL: 0
+; 0000 01B6         else
+;PCODE: $000001C2 VOL: 0
+;PCODE: $000001C3 VOL: 0
+; 0000 01B7          SEND_MAS[23]=(unsigned char)((BAT-610)*2);
+;PCODE: $000001C4 VOL: 0
+;PCODE: $000001C5 VOL: 0
+;PCODE: $000001C6 VOL: 0
+;PCODE: $000001C7 VOL: 0
+;PCODE: $000001C8 VOL: 0
+; 0000 01B8        }
+;PCODE: $000001C9 VOL: 0
+;PCODE: $000001CA VOL: 0
+; 0000 01B9      //--------------------------------------------------------------------
+; 0000 01BA 
+; 0000 01BB      I=ADC_I;
+;PCODE: $000001CB VOL: 0
+;PCODE: $000001CC VOL: 0
+; 0000 01BC      I=(int)(((long)(I_NULL-I)*100)/84);//0.021В датчика = 1А = 2.1*4 = 8.4 АЦП (1024 = 2.56в) 2.52v=0
+;PCODE: $000001CD VOL: 0
+;PCODE: $000001CE VOL: 0
+;PCODE: $000001CF VOL: 0
+;PCODE: $000001D0 VOL: 0
+;PCODE: $000001D1 VOL: 0
+;PCODE: $000001D2 VOL: 0
+;PCODE: $000001D3 VOL: 0
+;PCODE: $000001D4 VOL: 0
+;PCODE: $000001D5 VOL: 0
+;PCODE: $000001D6 VOL: 0
+; 0000 01BD      if(I<0)
+;PCODE: $000001D7 VOL: 0
+;PCODE: $000001D8 VOL: 0
+;PCODE: $000001D9 VOL: 0
+; 0000 01BE      I=0;
+;PCODE: $000001DA VOL: 0
+;PCODE: $000001DB VOL: 0
+; 0000 01BF 
+; 0000 01C0 
+; 0000 01C1       SEND_MAS[9]=I/100;
+;PCODE: $000001DC VOL: 0
+;PCODE: $000001DD VOL: 0
+;PCODE: $000001DE VOL: 0
+;PCODE: $000001DF VOL: 0
+;PCODE: $000001E0 VOL: 0
+;PCODE: $000001E1 VOL: 0
+; 0000 01C2       SEND_MAS[10]=I%100;
+;PCODE: $000001E2 VOL: 0
+;PCODE: $000001E3 VOL: 0
+;PCODE: $000001E4 VOL: 0
+;PCODE: $000001E5 VOL: 0
+;PCODE: $000001E6 VOL: 0
+; 0000 01C3 
+; 0000 01C4 
+; 0000 01C5     //Контрольная сумма----------------------
+; 0000 01C6      Control_Sum_Send();
+;PCODE: $000001E7 VOL: 0
+; 0000 01C7     //---------------------------------------
+; 0000 01C8       if(flag_transmission==255)
+;PCODE: $000001E8 VOL: 0
+;PCODE: $000001E9 VOL: 0
+;PCODE: $000001EA VOL: 0
+; 0000 01C9       {
+; 0000 01CA        uart1SendArray(SEND_MAS,26);
+;PCODE: $000001EB VOL: 0
+;PCODE: $000001EC VOL: 0
+;PCODE: $000001ED VOL: 0
+;PCODE: $000001EE VOL: 0
+; 0000 01CB       }
+; 0000 01CC       else
+;PCODE: $000001EF VOL: 0
+;PCODE: $000001F0 VOL: 0
+; 0000 01CD       {
+; 0000 01CE        if(flag_transmission==248)
+;PCODE: $000001F1 VOL: 0
+;PCODE: $000001F2 VOL: 0
+;PCODE: $000001F3 VOL: 0
+; 0000 01CF        {
+; 0000 01D0         uart1SendArray(SETUP_MAS,8);
+;PCODE: $000001F4 VOL: 0
+;PCODE: $000001F5 VOL: 0
+;PCODE: $000001F6 VOL: 0
+;PCODE: $000001F7 VOL: 0
+; 0000 01D1         flag_transmission=255;
+;PCODE: $000001F8 VOL: 0
+;PCODE: $000001F9 VOL: 0
+; 0000 01D2        }
+; 0000 01D3        if(flag_transmission==249)
+;PCODE: $000001FA VOL: 0
+;PCODE: $000001FB VOL: 0
+;PCODE: $000001FC VOL: 0
+;PCODE: $000001FD VOL: 0
+; 0000 01D4        {
+; 0000 01D5         uart1SendArray(CALIBR_MAS,10);
+;PCODE: $000001FE VOL: 0
+;PCODE: $000001FF VOL: 0
+;PCODE: $00000200 VOL: 0
+;PCODE: $00000201 VOL: 0
+; 0000 01D6         flag_transmission=255;
+;PCODE: $00000202 VOL: 0
+;PCODE: $00000203 VOL: 0
+; 0000 01D7        }
+; 0000 01D8       }
+;PCODE: $00000204 VOL: 0
+;PCODE: $00000205 VOL: 0
+; 0000 01D9 
+; 0000 01DA 
+; 0000 01DB       #asm("cli")
+;PCODE: $00000206 VOL: 0
+	cli
+;PCODE: $00000207 VOL: 0
+; 0000 01DC       lights(252-led_cycle*28,led_cycle*28,252-led_cycle*28);
+;PCODE: $00000208 VOL: 0
+;PCODE: $00000209 VOL: 0
+;PCODE: $0000020A VOL: 0
+;PCODE: $0000020B VOL: 0
+;PCODE: $0000020C VOL: 0
+;PCODE: $0000020D VOL: 0
+;PCODE: $0000020E VOL: 0
+;PCODE: $0000020F VOL: 0
+;PCODE: $00000210 VOL: 0
+;PCODE: $00000211 VOL: 0
+;PCODE: $00000212 VOL: 0
+;PCODE: $00000213 VOL: 0
+;PCODE: $00000214 VOL: 0
+; 0000 01DD       #asm("sei")
+;PCODE: $00000215 VOL: 0
+	sei
+;PCODE: $00000216 VOL: 0
+; 0000 01DE 
+; 0000 01DF       if(led_cycle==9)
+;PCODE: $00000217 VOL: 0
+;PCODE: $00000218 VOL: 0
+;PCODE: $00000219 VOL: 0
+; 0000 01E0       flag_led_direction=1;
+;PCODE: $0000021A VOL: 0
+;PCODE: $0000021B VOL: 0
+; 0000 01E1 
+; 0000 01E2       if(led_cycle==0)
+;PCODE: $0000021C VOL: 0
+;PCODE: $0000021D VOL: 0
+;PCODE: $0000021E VOL: 0
+; 0000 01E3       flag_led_direction=0;
+;PCODE: $0000021F VOL: 0
+;PCODE: $00000220 VOL: 0
+; 0000 01E4 
+; 0000 01E5       if(flag_led_direction==0)
+;PCODE: $00000221 VOL: 0
+;PCODE: $00000222 VOL: 0
+;PCODE: $00000223 VOL: 0
+; 0000 01E6       led_cycle++;
+;PCODE: $00000224 VOL: 0
+;PCODE: $00000225 VOL: 0
+; 0000 01E7       else
+;PCODE: $00000226 VOL: 0
+;PCODE: $00000227 VOL: 0
+; 0000 01E8       led_cycle--;
+;PCODE: $00000228 VOL: 0
+;PCODE: $00000229 VOL: 0
+; 0000 01E9 
+; 0000 01EA       if(main_cycle>=9)
+;PCODE: $0000022A VOL: 0
+;PCODE: $0000022B VOL: 0
+;PCODE: $0000022C VOL: 0
+;PCODE: $0000022D VOL: 0
+; 0000 01EB       main_cycle=0;
+;PCODE: $0000022E VOL: 0
+;PCODE: $0000022F VOL: 0
+; 0000 01EC       else
+;PCODE: $00000230 VOL: 0
+;PCODE: $00000231 VOL: 0
+; 0000 01ED       main_cycle++;
+;PCODE: $00000232 VOL: 0
+;PCODE: $00000233 VOL: 0
+; 0000 01EE 
+; 0000 01EF 
+; 0000 01F0     }
+;PCODE: $00000234 VOL: 0
+;PCODE: $00000235 VOL: 0
+;PCODE: $00000236 VOL: 0
+; 0000 01F1 }
+;PCODE: $00000237 VOL: 0
+;PCODE: $00000238 VOL: 0
+;PCODE: $00000239 VOL: 0
+;PCODE: $0000023A VOL: 0
+
+	.DSEG
+_0x26:
+	.BYTE 0x12
+;
+;
+;//SPEED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;//SPEED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;//SPEED!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;// External Interrupt 6 service routine
+;interrupt [EXT_INT6] void ext_int6_isr(void) //TK_SPEED
+; 0000 01F9 {
+
+	.CSEG
+;PCODE: $0000023B VOL: 0
+;PCODE: $0000023C VOL: 0
+; 0000 01FA  unsigned char H,L;
+; 0000 01FB  TK_COUNT[0]=TK_COUNT[1];
+;PCODE: $0000023D VOL: 0
+;PCODE: $0000023E VOL: 0
+;	H -> R17
+;	L -> R16
+;PCODE: $0000023F VOL: 0
+;PCODE: $00000240 VOL: 0
+;PCODE: $00000241 VOL: 0
+; 0000 01FC  L=TCNT1L;
+;PCODE: $00000242 VOL: 0
+;PCODE: $00000243 VOL: 0
+; 0000 01FD  H=TCNT1H;
+;PCODE: $00000244 VOL: 0
+;PCODE: $00000245 VOL: 0
+; 0000 01FE  TK_COUNT[1]=(unsigned long)H*256+(unsigned long)L;
+;PCODE: $00000246 VOL: 0
+;PCODE: $00000247 VOL: 0
+;PCODE: $00000248 VOL: 0
+;PCODE: $00000249 VOL: 0
+;PCODE: $0000024A VOL: 0
+;PCODE: $0000024B VOL: 0
+;PCODE: $0000024C VOL: 0
+;PCODE: $0000024D VOL: 0
+;PCODE: $0000024E VOL: 0
+;PCODE: $0000024F VOL: 0
+;PCODE: $00000250 VOL: 0
+;PCODE: $00000251 VOL: 0
+; 0000 01FF  if(ovf_TK>0)
+;PCODE: $00000252 VOL: 0
+;PCODE: $00000253 VOL: 0
+;PCODE: $00000254 VOL: 0
+; 0000 0200  {
+; 0000 0201   if(ovf_TK==2)
+;PCODE: $00000255 VOL: 0
+;PCODE: $00000256 VOL: 0
+;PCODE: $00000257 VOL: 0
+; 0000 0202   {
+; 0000 0203    TK_DELTA=0;
+;PCODE: $00000258 VOL: 0
+;PCODE: $00000259 VOL: 0
+; 0000 0204    TK_COUNT[0]=0;
+;PCODE: $0000025A VOL: 0
+;PCODE: $0000025B VOL: 0
+; 0000 0205    TK_COUNT[1]=0;
+;PCODE: $0000025C VOL: 0
+;PCODE: $0000025D VOL: 0
+;PCODE: $0000025E VOL: 0
+;PCODE: $0000025F VOL: 0
+; 0000 0206   }
+; 0000 0207   else
+;PCODE: $00000260 VOL: 0
+;PCODE: $00000261 VOL: 0
+; 0000 0208   {
+; 0000 0209    TK_DELTA=(65536-TK_COUNT[0])+TK_COUNT[1];
+;PCODE: $00000262 VOL: 0
+;PCODE: $00000263 VOL: 0
+;PCODE: $00000264 VOL: 0
+;PCODE: $00000265 VOL: 0
+;PCODE: $00000266 VOL: 0
+;PCODE: $00000267 VOL: 0
+;PCODE: $00000268 VOL: 0
+;PCODE: $00000269 VOL: 0
+; 0000 020A   }
+;PCODE: $0000026A VOL: 0
+; 0000 020B   ovf_TK=0;
+;PCODE: $0000026B VOL: 0
+;PCODE: $0000026C VOL: 0
+; 0000 020C  }
+; 0000 020D  else
+;PCODE: $0000026D VOL: 0
+;PCODE: $0000026E VOL: 0
+; 0000 020E  {
+; 0000 020F   TK_DELTA=TK_COUNT[1]-TK_COUNT[0];
+;PCODE: $0000026F VOL: 0
+;PCODE: $00000270 VOL: 0
+;PCODE: $00000271 VOL: 0
+;PCODE: $00000272 VOL: 0
+;PCODE: $00000273 VOL: 0
+; 0000 0210  }
+;PCODE: $00000274 VOL: 0
+; 0000 0211 }
+;PCODE: $00000275 VOL: 0
+;PCODE: $00000276 VOL: 0
+;PCODE: $00000277 VOL: 0
+;PCODE: $00000278 VOL: 0
+;
+;
+;// External Interrupt 7 service routine
+;interrupt [EXT_INT7] void ext_int7_isr(void) //IK_SPEED
+; 0000 0216 {
+;PCODE: $00000279 VOL: 0
+;PCODE: $0000027A VOL: 0
+; 0000 0217  unsigned char H,L;
+; 0000 0218  IK_COUNT[0]=IK_COUNT[1];
+;PCODE: $0000027B VOL: 0
+;PCODE: $0000027C VOL: 0
+;	H -> R17
+;	L -> R16
+;PCODE: $0000027D VOL: 0
+;PCODE: $0000027E VOL: 0
+;PCODE: $0000027F VOL: 0
+; 0000 0219  L=TCNT1L;
+;PCODE: $00000280 VOL: 0
+;PCODE: $00000281 VOL: 0
+; 0000 021A  H=TCNT1H;
+;PCODE: $00000282 VOL: 0
+;PCODE: $00000283 VOL: 0
+; 0000 021B  IK_COUNT[1]=(unsigned long)H*256+(unsigned long)L;
+;PCODE: $00000284 VOL: 0
+;PCODE: $00000285 VOL: 0
+;PCODE: $00000286 VOL: 0
+;PCODE: $00000287 VOL: 0
+;PCODE: $00000288 VOL: 0
+;PCODE: $00000289 VOL: 0
+;PCODE: $0000028A VOL: 0
+;PCODE: $0000028B VOL: 0
+;PCODE: $0000028C VOL: 0
+;PCODE: $0000028D VOL: 0
+;PCODE: $0000028E VOL: 0
+;PCODE: $0000028F VOL: 0
+; 0000 021C  if(ovf_IK>0)
+;PCODE: $00000290 VOL: 0
+;PCODE: $00000291 VOL: 0
+;PCODE: $00000292 VOL: 0
+; 0000 021D  {
+; 0000 021E   if(ovf_IK==2)
+;PCODE: $00000293 VOL: 0
+;PCODE: $00000294 VOL: 0
+;PCODE: $00000295 VOL: 0
+; 0000 021F   {
+; 0000 0220    IK_DELTA=0;
+;PCODE: $00000296 VOL: 0
+;PCODE: $00000297 VOL: 0
+; 0000 0221    IK_COUNT[0]=0;
+;PCODE: $00000298 VOL: 0
+;PCODE: $00000299 VOL: 0
+; 0000 0222    IK_COUNT[1]=0;
+;PCODE: $0000029A VOL: 0
+;PCODE: $0000029B VOL: 0
+;PCODE: $0000029C VOL: 0
+;PCODE: $0000029D VOL: 0
+; 0000 0223   }
+; 0000 0224   else
+;PCODE: $0000029E VOL: 0
+;PCODE: $0000029F VOL: 0
+; 0000 0225   {
+; 0000 0226    IK_DELTA=(65536-IK_COUNT[0])+IK_COUNT[1];
+;PCODE: $000002A0 VOL: 0
+;PCODE: $000002A1 VOL: 0
+;PCODE: $000002A2 VOL: 0
+;PCODE: $000002A3 VOL: 0
+;PCODE: $000002A4 VOL: 0
+;PCODE: $000002A5 VOL: 0
+;PCODE: $000002A6 VOL: 0
+;PCODE: $000002A7 VOL: 0
+; 0000 0227   }
+;PCODE: $000002A8 VOL: 0
+; 0000 0228   ovf_IK=0;
+;PCODE: $000002A9 VOL: 0
+;PCODE: $000002AA VOL: 0
+; 0000 0229  }
+; 0000 022A  else
+;PCODE: $000002AB VOL: 0
+;PCODE: $000002AC VOL: 0
+; 0000 022B  {
+; 0000 022C   IK_DELTA=IK_COUNT[1]-IK_COUNT[0];
+;PCODE: $000002AD VOL: 0
+;PCODE: $000002AE VOL: 0
+;PCODE: $000002AF VOL: 0
+;PCODE: $000002B0 VOL: 0
+;PCODE: $000002B1 VOL: 0
+; 0000 022D  }
+;PCODE: $000002B2 VOL: 0
+; 0000 022E }
+;PCODE: $000002B3 VOL: 0
+;PCODE: $000002B4 VOL: 0
+;PCODE: $000002B5 VOL: 0
+;PCODE: $000002B6 VOL: 0
+;
+;
+;
+;
+;
+;void init_all(void)
+; 0000 0235 {
+;PCODE: $000002B7 VOL: 0
+;PCODE: $000002B8 VOL: 0
+; 0000 0236 
+; 0000 0237  // Port B initialization
+; 0000 0238  DDRB.4=1;
+;PCODE: $000002B9 VOL: 0
+;PCODE: $000002BA VOL: 0
+; 0000 0239  DDRB.6=1;
+;PCODE: $000002BB VOL: 0
+;PCODE: $000002BC VOL: 0
+; 0000 023A 
+; 0000 023B  // Port C initialization
+; 0000 023C  // Func7=In Func6=In Func5=In Func4=In Func3=In Func2=In Func1=Out Func0=Out
+; 0000 023D  // State7=T State6=T State5=T State4=T State3=T State2=T State1=0 State0=0
+; 0000 023E  PORTC=0x00;
+;PCODE: $000002BD VOL: 0
+;PCODE: $000002BE VOL: 0
+; 0000 023F  DDRC=0x03;
+;PCODE: $000002BF VOL: 0
+;PCODE: $000002C0 VOL: 0
+; 0000 0240  PORTC.2=0;//GPS on
+;PCODE: $000002C1 VOL: 0
+;PCODE: $000002C2 VOL: 0
+; 0000 0241  DDRC.2=1;
+;PCODE: $000002C3 VOL: 0
+;PCODE: $000002C4 VOL: 0
+; 0000 0242 
+; 0000 0243 
+; 0000 0244  // Timer/Counter 0 initialization
+; 0000 0245  // Clock source: System Clock
+; 0000 0246  // Clock value: 1382,400 kHz
+; 0000 0247  // Mode: Phase correct PWM top=0xFF
+; 0000 0248  // OC0 output: Inverted PWM
+; 0000 0249  ASSR=0x00;
+;PCODE: $000002C5 VOL: 0
+;PCODE: $000002C6 VOL: 0
+; 0000 024A  TCCR0=0x72;
+;PCODE: $000002C7 VOL: 0
+;PCODE: $000002C8 VOL: 0
+; 0000 024B  TCNT0=0x00;
+;PCODE: $000002C9 VOL: 0
+;PCODE: $000002CA VOL: 0
+; 0000 024C  OCR0=255;
+;PCODE: $000002CB VOL: 0
+;PCODE: $000002CC VOL: 0
+; 0000 024D 
+; 0000 024E  // Timer/Counter 1 initialization
+; 0000 024F // Clock source: System Clock
+; 0000 0250 // Clock value: 172,800 kHz
+; 0000 0251 // Mode: Normal top=FFFFh
+; 0000 0252 // OC1A output: Discon.
+; 0000 0253 // OC1B output: Discon.
+; 0000 0254 // OC1C output: Discon.
+; 0000 0255 // Noise Canceler: Off
+; 0000 0256 // Input Capture on Falling Edge
+; 0000 0257 // Timer 1 Overflow Interrupt: On
+; 0000 0258 // Input Capture Interrupt: Off
+; 0000 0259 // Compare A Match Interrupt: Off
+; 0000 025A // Compare B Match Interrupt: Off
+; 0000 025B // Compare C Match Interrupt: Off
+; 0000 025C TCCR1A=0x00;
+;PCODE: $000002CD VOL: 0
+;PCODE: $000002CE VOL: 0
+; 0000 025D TCCR1B=0x03;
+;PCODE: $000002CF VOL: 0
+;PCODE: $000002D0 VOL: 0
+; 0000 025E TCNT1H=0x00;
+;PCODE: $000002D1 VOL: 0
+;PCODE: $000002D2 VOL: 0
+; 0000 025F TCNT1L=0x00;
+;PCODE: $000002D3 VOL: 0
+;PCODE: $000002D4 VOL: 0
+; 0000 0260 ICR1H=0x00;
+;PCODE: $000002D5 VOL: 0
+;PCODE: $000002D6 VOL: 0
+; 0000 0261 ICR1L=0x00;
+;PCODE: $000002D7 VOL: 0
+;PCODE: $000002D8 VOL: 0
+; 0000 0262 OCR1AH=0x00;
+;PCODE: $000002D9 VOL: 0
+;PCODE: $000002DA VOL: 0
+; 0000 0263 OCR1AL=0x00;
+;PCODE: $000002DB VOL: 0
+;PCODE: $000002DC VOL: 0
+; 0000 0264 OCR1BH=0x00;
+;PCODE: $000002DD VOL: 0
+;PCODE: $000002DE VOL: 0
+; 0000 0265 OCR1BL=0x00;
+;PCODE: $000002DF VOL: 0
+;PCODE: $000002E0 VOL: 0
+; 0000 0266 OCR1CH=0x00;
+;PCODE: $000002E1 VOL: 0
+;PCODE: $000002E2 VOL: 0
+; 0000 0267 OCR1CL=0x00;
+;PCODE: $000002E3 VOL: 0
+;PCODE: $000002E4 VOL: 0
+; 0000 0268 
+; 0000 0269 
+; 0000 026A 
+; 0000 026B  // Timer/Counter 2 initialization
+; 0000 026C  // Clock source: System Clock
+; 0000 026D  // Clock value: 10,800 kHz
+; 0000 026E  // Mode: Normal top=0xFF
+; 0000 026F  // OC2 output: Disconnected
+; 0000 0270  TCCR2=0x05;
+;PCODE: $000002E5 VOL: 0
+;PCODE: $000002E6 VOL: 0
+; 0000 0271  TCNT2=0x00;
+;PCODE: $000002E7 VOL: 0
+;PCODE: $000002E8 VOL: 0
+; 0000 0272  OCR2=0x00;
+;PCODE: $000002E9 VOL: 0
+;PCODE: $000002EA VOL: 0
+; 0000 0273 
+; 0000 0274 
+; 0000 0275 // Timer/Counter 3 initialization
+; 0000 0276 // Clock source: System Clock
+; 0000 0277 // Clock value: 10,800 kHz
+; 0000 0278 // Mode: Normal top=0xFFFF
+; 0000 0279 // OC3A output: Discon.
+; 0000 027A // OC3B output: Discon.
+; 0000 027B // OC3C output: Discon.
+; 0000 027C // Noise Canceler: Off
+; 0000 027D // Input Capture on Falling Edge
+; 0000 027E // Timer3 Overflow Interrupt: Off
+; 0000 027F // Input Capture Interrupt: Off
+; 0000 0280 // Compare A Match Interrupt: Off
+; 0000 0281 // Compare B Match Interrupt: Off
+; 0000 0282 // Compare C Match Interrupt: Off
+; 0000 0283 TCCR3A=0x00;
+;PCODE: $000002EB VOL: 0
+;PCODE: $000002EC VOL: 0
+; 0000 0284 TCCR3B=0x05;
+;PCODE: $000002ED VOL: 0
+;PCODE: $000002EE VOL: 0
+; 0000 0285 TCNT3H=0x00;
+;PCODE: $000002EF VOL: 0
+;PCODE: $000002F0 VOL: 0
+; 0000 0286 TCNT3L=0x00;
+;PCODE: $000002F1 VOL: 0
+;PCODE: $000002F2 VOL: 0
+; 0000 0287 ICR3H=0x00;
+;PCODE: $000002F3 VOL: 0
+;PCODE: $000002F4 VOL: 0
+; 0000 0288 ICR3L=0x00;
+;PCODE: $000002F5 VOL: 0
+;PCODE: $000002F6 VOL: 0
+; 0000 0289 OCR3AH=0x00;
+;PCODE: $000002F7 VOL: 0
+;PCODE: $000002F8 VOL: 0
+; 0000 028A OCR3AL=0x00;
+;PCODE: $000002F9 VOL: 0
+;PCODE: $000002FA VOL: 0
+; 0000 028B OCR3BH=0x00;
+;PCODE: $000002FB VOL: 0
+;PCODE: $000002FC VOL: 0
+; 0000 028C OCR3BL=0x00;
+;PCODE: $000002FD VOL: 0
+;PCODE: $000002FE VOL: 0
+; 0000 028D OCR3CH=0x00;
+;PCODE: $000002FF VOL: 0
+;PCODE: $00000300 VOL: 0
+; 0000 028E OCR3CL=0x00;
+;PCODE: $00000301 VOL: 0
+;PCODE: $00000302 VOL: 0
+; 0000 028F 
+; 0000 0290 
+; 0000 0291  // Timer(s)/Counter(s) Interrupt(s) initialization
+; 0000 0292  TIMSK=0x44;
+;PCODE: $00000303 VOL: 0
+;PCODE: $00000304 VOL: 0
+; 0000 0293 
+; 0000 0294  ETIMSK=0x00;
+;PCODE: $00000305 VOL: 0
+;PCODE: $00000306 VOL: 0
+; 0000 0295 
+; 0000 0296  // External Interrupt(s) initialization
+; 0000 0297  // INT0: Off
+; 0000 0298  // INT1: Off
+; 0000 0299  // INT2: Off
+; 0000 029A  // INT3: Off
+; 0000 029B  // INT4: Off
+; 0000 029C  // INT5: Off
+; 0000 029D  // INT6: On
+; 0000 029E  // INT6 Mode: Rising Edge
+; 0000 029F  // INT7: On
+; 0000 02A0  // INT7 Mode: Rising Edge
+; 0000 02A1  EICRA=0x00;
+;PCODE: $00000307 VOL: 0
+;PCODE: $00000308 VOL: 0
+; 0000 02A2  EICRB=0xF0;
+;PCODE: $00000309 VOL: 0
+;PCODE: $0000030A VOL: 0
+; 0000 02A3  EIMSK=0xC0;
+;PCODE: $0000030B VOL: 0
+;PCODE: $0000030C VOL: 0
+; 0000 02A4  EIFR=0xC0;
+;PCODE: $0000030D VOL: 0
+;PCODE: $0000030E VOL: 0
+; 0000 02A5 
+; 0000 02A6  // USART0 initialization
+; 0000 02A7  // Communication Parameters: 8 Data, 1 Stop, No Parity
+; 0000 02A8  // USART0 Receiver: On
+; 0000 02A9  // USART0 Transmitter: On
+; 0000 02AA  // USART0 Mode: Asynchronous
+; 0000 02AB  // USART0 Baud Rate: 9600
+; 0000 02AC  UCSR0A=0x00;
+;PCODE: $0000030F VOL: 0
+;PCODE: $00000310 VOL: 0
+; 0000 02AD  UCSR0B=0x98;
+;PCODE: $00000311 VOL: 0
+;PCODE: $00000312 VOL: 0
+; 0000 02AE  UCSR0C=0x06;
+;PCODE: $00000313 VOL: 0
+;PCODE: $00000314 VOL: 0
+; 0000 02AF  UBRR0H=0x00;
+;PCODE: $00000315 VOL: 0
+;PCODE: $00000316 VOL: 0
+; 0000 02B0  UBRR0L=0x47;
+;PCODE: $00000317 VOL: 0
+;PCODE: $00000318 VOL: 0
+; 0000 02B1 
+; 0000 02B2  // USART1 initialization
+; 0000 02B3  // Communication Parameters: 8 Data, 1 Stop, No Parity
+; 0000 02B4  // USART1 Receiver: On
+; 0000 02B5  // USART1 Transmitter: On
+; 0000 02B6  // USART1 Mode: Asynchronous
+; 0000 02B7  // USART1 Baud Rate: 9600
+; 0000 02B8  UCSR1A=0x00;
+;PCODE: $00000319 VOL: 0
+;PCODE: $0000031A VOL: 0
+; 0000 02B9  UCSR1B=0x98;
+;PCODE: $0000031B VOL: 0
+;PCODE: $0000031C VOL: 0
+; 0000 02BA  UCSR1C=0x06;
+;PCODE: $0000031D VOL: 0
+;PCODE: $0000031E VOL: 0
+; 0000 02BB  UBRR1H=0x00;
+;PCODE: $0000031F VOL: 0
+;PCODE: $00000320 VOL: 0
+; 0000 02BC  UBRR1L=0x47;
+;PCODE: $00000321 VOL: 0
+;PCODE: $00000322 VOL: 0
+; 0000 02BD 
+; 0000 02BE  // Analog Comparator initialization
+; 0000 02BF  // Analog Comparator: Off
+; 0000 02C0  // Analog Comparator Input Capture by Timer/Counter 1: Off
+; 0000 02C1  ACSR=0x80;
+;PCODE: $00000323 VOL: 0
+;PCODE: $00000324 VOL: 0
+; 0000 02C2  SFIOR=0x00;
+;PCODE: $00000325 VOL: 0
+;PCODE: $00000326 VOL: 0
+; 0000 02C3 
+; 0000 02C4  // ADC initialization
+; 0000 02C5  // ADC Clock frequency: 86,400 kHz
+; 0000 02C6  // ADC Voltage Reference: Int., cap. on AREF
+; 0000 02C7  ADMUX=ADC_VREF_TYPE & 0xff;
+;PCODE: $00000327 VOL: 0
+;PCODE: $00000328 VOL: 0
+; 0000 02C8  ADCSRA=0x87;
+;PCODE: $00000329 VOL: 0
+;PCODE: $0000032A VOL: 0
+; 0000 02C9 }
+;PCODE: $0000032B VOL: 0
+;PCODE: $0000032C VOL: 0
+;
+;unsigned int K_BY_KOEFFICIENTS_REAL(unsigned int M)
+; 0000 02CC {
+;PCODE: $0000032D VOL: 0
+;PCODE: $0000032E VOL: 0
+; 0000 02CD unsigned long F,W,K;
+; 0000 02CE //WEIGHT_NULL=6679, LOADCELL_NULL=618, DELTA_WEIGHT10KG=748, DELTA_LOADCELL10KG=772
+; 0000 02CF if(M<LOADCELL_NULL)
+;PCODE: $0000032F VOL: 0
+;PCODE: $00000330 VOL: 0
+;	M -> Y+12
+;	F -> Y+8
+;	W -> Y+4
+;	K -> Y+0
+;PCODE: $00000331 VOL: 0
+;PCODE: $00000332 VOL: 0
+;PCODE: $00000333 VOL: 0
+; 0000 02D0  return 0;
+;PCODE: $00000334 VOL: 0
+;PCODE: $00000335 VOL: 0
+;PCODE: $00000336 VOL: 0
+; 0000 02D1 
+; 0000 02D2 F=((M-(unsigned long)LOADCELL_NULL)*1000)/((unsigned long)DELTA_LOADCELL10KG);
+;PCODE: $00000337 VOL: 0
+;PCODE: $00000338 VOL: 0
+;PCODE: $00000339 VOL: 0
+;PCODE: $0000033A VOL: 0
+;PCODE: $0000033B VOL: 0
+;PCODE: $0000033C VOL: 0
+;PCODE: $0000033D VOL: 0
+;PCODE: $0000033E VOL: 0
+;PCODE: $0000033F VOL: 0
+;PCODE: $00000340 VOL: 0
+;PCODE: $00000341 VOL: 0
+;PCODE: $00000342 VOL: 0
+;PCODE: $00000343 VOL: 0
+; 0000 02D3 W=(unsigned long)WEIGHT_NULL-((unsigned long)DELTA_WEIGHT10KG*F)/1000;
+;PCODE: $00000344 VOL: 0
+;PCODE: $00000345 VOL: 0
+;PCODE: $00000346 VOL: 0
+;PCODE: $00000347 VOL: 0
+;PCODE: $00000348 VOL: 0
+;PCODE: $00000349 VOL: 0
+;PCODE: $0000034A VOL: 0
+;PCODE: $0000034B VOL: 0
+;PCODE: $0000034C VOL: 0
+;PCODE: $0000034D VOL: 0
+;PCODE: $0000034E VOL: 0
+;PCODE: $0000034F VOL: 0
+;PCODE: $00000350 VOL: 0
+; 0000 02D4 if(W>0)
+;PCODE: $00000351 VOL: 0
+;PCODE: $00000352 VOL: 0
+;PCODE: $00000353 VOL: 0
+; 0000 02D5  K=((F*1000)/W) - 28; //frCoef -
+;PCODE: $00000354 VOL: 0
+;PCODE: $00000355 VOL: 0
+;PCODE: $00000356 VOL: 0
+;PCODE: $00000357 VOL: 0
+;PCODE: $00000358 VOL: 0
+;PCODE: $00000359 VOL: 0
+;PCODE: $0000035A VOL: 0
+;PCODE: $0000035B VOL: 0
+; 0000 02D6 else
+;PCODE: $0000035C VOL: 0
+;PCODE: $0000035D VOL: 0
+; 0000 02D7  K=1800;
+;PCODE: $0000035E VOL: 0
+;PCODE: $0000035F VOL: 0
+; 0000 02D8 
+; 0000 02D9 if(K>1800)
+;PCODE: $00000360 VOL: 0
+;PCODE: $00000361 VOL: 0
+;PCODE: $00000362 VOL: 0
+;PCODE: $00000363 VOL: 0
+; 0000 02DA  K=1800;
+;PCODE: $00000364 VOL: 0
+;PCODE: $00000365 VOL: 0
+; 0000 02DB return K;
+;PCODE: $00000366 VOL: 0
+;PCODE: $00000367 VOL: 0
+;PCODE: $00000368 VOL: 0
+;PCODE: $00000369 VOL: 0
+; 0000 02DC }
+;PCODE: $0000036A VOL: 0
+;
+;unsigned int K_BY_KOEFFICIENTS_ASFT(unsigned int M)
+; 0000 02DF {
+;PCODE: $0000036B VOL: 0
+;PCODE: $0000036C VOL: 0
+; 0000 02E0  long F,W,K;
+; 0000 02E1 //WEIGHT_NULL=6679, LOADCELL_NULL=618, DELTA_WEIGHT10KG=748, DELTA_LOADCELL10KG=772
+; 0000 02E2 
+; 0000 02E3  F=(long)M-LOADCELL_NULL;
+;PCODE: $0000036D VOL: 0
+;PCODE: $0000036E VOL: 0
+;	M -> Y+12
+;	F -> Y+8
+;	W -> Y+4
+;	K -> Y+0
+;PCODE: $0000036F VOL: 0
+;PCODE: $00000370 VOL: 0
+;PCODE: $00000371 VOL: 0
+;PCODE: $00000372 VOL: 0
+;PCODE: $00000373 VOL: 0
+;PCODE: $00000374 VOL: 0
+; 0000 02E4  if(F<0)
+;PCODE: $00000375 VOL: 0
+;PCODE: $00000376 VOL: 0
+;PCODE: $00000377 VOL: 0
+; 0000 02E5   F=0;
+;PCODE: $00000378 VOL: 0
+;PCODE: $00000379 VOL: 0
+; 0000 02E6   F=(F*1000)/DELTA_LOADCELL10KG;
+;PCODE: $0000037A VOL: 0
+;PCODE: $0000037B VOL: 0
+;PCODE: $0000037C VOL: 0
+;PCODE: $0000037D VOL: 0
+;PCODE: $0000037E VOL: 0
+;PCODE: $0000037F VOL: 0
+;PCODE: $00000380 VOL: 0
+;PCODE: $00000381 VOL: 0
+;PCODE: $00000382 VOL: 0
+; 0000 02E7  W=WEIGHT_NULL;
+;PCODE: $00000383 VOL: 0
+;PCODE: $00000384 VOL: 0
+;PCODE: $00000385 VOL: 0
+; 0000 02E8  K=(F*1000)/W;
+;PCODE: $00000386 VOL: 0
+;PCODE: $00000387 VOL: 0
+;PCODE: $00000388 VOL: 0
+;PCODE: $00000389 VOL: 0
+;PCODE: $0000038A VOL: 0
+;PCODE: $0000038B VOL: 0
+;PCODE: $0000038C VOL: 0
+; 0000 02E9 
+; 0000 02EA if(K>3000)
+;PCODE: $0000038D VOL: 0
+;PCODE: $0000038E VOL: 0
+;PCODE: $0000038F VOL: 0
+; 0000 02EB  K=3000;
+;PCODE: $00000390 VOL: 0
+;PCODE: $00000391 VOL: 0
+; 0000 02EC 
+; 0000 02ED  if(K>100)
+;PCODE: $00000392 VOL: 0
+;PCODE: $00000393 VOL: 0
+;PCODE: $00000394 VOL: 0
+;PCODE: $00000395 VOL: 0
+; 0000 02EE   K=1000000/(1000000/(unsigned long)K+430-637);
+;PCODE: $00000396 VOL: 0
+;PCODE: $00000397 VOL: 0
+;PCODE: $00000398 VOL: 0
+;PCODE: $00000399 VOL: 0
+;PCODE: $0000039A VOL: 0
+;PCODE: $0000039B VOL: 0
+;PCODE: $0000039C VOL: 0
+; 0000 02EF  return K;
+;PCODE: $0000039D VOL: 0
+;PCODE: $0000039E VOL: 0
+;PCODE: $0000039F VOL: 0
+;PCODE: $000003A0 VOL: 0
+; 0000 02F0 }
+;PCODE: $000003A1 VOL: 0
+;
+;
+;
+;void led_zero(void)
+; 0000 02F5 {
+;PCODE: $000003A2 VOL: 0
+;PCODE: $000003A3 VOL: 0
+; 0000 02F6     PORTB.6 = 1;
+;PCODE: $000003A4 VOL: 0
+;PCODE: $000003A5 VOL: 0
+; 0000 02F7     #asm("nop");
+;PCODE: $000003A6 VOL: 0
+	nop
+;PCODE: $000003A7 VOL: 0
+; 0000 02F8     PORTB.6 = 0;
+;PCODE: $000003A8 VOL: 0
+;PCODE: $000003A9 VOL: 0
+; 0000 02F9     #asm("nop");
+;PCODE: $000003AA VOL: 0
+	nop
+;PCODE: $000003AB VOL: 0
+; 0000 02FA     #asm("nop");
+;PCODE: $000003AC VOL: 0
+	nop
+;PCODE: $000003AD VOL: 0
+; 0000 02FB     #asm("nop");
+;PCODE: $000003AE VOL: 0
+	nop
+;PCODE: $000003AF VOL: 0
+; 0000 02FC }
+;PCODE: $000003B0 VOL: 0
+;PCODE: $000003B1 VOL: 0
+;
+;void led_one(void)
+; 0000 02FF {
+;PCODE: $000003B2 VOL: 0
+;PCODE: $000003B3 VOL: 0
+; 0000 0300     PORTB.6 = 1;
+;PCODE: $000003B4 VOL: 0
+;PCODE: $000003B5 VOL: 0
+; 0000 0301     #asm("nop");
+;PCODE: $000003B6 VOL: 0
+	nop
+;PCODE: $000003B7 VOL: 0
+; 0000 0302     #asm("nop");
+;PCODE: $000003B8 VOL: 0
+	nop
+;PCODE: $000003B9 VOL: 0
+; 0000 0303     #asm("nop");
+;PCODE: $000003BA VOL: 0
+	nop
+;PCODE: $000003BB VOL: 0
+; 0000 0304     #asm("nop");
+;PCODE: $000003BC VOL: 0
+	nop
+;PCODE: $000003BD VOL: 0
+; 0000 0305     PORTB.6 = 0;
+;PCODE: $000003BE VOL: 0
+;PCODE: $000003BF VOL: 0
+; 0000 0306 }
+;PCODE: $000003C0 VOL: 0
+;PCODE: $000003C1 VOL: 0
+;
+;void lights(char G, char R, char B)
+; 0000 0309 {
+;PCODE: $000003C2 VOL: 0
+;PCODE: $000003C3 VOL: 0
+; 0000 030A     unsigned char i;
+; 0000 030B     for(i = 0b10000000; i >= 0b00000001; i = i >> 1)
+;PCODE: $000003C4 VOL: 0
+;PCODE: $000003C5 VOL: 0
+;	G -> Y+3
+;	R -> Y+2
+;	B -> Y+1
+;	i -> R17
+;PCODE: $000003C6 VOL: 0
+;PCODE: $000003C7 VOL: 0
+;PCODE: $000003C8 VOL: 0
+;PCODE: $000003C9 VOL: 0
+;PCODE: $000003CA VOL: 0
+;PCODE: $000003CB VOL: 0
+;PCODE: $000003CC VOL: 0
+;PCODE: $000003CD VOL: 0
+; 0000 030C     {
+; 0000 030D         if((G & i) > 0)
+;PCODE: $000003CE VOL: 0
+;PCODE: $000003CF VOL: 0
+;PCODE: $000003D0 VOL: 0
+;PCODE: $000003D1 VOL: 0
+;PCODE: $000003D2 VOL: 0
+; 0000 030E             led_one();
+;PCODE: $000003D3 VOL: 0
+; 0000 030F         else
+;PCODE: $000003D4 VOL: 0
+;PCODE: $000003D5 VOL: 0
+; 0000 0310             led_zero();
+;PCODE: $000003D6 VOL: 0
+; 0000 0311     }
+;PCODE: $000003D7 VOL: 0
+;PCODE: $000003D8 VOL: 0
+;PCODE: $000003D9 VOL: 0
+;PCODE: $000003DA VOL: 0
+;PCODE: $000003DB VOL: 0
+; 0000 0312 
+; 0000 0313     for(i = 0b10000000; i >= 0b00000001; i = i >> 1)
+;PCODE: $000003DC VOL: 0
+;PCODE: $000003DD VOL: 0
+;PCODE: $000003DE VOL: 0
+;PCODE: $000003DF VOL: 0
+;PCODE: $000003E0 VOL: 0
+;PCODE: $000003E1 VOL: 0
+;PCODE: $000003E2 VOL: 0
+;PCODE: $000003E3 VOL: 0
+; 0000 0314     {
+; 0000 0315         if((R & i) > 0)
+;PCODE: $000003E4 VOL: 0
+;PCODE: $000003E5 VOL: 0
+;PCODE: $000003E6 VOL: 0
+;PCODE: $000003E7 VOL: 0
+;PCODE: $000003E8 VOL: 0
+; 0000 0316             led_one();
+;PCODE: $000003E9 VOL: 0
+; 0000 0317         else
+;PCODE: $000003EA VOL: 0
+;PCODE: $000003EB VOL: 0
+; 0000 0318             led_zero();
+;PCODE: $000003EC VOL: 0
+; 0000 0319     }
+;PCODE: $000003ED VOL: 0
+;PCODE: $000003EE VOL: 0
+;PCODE: $000003EF VOL: 0
+;PCODE: $000003F0 VOL: 0
+;PCODE: $000003F1 VOL: 0
+; 0000 031A 
+; 0000 031B     for(i = 0b10000000; i >= 0b00000001; i = i >> 1)
+;PCODE: $000003F2 VOL: 0
+;PCODE: $000003F3 VOL: 0
+;PCODE: $000003F4 VOL: 0
+;PCODE: $000003F5 VOL: 0
+;PCODE: $000003F6 VOL: 0
+;PCODE: $000003F7 VOL: 0
+;PCODE: $000003F8 VOL: 0
+;PCODE: $000003F9 VOL: 0
+; 0000 031C     {
+; 0000 031D         if((B & i) > 0)
+;PCODE: $000003FA VOL: 0
+;PCODE: $000003FB VOL: 0
+;PCODE: $000003FC VOL: 0
+;PCODE: $000003FD VOL: 0
+;PCODE: $000003FE VOL: 0
+; 0000 031E             led_one();
+;PCODE: $000003FF VOL: 0
+; 0000 031F         else
+;PCODE: $00000400 VOL: 0
+;PCODE: $00000401 VOL: 0
+; 0000 0320             led_zero();
+;PCODE: $00000402 VOL: 0
+; 0000 0321     }
+;PCODE: $00000403 VOL: 0
+;PCODE: $00000404 VOL: 0
+;PCODE: $00000405 VOL: 0
+;PCODE: $00000406 VOL: 0
+;PCODE: $00000407 VOL: 0
+; 0000 0322 }
+;PCODE: $00000408 VOL: 0
+;PCODE: $00000409 VOL: 0
+;PCODE: $0000040A VOL: 0
+;PCODE: $0000040B VOL: 0
+;PCODE: $0000040C VOL: 0
+;
+;void Read_Setup_Calibr(void)
+; 0000 0325 {
+;PCODE: $0000040D VOL: 0
+;PCODE: $0000040E VOL: 0
+; 0000 0326 
+; 0000 0327 //unsigned char CALIBR_MAS[10]={249,66,94,7,9,7,2,8,24,(66+94+7+9+7+2+8+24)/8};
+; 0000 0328  //unsigned int WEIGHT_NULL=6694, LOADCELL_NULL=709, DELTA_WEIGHT10KG=702, DELTA_LOADCELL10KG=824;
+; 0000 0329  ZADANIE_S=SETUP_MAS[3];
+;PCODE: $0000040F VOL: 0
+;PCODE: $00000410 VOL: 0
+;PCODE: $00000411 VOL: 0
+;PCODE: $00000412 VOL: 0
+; 0000 032A  R_IK=SETUP_MAS[1];
+;PCODE: $00000413 VOL: 0
+;PCODE: $00000414 VOL: 0
+;PCODE: $00000415 VOL: 0
+;PCODE: $00000416 VOL: 0
+; 0000 032B  R_TK=SETUP_MAS[2]+200;
+;PCODE: $00000417 VOL: 0
+;PCODE: $00000418 VOL: 0
+;PCODE: $00000419 VOL: 0
+;PCODE: $0000041A VOL: 0
+;PCODE: $0000041B VOL: 0
+; 0000 032C 
+; 0000 032D  #ifdef FIXWEIGHT
+; 0000 032E  WEIGHT_NULL=(unsigned int)DEFAULT_CALIBR_MAS[1]*100+(unsigned int)DEFAULT_CALIBR_MAS[2];
+;PCODE: $0000041C VOL: 0
+;PCODE: $0000041D VOL: 0
+;PCODE: $0000041E VOL: 0
+;PCODE: $0000041F VOL: 0
+;PCODE: $00000420 VOL: 0
+;PCODE: $00000421 VOL: 0
+;PCODE: $00000422 VOL: 0
+;PCODE: $00000423 VOL: 0
+;PCODE: $00000424 VOL: 0
+;PCODE: $00000425 VOL: 0
+; 0000 032F  #else
+; 0000 0330  WEIGHT_NULL=(unsigned int)CALIBR_MAS[1]*100+(unsigned int)CALIBR_MAS[2];
+; 0000 0331  #endif
+; 0000 0332 
+; 0000 0333  LOADCELL_NULL=(unsigned int)CALIBR_MAS[3]*100+(unsigned int)CALIBR_MAS[4];
+;PCODE: $00000426 VOL: 0
+;PCODE: $00000427 VOL: 0
+;PCODE: $00000428 VOL: 0
+;PCODE: $00000429 VOL: 0
+;PCODE: $0000042A VOL: 0
+;PCODE: $0000042B VOL: 0
+;PCODE: $0000042C VOL: 0
+;PCODE: $0000042D VOL: 0
+;PCODE: $0000042E VOL: 0
+;PCODE: $0000042F VOL: 0
+; 0000 0334  DELTA_WEIGHT10KG=(unsigned int)CALIBR_MAS[5]*100+(unsigned int)CALIBR_MAS[6];
+;PCODE: $00000430 VOL: 0
+;PCODE: $00000431 VOL: 0
+;PCODE: $00000432 VOL: 0
+;PCODE: $00000433 VOL: 0
+;PCODE: $00000434 VOL: 0
+;PCODE: $00000435 VOL: 0
+;PCODE: $00000436 VOL: 0
+;PCODE: $00000437 VOL: 0
+;PCODE: $00000438 VOL: 0
+;PCODE: $00000439 VOL: 0
+; 0000 0335  DELTA_LOADCELL10KG=(unsigned int)CALIBR_MAS[7]*100+(unsigned int)CALIBR_MAS[8];
+;PCODE: $0000043A VOL: 0
+;PCODE: $0000043B VOL: 0
+;PCODE: $0000043C VOL: 0
+;PCODE: $0000043D VOL: 0
+;PCODE: $0000043E VOL: 0
+;PCODE: $0000043F VOL: 0
+;PCODE: $00000440 VOL: 0
+;PCODE: $00000441 VOL: 0
+;PCODE: $00000442 VOL: 0
+;PCODE: $00000443 VOL: 0
+; 0000 0336 }
+;PCODE: $00000444 VOL: 0
+;PCODE: $00000445 VOL: 0
+;
+;void Control_Sum_Send(void)
+; 0000 0339 {
+;PCODE: $00000446 VOL: 0
+;PCODE: $00000447 VOL: 0
+; 0000 033A  unsigned char tmp=0;
+; 0000 033B  unsigned int S=0;
+; 0000 033C 
+; 0000 033D  for(tmp=1;tmp<25;tmp++)
+;PCODE: $00000448 VOL: 0
+;	tmp -> R17
+;	S -> R18,R19
+;PCODE: $00000449 VOL: 0
+;PCODE: $0000044A VOL: 0
+;PCODE: $0000044B VOL: 0
+;PCODE: $0000044C VOL: 0
+;PCODE: $0000044D VOL: 0
+;PCODE: $0000044E VOL: 0
+;PCODE: $0000044F VOL: 0
+;PCODE: $00000450 VOL: 0
+;PCODE: $00000451 VOL: 0
+;PCODE: $00000452 VOL: 0
+;PCODE: $00000453 VOL: 0
+;PCODE: $00000454 VOL: 0
+;PCODE: $00000455 VOL: 0
+; 0000 033E   S=S+SEND_MAS[tmp];
+;PCODE: $00000456 VOL: 0
+;PCODE: $00000457 VOL: 0
+;PCODE: $00000458 VOL: 0
+;PCODE: $00000459 VOL: 0
+;PCODE: $0000045A VOL: 0
+;PCODE: $0000045B VOL: 0
+;PCODE: $0000045C VOL: 0
+;PCODE: $0000045D VOL: 0
+;PCODE: $0000045E VOL: 0
+;PCODE: $0000045F VOL: 0
+;PCODE: $00000460 VOL: 0
+;PCODE: $00000461 VOL: 0
+; 0000 033F SEND_MAS[25]=S/24;
+;PCODE: $00000462 VOL: 0
+;PCODE: $00000463 VOL: 0
+;PCODE: $00000464 VOL: 0
+;PCODE: $00000465 VOL: 0
+;PCODE: $00000466 VOL: 0
+; 0000 0340 }
+;PCODE: $00000467 VOL: 0
+;PCODE: $00000468 VOL: 0
+;PCODE: $00000469 VOL: 0
+;PCODE: $0000046A VOL: 0
+;
+;void Control_Sum_Calibr(void)
+; 0000 0343 {
+;PCODE: $0000046B VOL: 0
+;PCODE: $0000046C VOL: 0
+; 0000 0344  unsigned char tmp=0;
+; 0000 0345  unsigned int S=0;
+; 0000 0346 
+; 0000 0347  for(tmp=1;tmp<9;tmp++)
+;PCODE: $0000046D VOL: 0
+;	tmp -> R17
+;	S -> R18,R19
+;PCODE: $0000046E VOL: 0
+;PCODE: $0000046F VOL: 0
+;PCODE: $00000470 VOL: 0
+;PCODE: $00000471 VOL: 0
+;PCODE: $00000472 VOL: 0
+;PCODE: $00000473 VOL: 0
+;PCODE: $00000474 VOL: 0
+;PCODE: $00000475 VOL: 0
+;PCODE: $00000476 VOL: 0
+;PCODE: $00000477 VOL: 0
+;PCODE: $00000478 VOL: 0
+;PCODE: $00000479 VOL: 0
+;PCODE: $0000047A VOL: 0
+; 0000 0348   S=S+CALIBR_MAS[tmp];
+;PCODE: $0000047B VOL: 0
+;PCODE: $0000047C VOL: 0
+;PCODE: $0000047D VOL: 0
+;PCODE: $0000047E VOL: 0
+;PCODE: $0000047F VOL: 0
+;PCODE: $00000480 VOL: 0
+;PCODE: $00000481 VOL: 0
+;PCODE: $00000482 VOL: 0
+;PCODE: $00000483 VOL: 0
+;PCODE: $00000484 VOL: 0
+;PCODE: $00000485 VOL: 0
+;PCODE: $00000486 VOL: 0
+; 0000 0349 CALIBR_MAS[9]=S/8;
+;PCODE: $00000487 VOL: 0
+;PCODE: $00000488 VOL: 0
+;PCODE: $00000489 VOL: 0
+;PCODE: $0000048A VOL: 0
+; 0000 034A }
+;PCODE: $0000048B VOL: 0
+;PCODE: $0000048C VOL: 0
+;PCODE: $0000048D VOL: 0
+;PCODE: $0000048E VOL: 0
+;
+;
+;void Control_Sum_Setup(void)
+; 0000 034E {
+;PCODE: $0000048F VOL: 0
+;PCODE: $00000490 VOL: 0
+; 0000 034F  unsigned char tmp=0;
+; 0000 0350  unsigned int S=0;
+; 0000 0351 
+; 0000 0352  for(tmp=1;tmp<7;tmp++)
+;PCODE: $00000491 VOL: 0
+;	tmp -> R17
+;	S -> R18,R19
+;PCODE: $00000492 VOL: 0
+;PCODE: $00000493 VOL: 0
+;PCODE: $00000494 VOL: 0
+;PCODE: $00000495 VOL: 0
+;PCODE: $00000496 VOL: 0
+;PCODE: $00000497 VOL: 0
+;PCODE: $00000498 VOL: 0
+;PCODE: $00000499 VOL: 0
+;PCODE: $0000049A VOL: 0
+;PCODE: $0000049B VOL: 0
+;PCODE: $0000049C VOL: 0
+;PCODE: $0000049D VOL: 0
+;PCODE: $0000049E VOL: 0
+; 0000 0353   S=S+SETUP_MAS[tmp];
+;PCODE: $0000049F VOL: 0
+;PCODE: $000004A0 VOL: 0
+;PCODE: $000004A1 VOL: 0
+;PCODE: $000004A2 VOL: 0
+;PCODE: $000004A3 VOL: 0
+;PCODE: $000004A4 VOL: 0
+;PCODE: $000004A5 VOL: 0
+;PCODE: $000004A6 VOL: 0
+;PCODE: $000004A7 VOL: 0
+;PCODE: $000004A8 VOL: 0
+;PCODE: $000004A9 VOL: 0
+;PCODE: $000004AA VOL: 0
+; 0000 0354 SETUP_MAS[7]=S/6;
+;PCODE: $000004AB VOL: 0
+;PCODE: $000004AC VOL: 0
+;PCODE: $000004AD VOL: 0
+;PCODE: $000004AE VOL: 0
+;PCODE: $000004AF VOL: 0
+; 0000 0355 }
+;PCODE: $000004B0 VOL: 0
+;PCODE: $000004B1 VOL: 0
+;PCODE: $000004B2 VOL: 0
+;PCODE: $000004B3 VOL: 0
+;
+;// Timer 1 overflow interrupt service routine
+;interrupt [TIM1_OVF] void timer1_ovf_isr(void)
+; 0000 0359 {
+;PCODE: $000004B4 VOL: 0
+;PCODE: $000004B5 VOL: 0
+; 0000 035A if(ovf_IK<2)
+;PCODE: $000004B6 VOL: 0
+;PCODE: $000004B7 VOL: 0
+;PCODE: $000004B8 VOL: 0
+; 0000 035B  {
+; 0000 035C   ovf_IK++;
+;PCODE: $000004B9 VOL: 0
+;PCODE: $000004BA VOL: 0
+;PCODE: $000004BB VOL: 0
+; 0000 035D  }
+; 0000 035E if(ovf_TK<2)
+;PCODE: $000004BC VOL: 0
+;PCODE: $000004BD VOL: 0
+;PCODE: $000004BE VOL: 0
+;PCODE: $000004BF VOL: 0
+; 0000 035F  {
+; 0000 0360   ovf_TK++;
+;PCODE: $000004C0 VOL: 0
+;PCODE: $000004C1 VOL: 0
+;PCODE: $000004C2 VOL: 0
+; 0000 0361  }
+; 0000 0362 }
+;PCODE: $000004C3 VOL: 0
+;PCODE: $000004C4 VOL: 0
+;PCODE: $000004C5 VOL: 0
+;PCODE: $000004C6 VOL: 0
+;//***********************************************************************************************************
+;//***********************************************************************************************************
+;//***********************************************************************************************************
+;
+;
+;
+;
+;void delay(unsigned int d)
+; 0000 036B {
+;PCODE: $000004C7 VOL: 0
+;PCODE: $000004C8 VOL: 0
+; 0000 036C  unsigned int y;
+; 0000 036D  for(y=0;y<d;y++)
+;PCODE: $000004C9 VOL: 0
+;PCODE: $000004CA VOL: 0
+;PCODE: $000004CB VOL: 0
+;	d -> Y+2
+;	y -> R16,R17
+;PCODE: $000004CC VOL: 0
+;PCODE: $000004CD VOL: 0
+;PCODE: $000004CE VOL: 0
+;PCODE: $000004CF VOL: 0
+;PCODE: $000004D0 VOL: 0
+;PCODE: $000004D1 VOL: 0
+;PCODE: $000004D2 VOL: 0
+;PCODE: $000004D3 VOL: 0
+;PCODE: $000004D4 VOL: 0
+; 0000 036E  {}
+;PCODE: $000004D5 VOL: 0
+;PCODE: $000004D6 VOL: 0
+;PCODE: $000004D7 VOL: 0
+;PCODE: $000004D8 VOL: 0
+;PCODE: $000004D9 VOL: 0
+; 0000 036F }
+;PCODE: $000004DA VOL: 0
+;PCODE: $000004DB VOL: 0
+;PCODE: $000004DC VOL: 0
+;PCODE: $000004DD VOL: 0
+;PCODE: $000004DE VOL: 0
+;PCODE: $000004DF VOL: 0
+;PCODE: $000004E0 VOL: 0
+;
+;
+;
+;void SPI_MasterInit(void)
+; 0000 0374 {
+;PCODE: $000004E1 VOL: 0
+;PCODE: $000004E2 VOL: 0
+; 0000 0375 // DDRB.1=1; //SCK
+; 0000 0376 // PORTB.1=0;
+; 0000 0377 // DDRB.2=1; //MOSI
+; 0000 0378 // PORTB.2=1;
+; 0000 0379 // DDRB.3=0; //MISO
+; 0000 037A // PORTB.3=0;
+; 0000 037B 
+; 0000 037C  DDRB |= (1 << 0) | (1 << 1) | (1 << 2); //SS, SCK, MOSI - out
+;PCODE: $000004E3 VOL: 0
+;PCODE: $000004E4 VOL: 0
+;PCODE: $000004E5 VOL: 0
+; 0000 037D  DDRB &= ~(1 << 3); //MISO - in
+;PCODE: $000004E6 VOL: 0
+;PCODE: $000004E7 VOL: 0
+; 0000 037E  SPCR = (1<<SPE) | (1<<MSTR) | (1<<CPOL) | (1<<CPHA);
+;PCODE: $000004E8 VOL: 0
+;PCODE: $000004E9 VOL: 0
+; 0000 037F }
+;PCODE: $000004EA VOL: 0
+;PCODE: $000004EB VOL: 0
+;
+;
+;unsigned char SPI_MasterReceive(void)
+; 0000 0383 {
+;PCODE: $000004EC VOL: 0
+;PCODE: $000004ED VOL: 0
+; 0000 0384 //unsigned char t,x=0;
+; 0000 0385 //
+; 0000 0386 // for(t=128;t>=1;t=t/2)
+; 0000 0387 // {
+; 0000 0388 //  PORTB.1=1;
+; 0000 0389 //  delay(100);
+; 0000 038A //  PORTB.1=0;
+; 0000 038B //  if(!PINB.3)
+; 0000 038C //    x=x+t;
+; 0000 038D //  delay(100);
+; 0000 038E // }
+; 0000 038F // return x;
+; 0000 0390 
+; 0000 0391  SPI_MasterTransmit(0xFF);
+;PCODE: $000004EE VOL: 0
+;PCODE: $000004EF VOL: 0
+; 0000 0392  while(!(SPSR & (1<<SPIF)))
+;PCODE: $000004F0 VOL: 0
+;PCODE: $000004F1 VOL: 0
+;PCODE: $000004F2 VOL: 0
+;PCODE: $000004F3 VOL: 0
+; 0000 0393   continue;
+;PCODE: $000004F4 VOL: 0
+; 0000 0394  return SPDR;
+;PCODE: $000004F5 VOL: 0
+;PCODE: $000004F6 VOL: 0
+;PCODE: $000004F7 VOL: 0
+;PCODE: $000004F8 VOL: 0
+; 0000 0395 }
+;PCODE: $000004F9 VOL: 0
+;
+;
+;void SPI_MasterTransmit(unsigned char x)
+; 0000 0399 {
+;PCODE: $000004FA VOL: 0
+;PCODE: $000004FB VOL: 0
+; 0000 039A //unsigned char t;
+; 0000 039B //
+; 0000 039C // for(t=128;t>=1;t=t/2)
+; 0000 039D // {
+; 0000 039E // PORTB.1=1;
+; 0000 039F // delay(200);
+; 0000 03A0 // if(x&t)
+; 0000 03A1 //  PORTB.2=0;
+; 0000 03A2 // else
+; 0000 03A3 //  PORTB.2=1;
+; 0000 03A4 // delay(200);
+; 0000 03A5 // PORTB.1=0;
+; 0000 03A6 // delay(200);
+; 0000 03A7 // }
+; 0000 03A8 // PORTB.2=1;
+; 0000 03A9 // delay(300);
+; 0000 03AA 
+; 0000 03AB  SPDR = x;
+;PCODE: $000004FC VOL: 0
+;	x -> Y+0
+;PCODE: $000004FD VOL: 0
+;PCODE: $000004FE VOL: 0
+; 0000 03AC  while(!(SPSR & (1<<SPIF)))
+;PCODE: $000004FF VOL: 0
+;PCODE: $00000500 VOL: 0
+;PCODE: $00000501 VOL: 0
+;PCODE: $00000502 VOL: 0
+; 0000 03AD   continue;
+;PCODE: $00000503 VOL: 0
+; 0000 03AE }
+;PCODE: $00000504 VOL: 0
+;PCODE: $00000505 VOL: 0
+;PCODE: $00000506 VOL: 0
+;PCODE: $00000507 VOL: 0
+;PCODE: $00000508 VOL: 0
+;
+;
+;
+;void SET_AD7799(void)
+; 0000 03B3 {
+;PCODE: $00000509 VOL: 0
+;PCODE: $0000050A VOL: 0
+; 0000 03B4  delay_ms(100);
+;PCODE: $0000050B VOL: 0
+;PCODE: $0000050C VOL: 0
+;PCODE: $0000050D VOL: 0
+; 0000 03B5  SPI_MasterTransmit(0b11111111);
+;PCODE: $0000050E VOL: 0
+;PCODE: $0000050F VOL: 0
+; 0000 03B6  SPI_MasterTransmit(0b11111111);
+;PCODE: $00000510 VOL: 0
+;PCODE: $00000511 VOL: 0
+; 0000 03B7  SPI_MasterTransmit(0b11111111);
+;PCODE: $00000512 VOL: 0
+;PCODE: $00000513 VOL: 0
+; 0000 03B8  SPI_MasterTransmit(0b11111111);
+;PCODE: $00000514 VOL: 0
+;PCODE: $00000515 VOL: 0
+; 0000 03B9  delay_ms(100);
+;PCODE: $00000516 VOL: 0
+;PCODE: $00000517 VOL: 0
+;PCODE: $00000518 VOL: 0
+; 0000 03BA  SPI_MasterTransmit(0x10);    //conf
+;PCODE: $00000519 VOL: 0
+;PCODE: $0000051A VOL: 0
+; 0000 03BB  delay(10000);
+;PCODE: $0000051B VOL: 0
+;PCODE: $0000051C VOL: 0
+; 0000 03BC  //#ifdef ADC_TO_KG
+; 0000 03BD  //SPI_MasterTransmit(0b00000111); //bipolar and *128
+; 0000 03BE  //#else
+; 0000 03BF  SPI_MasterTransmit(0b00010111); //unipolar and *128
+;PCODE: $0000051D VOL: 0
+;PCODE: $0000051E VOL: 0
+; 0000 03C0  //#endif
+; 0000 03C1  SPI_MasterTransmit(0b00010000);
+;PCODE: $0000051F VOL: 0
+;PCODE: $00000520 VOL: 0
+; 0000 03C2  delay(10000);
+;PCODE: $00000521 VOL: 0
+;PCODE: $00000522 VOL: 0
+; 0000 03C3 
+; 0000 03C4 
+; 0000 03C5  SPI_MasterTransmit(0x08);  //mode
+;PCODE: $00000523 VOL: 0
+;PCODE: $00000524 VOL: 0
+; 0000 03C6  delay(10000);
+;PCODE: $00000525 VOL: 0
+;PCODE: $00000526 VOL: 0
+; 0000 03C7  SPI_MasterTransmit(0b00000000);
+;PCODE: $00000527 VOL: 0
+;PCODE: $00000528 VOL: 0
+; 0000 03C8  //SPI_MasterTransmit(0b00001111);
+; 0000 03C9 
+; 0000 03CA  SPI_MasterTransmit(0b00001100);//10Hz
+;PCODE: $00000529 VOL: 0
+;PCODE: $0000052A VOL: 0
+; 0000 03CB  //SPI_MasterTransmit(0b00001000);//20Hz
+; 0000 03CC  delay(10000);
+;PCODE: $0000052B VOL: 0
+;PCODE: $0000052C VOL: 0
+; 0000 03CD  SPI_MasterTransmit(0x5C);
+;PCODE: $0000052D VOL: 0
+;PCODE: $0000052E VOL: 0
+; 0000 03CE  delay(10000);
+;PCODE: $0000052F VOL: 0
+;PCODE: $00000530 VOL: 0
+; 0000 03CF }
+;PCODE: $00000531 VOL: 0
+;PCODE: $00000532 VOL: 0
+;
+; unsigned int READ_AD7799(void)
+; 0000 03D2 {
+;PCODE: $00000533 VOL: 0
+;PCODE: $00000534 VOL: 0
+; 0000 03D3  unsigned char a1,a2;
+; 0000 03D4  unsigned int M;
+; 0000 03D5         delay(100);
+;PCODE: $00000535 VOL: 0
+;	a1 -> R17
+;	a2 -> R16
+;	M -> R18,R19
+;PCODE: $00000536 VOL: 0
+;PCODE: $00000537 VOL: 0
+;PCODE: $00000538 VOL: 0
+; 0000 03D6         a1=SPI_MasterReceive();
+;PCODE: $00000539 VOL: 0
+;PCODE: $0000053A VOL: 0
+; 0000 03D7         a2=SPI_MasterReceive();
+;PCODE: $0000053B VOL: 0
+;PCODE: $0000053C VOL: 0
+; 0000 03D8         SPI_MasterReceive();
+;PCODE: $0000053D VOL: 0
+; 0000 03D9         M=(unsigned int)a1*256+(unsigned int)a2;
+;PCODE: $0000053E VOL: 0
+;PCODE: $0000053F VOL: 0
+;PCODE: $00000540 VOL: 0
+;PCODE: $00000541 VOL: 0
+;PCODE: $00000542 VOL: 0
+;PCODE: $00000543 VOL: 0
+;PCODE: $00000544 VOL: 0
+;PCODE: $00000545 VOL: 0
+;PCODE: $00000546 VOL: 0
+; 0000 03DA         return M;
+;PCODE: $00000547 VOL: 0
+;PCODE: $00000548 VOL: 0
+;PCODE: $00000549 VOL: 0
+;PCODE: $0000054A VOL: 0
+; 0000 03DB         //return a2;
+; 0000 03DC }
+;PCODE: $0000054B VOL: 0
+;
+;
+;void uart1SendByte(char data)
+; 0000 03E0 {
+;PCODE: $0000054C VOL: 0
+;PCODE: $0000054D VOL: 0
+; 0000 03E1     while(!( UCSR1A & (1 << UDRE)));
+;PCODE: $0000054E VOL: 0
+;	data -> Y+0
+;PCODE: $0000054F VOL: 0
+;PCODE: $00000550 VOL: 0
+;PCODE: $00000551 VOL: 0
+;PCODE: $00000552 VOL: 0
+;PCODE: $00000553 VOL: 0
+;PCODE: $00000554 VOL: 0
+; 0000 03E2     UDR1 = data;
+;PCODE: $00000555 VOL: 0
+;PCODE: $00000556 VOL: 0
+; 0000 03E3 }
+;PCODE: $00000557 VOL: 0
+;PCODE: $00000558 VOL: 0
+;PCODE: $00000559 VOL: 0
+;
+;void uart1SendString(char *str)
+; 0000 03E6 {
+;PCODE: $0000055A VOL: 0
+;PCODE: $0000055B VOL: 0
+; 0000 03E7     while(*str)
+;PCODE: $0000055C VOL: 0
+;	*str -> Y+0
+;PCODE: $0000055D VOL: 0
+;PCODE: $0000055E VOL: 0
+;PCODE: $0000055F VOL: 0
+;PCODE: $00000560 VOL: 0
+;PCODE: $00000561 VOL: 0
+; 0000 03E8     {
+; 0000 03E9         uart1SendByte(*str++);
+;PCODE: $00000562 VOL: 0
+;PCODE: $00000563 VOL: 0
+;PCODE: $00000564 VOL: 0
+;PCODE: $00000565 VOL: 0
+;PCODE: $00000566 VOL: 0
+; 0000 03EA     }
+;PCODE: $00000567 VOL: 0
+;PCODE: $00000568 VOL: 0
+; 0000 03EB }
+;PCODE: $00000569 VOL: 0
+;PCODE: $0000056A VOL: 0
+;PCODE: $0000056B VOL: 0
+;
+;void uart1SendArray(unsigned char *array, unsigned char size)
+; 0000 03EE {
+;PCODE: $0000056C VOL: 0
+;PCODE: $0000056D VOL: 0
+; 0000 03EF    unsigned char i;
+; 0000 03F0     for(i = 0; i < size; ++i)
+;PCODE: $0000056E VOL: 0
+;PCODE: $0000056F VOL: 0
+;	*array -> Y+2
+;	size -> Y+1
+;	i -> R17
+;PCODE: $00000570 VOL: 0
+;PCODE: $00000571 VOL: 0
+;PCODE: $00000572 VOL: 0
+;PCODE: $00000573 VOL: 0
+;PCODE: $00000574 VOL: 0
+;PCODE: $00000575 VOL: 0
+;PCODE: $00000576 VOL: 0
+;PCODE: $00000577 VOL: 0
+;PCODE: $00000578 VOL: 0
+; 0000 03F1     {
+; 0000 03F2         uart1SendByte(array[i]);
+;PCODE: $00000579 VOL: 0
+;PCODE: $0000057A VOL: 0
+;PCODE: $0000057B VOL: 0
+;PCODE: $0000057C VOL: 0
+; 0000 03F3     }
+;PCODE: $0000057D VOL: 0
+;PCODE: $0000057E VOL: 0
+;PCODE: $0000057F VOL: 0
+;PCODE: $00000580 VOL: 0
+;PCODE: $00000581 VOL: 0
+; 0000 03F4 }
+;PCODE: $00000582 VOL: 0
+;PCODE: $00000583 VOL: 0
+;PCODE: $00000584 VOL: 0
+;PCODE: $00000585 VOL: 0
+;PCODE: $00000586 VOL: 0
+;
+;// USART0 Receiver interrupt service routine
+;interrupt [USART0_RXC] void usart0_rx_isr(void)
+; 0000 03F8 {
+;PCODE: $00000587 VOL: 0
+;PCODE: $00000588 VOL: 0
+; 0000 03F9 char simvol;
+; 0000 03FA simvol=UDR0;
+;PCODE: $00000589 VOL: 0
+;	simvol -> R17
+;PCODE: $0000058A VOL: 0
+;PCODE: $0000058B VOL: 0
+; 0000 03FB 
+; 0000 03FC      if(simvol=='P')
+;PCODE: $0000058C VOL: 0
+;PCODE: $0000058D VOL: 0
+;PCODE: $0000058E VOL: 0
+; 0000 03FD    {
+; 0000 03FE     GPS_flag_gp=1;
+;PCODE: $0000058F VOL: 0
+;PCODE: $00000590 VOL: 0
+; 0000 03FF     GPS_zap_counter=0;
+;PCODE: $00000591 VOL: 0
+;PCODE: $00000592 VOL: 0
+; 0000 0400     goto exit_int;
+;PCODE: $00000593 VOL: 0
+; 0000 0401    }
+; 0000 0402     if(GPS_flag_gp==1)
+;PCODE: $00000594 VOL: 0
+;PCODE: $00000595 VOL: 0
+;PCODE: $00000596 VOL: 0
+;PCODE: $00000597 VOL: 0
+; 0000 0403    {
+; 0000 0404     GPS_string_name[0]=simvol;
+;PCODE: $00000598 VOL: 0
+;PCODE: $00000599 VOL: 0
+; 0000 0405     GPS_flag_gp=2;
+;PCODE: $0000059A VOL: 0
+;PCODE: $0000059B VOL: 0
+; 0000 0406     goto exit_int;
+;PCODE: $0000059C VOL: 0
+; 0000 0407    }
+; 0000 0408     if(GPS_flag_gp==2)
+;PCODE: $0000059D VOL: 0
+;PCODE: $0000059E VOL: 0
+;PCODE: $0000059F VOL: 0
+;PCODE: $000005A0 VOL: 0
+; 0000 0409    {
+; 0000 040A     GPS_string_name[1]=simvol;
+;PCODE: $000005A1 VOL: 0
+;PCODE: $000005A2 VOL: 0
+;PCODE: $000005A3 VOL: 0
+; 0000 040B     GPS_flag_gp=3;
+;PCODE: $000005A4 VOL: 0
+;PCODE: $000005A5 VOL: 0
+; 0000 040C     goto exit_int;
+;PCODE: $000005A6 VOL: 0
+; 0000 040D    }
+; 0000 040E     if(GPS_flag_gp==3)
+;PCODE: $000005A7 VOL: 0
+;PCODE: $000005A8 VOL: 0
+;PCODE: $000005A9 VOL: 0
+;PCODE: $000005AA VOL: 0
+; 0000 040F    {
+; 0000 0410     GPS_string_name[2]=simvol;
+;PCODE: $000005AB VOL: 0
+;PCODE: $000005AC VOL: 0
+;PCODE: $000005AD VOL: 0
+; 0000 0411     if(GPS_string_name[0]=='G'&&GPS_string_name[1]=='G'&&GPS_string_name[2]=='A')
+;PCODE: $000005AE VOL: 0
+;PCODE: $000005AF VOL: 0
+;PCODE: $000005B0 VOL: 0
+;PCODE: $000005B1 VOL: 0
+;PCODE: $000005B2 VOL: 0
+;PCODE: $000005B3 VOL: 0
+;PCODE: $000005B4 VOL: 0
+;PCODE: $000005B5 VOL: 0
+;PCODE: $000005B6 VOL: 0
+;PCODE: $000005B7 VOL: 0
+;PCODE: $000005B8 VOL: 0
+;PCODE: $000005B9 VOL: 0
+;PCODE: $000005BA VOL: 0
+;PCODE: $000005BB VOL: 0
+;PCODE: $000005BC VOL: 0
+; 0000 0412       {GPS_flag_gp=4;
+;PCODE: $000005BD VOL: 0
+;PCODE: $000005BE VOL: 0
+; 0000 0413        GPS_flag_ready=0;
+;PCODE: $000005BF VOL: 0
+;PCODE: $000005C0 VOL: 0
+; 0000 0414        }
+; 0000 0415     else
+;PCODE: $000005C1 VOL: 0
+;PCODE: $000005C2 VOL: 0
+; 0000 0416      GPS_flag_gp=0;
+;PCODE: $000005C3 VOL: 0
+;PCODE: $000005C4 VOL: 0
+; 0000 0417     goto exit_int;
+;PCODE: $000005C5 VOL: 0
+;PCODE: $000005C6 VOL: 0
+; 0000 0418    }
+; 0000 0419 
+; 0000 041A     if((GPS_flag_gp==4)&&(simvol==','))
+;PCODE: $000005C7 VOL: 0
+;PCODE: $000005C8 VOL: 0
+;PCODE: $000005C9 VOL: 0
+;PCODE: $000005CA VOL: 0
+;PCODE: $000005CB VOL: 0
+;PCODE: $000005CC VOL: 0
+;PCODE: $000005CD VOL: 0
+;PCODE: $000005CE VOL: 0
+;PCODE: $000005CF VOL: 0
+;PCODE: $000005D0 VOL: 0
+;PCODE: $000005D1 VOL: 0
+; 0000 041B     {
+; 0000 041C      GPS_zap_counter++;
+;PCODE: $000005D2 VOL: 0
+;PCODE: $000005D3 VOL: 0
+;PCODE: $000005D4 VOL: 0
+; 0000 041D      GPS_sim_counter=0;
+;PCODE: $000005D5 VOL: 0
+;PCODE: $000005D6 VOL: 0
+; 0000 041E      goto exit_int;
+;PCODE: $000005D7 VOL: 0
+; 0000 041F     }
+; 0000 0420 
+; 0000 0421 
+; 0000 0422    if(GPS_flag_gp==4)
+;PCODE: $000005D8 VOL: 0
+;PCODE: $000005D9 VOL: 0
+;PCODE: $000005DA VOL: 0
+;PCODE: $000005DB VOL: 0
+; 0000 0423    {
+; 0000 0424 
+; 0000 0425     if(GPS_zap_counter==2)//shir
+;PCODE: $000005DC VOL: 0
+;PCODE: $000005DD VOL: 0
+;PCODE: $000005DE VOL: 0
+; 0000 0426     {
+; 0000 0427      switch(GPS_sim_counter)
+;PCODE: $000005DF VOL: 0
+;PCODE: $000005E0 VOL: 0
+; 0000 0428      {
+; 0000 0429       case 0:
+;PCODE: $000005E1 VOL: 0
+;PCODE: $000005E2 VOL: 0
+; 0000 042A        GPS_shir[0]=(simvol-48)*10;
+;PCODE: $000005E3 VOL: 0
+;PCODE: $000005E4 VOL: 0
+;PCODE: $000005E5 VOL: 0
+;PCODE: $000005E6 VOL: 0
+;PCODE: $000005E7 VOL: 0
+;PCODE: $000005E8 VOL: 0
+; 0000 042B       break;
+;PCODE: $000005E9 VOL: 0
+; 0000 042C       case 1:
+;PCODE: $000005EA VOL: 0
+;PCODE: $000005EB VOL: 0
+;PCODE: $000005EC VOL: 0
+; 0000 042D        GPS_shir[0]=GPS_shir[0]+(simvol-48);
+;PCODE: $000005ED VOL: 0
+;PCODE: $000005EE VOL: 0
+;PCODE: $000005EF VOL: 0
+;PCODE: $000005F0 VOL: 0
+;PCODE: $000005F1 VOL: 0
+;PCODE: $000005F2 VOL: 0
+; 0000 042E       break;
+;PCODE: $000005F3 VOL: 0
+; 0000 042F       case 2:
+;PCODE: $000005F4 VOL: 0
+;PCODE: $000005F5 VOL: 0
+;PCODE: $000005F6 VOL: 0
+; 0000 0430        GPS_shir[1]=(simvol-48)*10;
+;PCODE: $000005F7 VOL: 0
+;PCODE: $000005F8 VOL: 0
+;PCODE: $000005F9 VOL: 0
+;PCODE: $000005FA VOL: 0
+;PCODE: $000005FB VOL: 0
+;PCODE: $000005FC VOL: 0
+;PCODE: $000005FD VOL: 0
+; 0000 0431       break;
+;PCODE: $000005FE VOL: 0
+; 0000 0432       case 3:
+;PCODE: $000005FF VOL: 0
+;PCODE: $00000600 VOL: 0
+;PCODE: $00000601 VOL: 0
+; 0000 0433        GPS_shir[1]=GPS_shir[1]+(simvol-48);
+;PCODE: $00000602 VOL: 0
+;PCODE: $00000603 VOL: 0
+;PCODE: $00000604 VOL: 0
+;PCODE: $00000605 VOL: 0
+;PCODE: $00000606 VOL: 0
+;PCODE: $00000607 VOL: 0
+;PCODE: $00000608 VOL: 0
+;PCODE: $00000609 VOL: 0
+; 0000 0434       break;
+;PCODE: $0000060A VOL: 0
+; 0000 0435       case 5:
+;PCODE: $0000060B VOL: 0
+;PCODE: $0000060C VOL: 0
+;PCODE: $0000060D VOL: 0
+; 0000 0436        GPS_shir[2]=(simvol-48)*1000;
+;PCODE: $0000060E VOL: 0
+;PCODE: $0000060F VOL: 0
+;PCODE: $00000610 VOL: 0
+;PCODE: $00000611 VOL: 0
+;PCODE: $00000612 VOL: 0
+;PCODE: $00000613 VOL: 0
+;PCODE: $00000614 VOL: 0
+; 0000 0437       break;
+;PCODE: $00000615 VOL: 0
+; 0000 0438       case 6:
+;PCODE: $00000616 VOL: 0
+;PCODE: $00000617 VOL: 0
+;PCODE: $00000618 VOL: 0
+; 0000 0439        GPS_shir[2]=GPS_shir[2]+(simvol-48)*100;
+;PCODE: $00000619 VOL: 0
+;PCODE: $0000061A VOL: 0
+;PCODE: $0000061B VOL: 0
+;PCODE: $0000061C VOL: 0
+;PCODE: $0000061D VOL: 0
+;PCODE: $0000061E VOL: 0
+;PCODE: $0000061F VOL: 0
+;PCODE: $00000620 VOL: 0
+;PCODE: $00000621 VOL: 0
+;PCODE: $00000622 VOL: 0
+; 0000 043A       break;
+;PCODE: $00000623 VOL: 0
+; 0000 043B       case 7:
+;PCODE: $00000624 VOL: 0
+;PCODE: $00000625 VOL: 0
+;PCODE: $00000626 VOL: 0
+; 0000 043C        GPS_shir[2]=GPS_shir[2]+(simvol-48)*10;
+;PCODE: $00000627 VOL: 0
+;PCODE: $00000628 VOL: 0
+;PCODE: $00000629 VOL: 0
+;PCODE: $0000062A VOL: 0
+;PCODE: $0000062B VOL: 0
+;PCODE: $0000062C VOL: 0
+;PCODE: $0000062D VOL: 0
+;PCODE: $0000062E VOL: 0
+;PCODE: $0000062F VOL: 0
+;PCODE: $00000630 VOL: 0
+; 0000 043D       break;
+;PCODE: $00000631 VOL: 0
+; 0000 043E       case 8:
+;PCODE: $00000632 VOL: 0
+;PCODE: $00000633 VOL: 0
+;PCODE: $00000634 VOL: 0
+; 0000 043F        GPS_shir[2]=GPS_shir[2]+(simvol-48);
+;PCODE: $00000635 VOL: 0
+;PCODE: $00000636 VOL: 0
+;PCODE: $00000637 VOL: 0
+;PCODE: $00000638 VOL: 0
+;PCODE: $00000639 VOL: 0
+;PCODE: $0000063A VOL: 0
+;PCODE: $0000063B VOL: 0
+;PCODE: $0000063C VOL: 0
+; 0000 0440      }
+;PCODE: $0000063D VOL: 0
+; 0000 0441      GPS_sim_counter++;
+;PCODE: $0000063E VOL: 0
+;PCODE: $0000063F VOL: 0
+;PCODE: $00000640 VOL: 0
+; 0000 0442 
+; 0000 0443      goto exit_int;
+;PCODE: $00000641 VOL: 0
+; 0000 0444     }
+; 0000 0445    if(GPS_zap_counter==3)
+;PCODE: $00000642 VOL: 0
+;PCODE: $00000643 VOL: 0
+;PCODE: $00000644 VOL: 0
+;PCODE: $00000645 VOL: 0
+; 0000 0446     {GPS_shir[3]=simvol;
+;PCODE: $00000646 VOL: 0
+;PCODE: $00000647 VOL: 0
+;PCODE: $00000648 VOL: 0
+;PCODE: $00000649 VOL: 0
+;PCODE: $0000064A VOL: 0
+; 0000 0447      goto exit_int;}
+;PCODE: $0000064B VOL: 0
+; 0000 0448    if(GPS_zap_counter==4)//dolg
+;PCODE: $0000064C VOL: 0
+;PCODE: $0000064D VOL: 0
+;PCODE: $0000064E VOL: 0
+;PCODE: $0000064F VOL: 0
+; 0000 0449     {
+; 0000 044A      switch(GPS_sim_counter)
+;PCODE: $00000650 VOL: 0
+;PCODE: $00000651 VOL: 0
+; 0000 044B      {
+; 0000 044C       case 0:
+;PCODE: $00000652 VOL: 0
+;PCODE: $00000653 VOL: 0
+; 0000 044D     GPS_dolg[0]=(simvol-48)*100;
+;PCODE: $00000654 VOL: 0
+;PCODE: $00000655 VOL: 0
+;PCODE: $00000656 VOL: 0
+;PCODE: $00000657 VOL: 0
+;PCODE: $00000658 VOL: 0
+;PCODE: $00000659 VOL: 0
+; 0000 044E       break;
+;PCODE: $0000065A VOL: 0
+; 0000 044F       case 1:
+;PCODE: $0000065B VOL: 0
+;PCODE: $0000065C VOL: 0
+;PCODE: $0000065D VOL: 0
+; 0000 0450     GPS_dolg[0]=GPS_dolg[0]+(simvol-48)*10;
+;PCODE: $0000065E VOL: 0
+;PCODE: $0000065F VOL: 0
+;PCODE: $00000660 VOL: 0
+;PCODE: $00000661 VOL: 0
+;PCODE: $00000662 VOL: 0
+;PCODE: $00000663 VOL: 0
+;PCODE: $00000664 VOL: 0
+;PCODE: $00000665 VOL: 0
+; 0000 0451       break;
+;PCODE: $00000666 VOL: 0
+; 0000 0452       case 2:
+;PCODE: $00000667 VOL: 0
+;PCODE: $00000668 VOL: 0
+;PCODE: $00000669 VOL: 0
+; 0000 0453     GPS_dolg[0]=GPS_dolg[0]+(simvol-48);
+;PCODE: $0000066A VOL: 0
+;PCODE: $0000066B VOL: 0
+;PCODE: $0000066C VOL: 0
+;PCODE: $0000066D VOL: 0
+;PCODE: $0000066E VOL: 0
+;PCODE: $0000066F VOL: 0
+; 0000 0454       break;
+;PCODE: $00000670 VOL: 0
+; 0000 0455       case 3:
+;PCODE: $00000671 VOL: 0
+;PCODE: $00000672 VOL: 0
+;PCODE: $00000673 VOL: 0
+; 0000 0456        GPS_dolg[1]=(simvol-48)*10;
+;PCODE: $00000674 VOL: 0
+;PCODE: $00000675 VOL: 0
+;PCODE: $00000676 VOL: 0
+;PCODE: $00000677 VOL: 0
+;PCODE: $00000678 VOL: 0
+;PCODE: $00000679 VOL: 0
+;PCODE: $0000067A VOL: 0
+; 0000 0457       break;
+;PCODE: $0000067B VOL: 0
+; 0000 0458       case 4:
+;PCODE: $0000067C VOL: 0
+;PCODE: $0000067D VOL: 0
+;PCODE: $0000067E VOL: 0
+; 0000 0459        GPS_dolg[1]=GPS_dolg[1]+(simvol-48);
+;PCODE: $0000067F VOL: 0
+;PCODE: $00000680 VOL: 0
+;PCODE: $00000681 VOL: 0
+;PCODE: $00000682 VOL: 0
+;PCODE: $00000683 VOL: 0
+;PCODE: $00000684 VOL: 0
+;PCODE: $00000685 VOL: 0
+;PCODE: $00000686 VOL: 0
+; 0000 045A       break;
+;PCODE: $00000687 VOL: 0
+; 0000 045B       case 6:
+;PCODE: $00000688 VOL: 0
+;PCODE: $00000689 VOL: 0
+;PCODE: $0000068A VOL: 0
+; 0000 045C        GPS_dolg[2]=(simvol-48)*1000;
+;PCODE: $0000068B VOL: 0
+;PCODE: $0000068C VOL: 0
+;PCODE: $0000068D VOL: 0
+;PCODE: $0000068E VOL: 0
+;PCODE: $0000068F VOL: 0
+;PCODE: $00000690 VOL: 0
+;PCODE: $00000691 VOL: 0
+; 0000 045D       break;
+;PCODE: $00000692 VOL: 0
+; 0000 045E       case 7:
+;PCODE: $00000693 VOL: 0
+;PCODE: $00000694 VOL: 0
+;PCODE: $00000695 VOL: 0
+; 0000 045F        GPS_dolg[2]=GPS_dolg[2]+(simvol-48)*100;
+;PCODE: $00000696 VOL: 0
+;PCODE: $00000697 VOL: 0
+;PCODE: $00000698 VOL: 0
+;PCODE: $00000699 VOL: 0
+;PCODE: $0000069A VOL: 0
+;PCODE: $0000069B VOL: 0
+;PCODE: $0000069C VOL: 0
+;PCODE: $0000069D VOL: 0
+;PCODE: $0000069E VOL: 0
+;PCODE: $0000069F VOL: 0
+; 0000 0460       break;
+;PCODE: $000006A0 VOL: 0
+; 0000 0461       case 8:
+;PCODE: $000006A1 VOL: 0
+;PCODE: $000006A2 VOL: 0
+;PCODE: $000006A3 VOL: 0
+; 0000 0462        GPS_dolg[2]=GPS_dolg[2]+(simvol-48)*10;
+;PCODE: $000006A4 VOL: 0
+;PCODE: $000006A5 VOL: 0
+;PCODE: $000006A6 VOL: 0
+;PCODE: $000006A7 VOL: 0
+;PCODE: $000006A8 VOL: 0
+;PCODE: $000006A9 VOL: 0
+;PCODE: $000006AA VOL: 0
+;PCODE: $000006AB VOL: 0
+;PCODE: $000006AC VOL: 0
+;PCODE: $000006AD VOL: 0
+; 0000 0463       break;
+;PCODE: $000006AE VOL: 0
+; 0000 0464       case 9:
+;PCODE: $000006AF VOL: 0
+;PCODE: $000006B0 VOL: 0
+;PCODE: $000006B1 VOL: 0
+; 0000 0465        GPS_dolg[2]=GPS_dolg[2]+(simvol-48);
+;PCODE: $000006B2 VOL: 0
+;PCODE: $000006B3 VOL: 0
+;PCODE: $000006B4 VOL: 0
+;PCODE: $000006B5 VOL: 0
+;PCODE: $000006B6 VOL: 0
+;PCODE: $000006B7 VOL: 0
+;PCODE: $000006B8 VOL: 0
+;PCODE: $000006B9 VOL: 0
+; 0000 0466      }
+;PCODE: $000006BA VOL: 0
+; 0000 0467      GPS_sim_counter++;
+;PCODE: $000006BB VOL: 0
+;PCODE: $000006BC VOL: 0
+;PCODE: $000006BD VOL: 0
+; 0000 0468      goto exit_int;
+;PCODE: $000006BE VOL: 0
+; 0000 0469     }
+; 0000 046A    if(GPS_zap_counter==5)
+;PCODE: $000006BF VOL: 0
+;PCODE: $000006C0 VOL: 0
+;PCODE: $000006C1 VOL: 0
+;PCODE: $000006C2 VOL: 0
+; 0000 046B     {
+; 0000 046C      GPS_dolg[3]=simvol;
+;PCODE: $000006C3 VOL: 0
+;PCODE: $000006C4 VOL: 0
+;PCODE: $000006C5 VOL: 0
+;PCODE: $000006C6 VOL: 0
+;PCODE: $000006C7 VOL: 0
+; 0000 046D      goto exit_int;
+;PCODE: $000006C8 VOL: 0
+; 0000 046E     }
+; 0000 046F     if(GPS_zap_counter==6)
+;PCODE: $000006C9 VOL: 0
+;PCODE: $000006CA VOL: 0
+;PCODE: $000006CB VOL: 0
+;PCODE: $000006CC VOL: 0
+; 0000 0470     {
+; 0000 0471      GPS_solve=simvol;
+;PCODE: $000006CD VOL: 0
+;PCODE: $000006CE VOL: 0
+; 0000 0472      GPS_flag_ready=1;
+;PCODE: $000006CF VOL: 0
+;PCODE: $000006D0 VOL: 0
+; 0000 0473      GPS_flag_gp=0;
+;PCODE: $000006D1 VOL: 0
+;PCODE: $000006D2 VOL: 0
+; 0000 0474      GPS_zap_counter=0;
+;PCODE: $000006D3 VOL: 0
+;PCODE: $000006D4 VOL: 0
+; 0000 0475      GPS_ON_COUNTER=0;
+;PCODE: $000006D5 VOL: 0
+;PCODE: $000006D6 VOL: 0
+; 0000 0476 
+; 0000 0477       SEND_MAS[12]=1;
+;PCODE: $000006D7 VOL: 0
+;PCODE: $000006D8 VOL: 0
+;PCODE: $000006D9 VOL: 0
+; 0000 0478 
+; 0000 0479      SEND_MAS[13]=(unsigned char)GPS_shir[0];
+;PCODE: $000006DA VOL: 0
+;PCODE: $000006DB VOL: 0
+;PCODE: $000006DC VOL: 0
+; 0000 047A      SEND_MAS[14]=(unsigned char)GPS_shir[1];
+;PCODE: $000006DD VOL: 0
+;PCODE: $000006DE VOL: 0
+;PCODE: $000006DF VOL: 0
+;PCODE: $000006E0 VOL: 0
+; 0000 047B      SEND_MAS[15]=(unsigned char)(GPS_shir[2]/100);
+;PCODE: $000006E1 VOL: 0
+;PCODE: $000006E2 VOL: 0
+;PCODE: $000006E3 VOL: 0
+;PCODE: $000006E4 VOL: 0
+;PCODE: $000006E5 VOL: 0
+;PCODE: $000006E6 VOL: 0
+; 0000 047C      SEND_MAS[16]=(unsigned char)(GPS_shir[2]%100);
+;PCODE: $000006E7 VOL: 0
+;PCODE: $000006E8 VOL: 0
+;PCODE: $000006E9 VOL: 0
+;PCODE: $000006EA VOL: 0
+;PCODE: $000006EB VOL: 0
+;PCODE: $000006EC VOL: 0
+; 0000 047D 
+; 0000 047E      SEND_MAS[17]=(unsigned char)GPS_dolg[0];
+;PCODE: $000006ED VOL: 0
+;PCODE: $000006EE VOL: 0
+;PCODE: $000006EF VOL: 0
+; 0000 047F      SEND_MAS[18]=(unsigned char)GPS_dolg[1];
+;PCODE: $000006F0 VOL: 0
+;PCODE: $000006F1 VOL: 0
+;PCODE: $000006F2 VOL: 0
+;PCODE: $000006F3 VOL: 0
+; 0000 0480      SEND_MAS[19]=(unsigned char)(GPS_dolg[2]/100);
+;PCODE: $000006F4 VOL: 0
+;PCODE: $000006F5 VOL: 0
+;PCODE: $000006F6 VOL: 0
+;PCODE: $000006F7 VOL: 0
+;PCODE: $000006F8 VOL: 0
+;PCODE: $000006F9 VOL: 0
+; 0000 0481      SEND_MAS[20]=(unsigned char)(GPS_dolg[2]%100);
+;PCODE: $000006FA VOL: 0
+;PCODE: $000006FB VOL: 0
+;PCODE: $000006FC VOL: 0
+;PCODE: $000006FD VOL: 0
+;PCODE: $000006FE VOL: 0
+;PCODE: $000006FF VOL: 0
+; 0000 0482 
+; 0000 0483      SEND_MAS[21]=(unsigned char)GPS_shir[3];
+;PCODE: $00000700 VOL: 0
+;PCODE: $00000701 VOL: 0
+;PCODE: $00000702 VOL: 0
+;PCODE: $00000703 VOL: 0
+; 0000 0484      SEND_MAS[22]=(unsigned char)GPS_dolg[3];
+;PCODE: $00000704 VOL: 0
+;PCODE: $00000705 VOL: 0
+;PCODE: $00000706 VOL: 0
+;PCODE: $00000707 VOL: 0
+; 0000 0485 
+; 0000 0486     }
+; 0000 0487   }
+;PCODE: $00000708 VOL: 0
+; 0000 0488 
+; 0000 0489 
+; 0000 048A  exit_int:
+;PCODE: $00000709 VOL: 0
+;PCODE: $0000070A VOL: 0
+; 0000 048B }
+;PCODE: $0000070B VOL: 0
+;PCODE: $0000070C VOL: 0
+;PCODE: $0000070D VOL: 0
+;PCODE: $0000070E VOL: 0
+;
+;
+;// USART1 Receiver interrupt service routine
+;interrupt [USART1_RXC] void usart1_rx_isr(void)
+; 0000 0490 {
+;PCODE: $0000070F VOL: 0
+;PCODE: $00000710 VOL: 0
+; 0000 0491  char data;
+; 0000 0492   data=UDR1;
+;PCODE: $00000711 VOL: 0
+;	data -> R17
+;PCODE: $00000712 VOL: 0
+;PCODE: $00000713 VOL: 0
+; 0000 0493  if((receive_counter==0)||(data>245))
+;PCODE: $00000714 VOL: 0
+;PCODE: $00000715 VOL: 0
+;PCODE: $00000716 VOL: 0
+;PCODE: $00000717 VOL: 0
+;PCODE: $00000718 VOL: 0
+;PCODE: $00000719 VOL: 0
+;PCODE: $0000071A VOL: 0
+;PCODE: $0000071B VOL: 0
+; 0000 0494  {
+; 0000 0495   receive_counter=0;
+;PCODE: $0000071C VOL: 0
+;PCODE: $0000071D VOL: 0
+; 0000 0496   switch(data)
+;PCODE: $0000071E VOL: 0
+;PCODE: $0000071F VOL: 0
+; 0000 0497   {
+; 0000 0498    //setup request
+; 0000 0499    case 246:
+;PCODE: $00000720 VOL: 0
+;PCODE: $00000721 VOL: 0
+; 0000 049A    flag_transmission=248;
+;PCODE: $00000722 VOL: 0
+;PCODE: $00000723 VOL: 0
+; 0000 049B    break;
+;PCODE: $00000724 VOL: 0
+; 0000 049C 
+; 0000 049D    //calibr request
+; 0000 049E    case 247:
+;PCODE: $00000725 VOL: 0
+;PCODE: $00000726 VOL: 0
+;PCODE: $00000727 VOL: 0
+; 0000 049F    flag_transmission=249;
+;PCODE: $00000728 VOL: 0
+;PCODE: $00000729 VOL: 0
+; 0000 04A0    break;
+;PCODE: $0000072A VOL: 0
+; 0000 04A1 
+; 0000 04A2    //setup table
+; 0000 04A3    case 248:
+;PCODE: $0000072B VOL: 0
+;PCODE: $0000072C VOL: 0
+;PCODE: $0000072D VOL: 0
+; 0000 04A4    flag_receive=248;
+;PCODE: $0000072E VOL: 0
+;PCODE: $0000072F VOL: 0
+; 0000 04A5    receive_counter=7;
+;PCODE: $00000730 VOL: 0
+;PCODE: $00000731 VOL: 0
+; 0000 04A6    break;
+;PCODE: $00000732 VOL: 0
+; 0000 04A7 
+; 0000 04A8    //calibr table
+; 0000 04A9    case 249:
+;PCODE: $00000733 VOL: 0
+;PCODE: $00000734 VOL: 0
+;PCODE: $00000735 VOL: 0
+; 0000 04AA    flag_receive=249;
+;PCODE: $00000736 VOL: 0
+;PCODE: $00000737 VOL: 0
+; 0000 04AB    receive_counter=9;
+;PCODE: $00000738 VOL: 0
+;PCODE: $00000739 VOL: 0
+; 0000 04AC    break;
+;PCODE: $0000073A VOL: 0
+; 0000 04AD 
+; 0000 04AE     //system on
+; 0000 04AF    case 250:
+;PCODE: $0000073B VOL: 0
+;PCODE: $0000073C VOL: 0
+;PCODE: $0000073D VOL: 0
+; 0000 04B0     if(flag_I_NULL<10)//If the current null calibration has not finished
+;PCODE: $0000073E VOL: 0
+;PCODE: $0000073F VOL: 0
+;PCODE: $00000740 VOL: 0
+; 0000 04B1      break;
+;PCODE: $00000741 VOL: 0
+; 0000 04B2     flag_start=1;
+;PCODE: $00000742 VOL: 0
+;PCODE: $00000743 VOL: 0
+;PCODE: $00000744 VOL: 0
+; 0000 04B3    break;
+;PCODE: $00000745 VOL: 0
+; 0000 04B4 
+; 0000 04B5    //system off
+; 0000 04B6    case 251:
+;PCODE: $00000746 VOL: 0
+;PCODE: $00000747 VOL: 0
+;PCODE: $00000748 VOL: 0
+; 0000 04B7    flag_start=0;
+;PCODE: $00000749 VOL: 0
+;PCODE: $0000074A VOL: 0
+; 0000 04B8    break;
+;PCODE: $0000074B VOL: 0
+; 0000 04B9 
+; 0000 04BA    case 252:
+;PCODE: $0000074C VOL: 0
+;PCODE: $0000074D VOL: 0
+;PCODE: $0000074E VOL: 0
+; 0000 04BB    PORTC.1 = 1;//fonar on
+;PCODE: $0000074F VOL: 0
+;PCODE: $00000750 VOL: 0
+; 0000 04BC    break;
+;PCODE: $00000751 VOL: 0
+; 0000 04BD 
+; 0000 04BE    case 253:
+;PCODE: $00000752 VOL: 0
+;PCODE: $00000753 VOL: 0
+;PCODE: $00000754 VOL: 0
+; 0000 04BF    PORTC.1 = 0;//fonar off
+;PCODE: $00000755 VOL: 0
+;PCODE: $00000756 VOL: 0
+; 0000 04C0    break;
+;PCODE: $00000757 VOL: 0
+; 0000 04C1   }
+;PCODE: $00000758 VOL: 0
+; 0000 04C2  }
+; 0000 04C3  else
+;PCODE: $00000759 VOL: 0
+;PCODE: $0000075A VOL: 0
+; 0000 04C4  {
+; 0000 04C5    if(flag_receive==248)
+;PCODE: $0000075B VOL: 0
+;PCODE: $0000075C VOL: 0
+;PCODE: $0000075D VOL: 0
+; 0000 04C6    {
+; 0000 04C7     SETUP_MAS[8-receive_counter]=data;
+;PCODE: $0000075E VOL: 0
+;PCODE: $0000075F VOL: 0
+;PCODE: $00000760 VOL: 0
+;PCODE: $00000761 VOL: 0
+;PCODE: $00000762 VOL: 0
+; 0000 04C8     if(receive_counter==1)
+;PCODE: $00000763 VOL: 0
+;PCODE: $00000764 VOL: 0
+;PCODE: $00000765 VOL: 0
+; 0000 04C9     {
+; 0000 04CA      save_to_eeprom();
+;PCODE: $00000766 VOL: 0
+; 0000 04CB      Read_Setup_Calibr();
+;PCODE: $00000767 VOL: 0
+; 0000 04CC     }
+; 0000 04CD    }
+;PCODE: $00000768 VOL: 0
+; 0000 04CE 
+; 0000 04CF     if(flag_receive==249)
+;PCODE: $00000769 VOL: 0
+;PCODE: $0000076A VOL: 0
+;PCODE: $0000076B VOL: 0
+;PCODE: $0000076C VOL: 0
+; 0000 04D0     {
+; 0000 04D1      CALIBR_MAS[10-receive_counter]=data;
+;PCODE: $0000076D VOL: 0
+;PCODE: $0000076E VOL: 0
+;PCODE: $0000076F VOL: 0
+;PCODE: $00000770 VOL: 0
+;PCODE: $00000771 VOL: 0
+; 0000 04D2      if(receive_counter==1)
+;PCODE: $00000772 VOL: 0
+;PCODE: $00000773 VOL: 0
+;PCODE: $00000774 VOL: 0
+; 0000 04D3      {
+; 0000 04D4       save_to_eeprom();
+;PCODE: $00000775 VOL: 0
+; 0000 04D5       Read_Setup_Calibr();
+;PCODE: $00000776 VOL: 0
+; 0000 04D6      }
+; 0000 04D7     }
+;PCODE: $00000777 VOL: 0
+; 0000 04D8 
+; 0000 04D9    receive_counter--;
+;PCODE: $00000778 VOL: 0
+;PCODE: $00000779 VOL: 0
+;PCODE: $0000077A VOL: 0
+;PCODE: $0000077B VOL: 0
+;PCODE: $0000077C VOL: 0
+; 0000 04DA  }
+;PCODE: $0000077D VOL: 0
+; 0000 04DB }
+;PCODE: $0000077E VOL: 0
+;PCODE: $0000077F VOL: 0
+;PCODE: $00000780 VOL: 0
+;PCODE: $00000781 VOL: 0
+;
+;
+;
+;
+;
+;// Read the AD conversion result
+;unsigned int read_adc(unsigned char adc_input)
+; 0000 04E3 {
+;PCODE: $00000782 VOL: 0
+;PCODE: $00000783 VOL: 0
+; 0000 04E4  ADMUX=adc_input | (ADC_VREF_TYPE & 0xff);
+;PCODE: $00000784 VOL: 0
+;	adc_input -> Y+0
+;PCODE: $00000785 VOL: 0
+;PCODE: $00000786 VOL: 0
+;PCODE: $00000787 VOL: 0
+; 0000 04E5  // Delay needed for the stabilization of the ADC input voltage
+; 0000 04E6  delay_us(7);
+;PCODE: $00000788 VOL: 0
+; 0000 04E7  // Start the AD conversion
+; 0000 04E8  ADCSRA|=0x40;
+;PCODE: $00000789 VOL: 0
+;PCODE: $0000078A VOL: 0
+; 0000 04E9  // Wait for the AD conversion to complete
+; 0000 04EA  while ((ADCSRA & 0x10)==0);
+;PCODE: $0000078B VOL: 0
+;PCODE: $0000078C VOL: 0
+;PCODE: $0000078D VOL: 0
+;PCODE: $0000078E VOL: 0
+;PCODE: $0000078F VOL: 0
+;PCODE: $00000790 VOL: 0
+; 0000 04EB   ADCSRA|=0x10;
+;PCODE: $00000791 VOL: 0
+;PCODE: $00000792 VOL: 0
+; 0000 04EC  return ADCW;
+;PCODE: $00000793 VOL: 0
+;PCODE: $00000794 VOL: 0
+;PCODE: $00000795 VOL: 0
+; 0000 04ED }
+;PCODE: $00000796 VOL: 0
+;
+;
+;
+; unsigned char NEW_REGULATOR(unsigned int Z,unsigned int S)//s 1000=1
+; 0000 04F2  {
+;PCODE: $00000797 VOL: 0
+;PCODE: $00000798 VOL: 0
+; 0000 04F3   int U,E;
+; 0000 04F4 
+; 0000 04F5   E=150-S;//z always 150
+;PCODE: $00000799 VOL: 0
+;PCODE: $0000079A VOL: 0
+;	Z -> Y+6
+;	S -> Y+4
+;	U -> R16,R17
+;	E -> R18,R19
+;PCODE: $0000079B VOL: 0
+;PCODE: $0000079C VOL: 0
+;PCODE: $0000079D VOL: 0
+;PCODE: $0000079E VOL: 0
+; 0000 04F6   PID_I_S=PID_I_S+E;
+;PCODE: $0000079F VOL: 0
+;PCODE: $000007A0 VOL: 0
+;PCODE: $000007A1 VOL: 0
+;PCODE: $000007A2 VOL: 0
+; 0000 04F7   if(PID_I_S>1000)
+;PCODE: $000007A3 VOL: 0
+;PCODE: $000007A4 VOL: 0
+;PCODE: $000007A5 VOL: 0
+; 0000 04F8    PID_I_S=1000;
+;PCODE: $000007A6 VOL: 0
+;PCODE: $000007A7 VOL: 0
+; 0000 04F9   if(PID_I_S<0)
+;PCODE: $000007A8 VOL: 0
+;PCODE: $000007A9 VOL: 0
+;PCODE: $000007AA VOL: 0
+;PCODE: $000007AB VOL: 0
+; 0000 04FA    PID_I_S=0;
+;PCODE: $000007AC VOL: 0
+;PCODE: $000007AD VOL: 0
+; 0000 04FB 
+; 0000 04FC    if(S<30)
+;PCODE: $000007AE VOL: 0
+;PCODE: $000007AF VOL: 0
+;PCODE: $000007B0 VOL: 0
+;PCODE: $000007B1 VOL: 0
+; 0000 04FD     PID_I_S=800;
+;PCODE: $000007B2 VOL: 0
+;PCODE: $000007B3 VOL: 0
+; 0000 04FE 
+; 0000 04FF    U=PID_I_S;
+;PCODE: $000007B4 VOL: 0
+;PCODE: $000007B5 VOL: 0
+;PCODE: $000007B6 VOL: 0
+; 0000 0500 
+; 0000 0501 
+; 0000 0502  U=U/4;
+;PCODE: $000007B7 VOL: 0
+;PCODE: $000007B8 VOL: 0
+;PCODE: $000007B9 VOL: 0
+;PCODE: $000007BA VOL: 0
+; 0000 0503   if(U<0)
+;PCODE: $000007BB VOL: 0
+;PCODE: $000007BC VOL: 0
+; 0000 0504    U=0;
+;PCODE: $000007BD VOL: 0
+;PCODE: $000007BE VOL: 0
+; 0000 0505   if(U>255)
+;PCODE: $000007BF VOL: 0
+;PCODE: $000007C0 VOL: 0
+;PCODE: $000007C1 VOL: 0
+;PCODE: $000007C2 VOL: 0
+; 0000 0506    U=255;
+;PCODE: $000007C3 VOL: 0
+;PCODE: $000007C4 VOL: 0
+; 0000 0507   return (unsigned char)U;
+;PCODE: $000007C5 VOL: 0
+;PCODE: $000007C6 VOL: 0
+;PCODE: $000007C7 VOL: 0
+;PCODE: $000007C8 VOL: 0
+;PCODE: $000007C9 VOL: 0
+; 0000 0508  }
+;PCODE: $000007CA VOL: 0
+;
+;
+;// Timer2 overflow interrupt service routine
+;////100HZ Program cycle
+;interrupt [TIM2_OVF] void timer2_ovf_isr(void)
+; 0000 050E {
+;PCODE: $000007CB VOL: 0
+;PCODE: $000007CC VOL: 0
+; 0000 050F  int SCOLGENIE=0;
+; 0000 0510  unsigned char PWM=0;
+; 0000 0511 
+; 0000 0512  TCNT2=148;//100HZ
+;PCODE: $000007CD VOL: 0
+;	SCOLGENIE -> R16,R17
+;	PWM -> R19
+;PCODE: $000007CE VOL: 0
+;PCODE: $000007CF VOL: 0
+;PCODE: $000007D0 VOL: 0
+;PCODE: $000007D1 VOL: 0
+;PCODE: $000007D2 VOL: 0
+;PCODE: $000007D3 VOL: 0
+; 0000 0513  //Speed---------------------------------------------------------------------------
+; 0000 0514   if((IK_DELTA>400)&&(ovf_IK<2))   //   ~~160km/h             172,800 kHz
+;PCODE: $000007D4 VOL: 0
+;PCODE: $000007D5 VOL: 0
+;PCODE: $000007D6 VOL: 0
+;PCODE: $000007D7 VOL: 0
+;PCODE: $000007D8 VOL: 0
+;PCODE: $000007D9 VOL: 0
+;PCODE: $000007DA VOL: 0
+;PCODE: $000007DB VOL: 0
+;PCODE: $000007DC VOL: 0
+;PCODE: $000007DD VOL: 0
+; 0000 0515           {
+; 0000 0516            IK_SPEED_KM_H=(unsigned int)(((unsigned long)R_IK*2255)/IK_DELTA);
+;PCODE: $000007DE VOL: 0
+;PCODE: $000007DF VOL: 0
+;PCODE: $000007E0 VOL: 0
+;PCODE: $000007E1 VOL: 0
+;PCODE: $000007E2 VOL: 0
+;PCODE: $000007E3 VOL: 0
+;PCODE: $000007E4 VOL: 0
+;PCODE: $000007E5 VOL: 0
+; 0000 0517           }
+; 0000 0518   else
+;PCODE: $000007E6 VOL: 0
+;PCODE: $000007E7 VOL: 0
+; 0000 0519           {
+; 0000 051A            IK_SPEED_KM_H=0;
+;PCODE: $000007E8 VOL: 0
+;PCODE: $000007E9 VOL: 0
+; 0000 051B           }
+;PCODE: $000007EA VOL: 0
+; 0000 051C           IK_SPEED_MAS[0]=IK_SPEED_MAS[1];
+;PCODE: $000007EB VOL: 0
+;PCODE: $000007EC VOL: 0
+;PCODE: $000007ED VOL: 0
+; 0000 051D           IK_SPEED_MAS[1]=IK_SPEED_MAS[2];
+;PCODE: $000007EE VOL: 0
+;PCODE: $000007EF VOL: 0
+;PCODE: $000007F0 VOL: 0
+;PCODE: $000007F1 VOL: 0
+; 0000 051E           IK_SPEED_MAS[2]=IK_SPEED_KM_H;
+;PCODE: $000007F2 VOL: 0
+;PCODE: $000007F3 VOL: 0
+;PCODE: $000007F4 VOL: 0
+; 0000 051F 
+; 0000 0520   if((TK_DELTA>400)&&(ovf_TK<2))   //   ~~160            172,800 kHz
+;PCODE: $000007F5 VOL: 0
+;PCODE: $000007F6 VOL: 0
+;PCODE: $000007F7 VOL: 0
+;PCODE: $000007F8 VOL: 0
+;PCODE: $000007F9 VOL: 0
+;PCODE: $000007FA VOL: 0
+;PCODE: $000007FB VOL: 0
+;PCODE: $000007FC VOL: 0
+;PCODE: $000007FD VOL: 0
+;PCODE: $000007FE VOL: 0
+; 0000 0521           {
+; 0000 0522            TK_SPEED_KM_H=(unsigned int)(((unsigned long)R_TK*2171)/TK_DELTA);
+;PCODE: $000007FF VOL: 0
+;PCODE: $00000800 VOL: 0
+;PCODE: $00000801 VOL: 0
+;PCODE: $00000802 VOL: 0
+;PCODE: $00000803 VOL: 0
+;PCODE: $00000804 VOL: 0
+;PCODE: $00000805 VOL: 0
+;PCODE: $00000806 VOL: 0
+; 0000 0523           }
+; 0000 0524   else
+;PCODE: $00000807 VOL: 0
+;PCODE: $00000808 VOL: 0
+; 0000 0525           {
+; 0000 0526            TK_SPEED_KM_H=0;
+;PCODE: $00000809 VOL: 0
+;PCODE: $0000080A VOL: 0
+; 0000 0527           }
+;PCODE: $0000080B VOL: 0
+; 0000 0528           TK_SPEED_MAS[0]=TK_SPEED_MAS[1];
+;PCODE: $0000080C VOL: 0
+;PCODE: $0000080D VOL: 0
+;PCODE: $0000080E VOL: 0
+; 0000 0529           TK_SPEED_MAS[1]=TK_SPEED_MAS[2];
+;PCODE: $0000080F VOL: 0
+;PCODE: $00000810 VOL: 0
+;PCODE: $00000811 VOL: 0
+;PCODE: $00000812 VOL: 0
+; 0000 052A           TK_SPEED_MAS[2]=TK_SPEED_KM_H;
+;PCODE: $00000813 VOL: 0
+;PCODE: $00000814 VOL: 0
+;PCODE: $00000815 VOL: 0
+; 0000 052B   //Speed---------------------------------------------------------------------------
+; 0000 052C 
+; 0000 052D 
+; 0000 052E         //Proverka u vichiclenie skolgenia---------------------------------------------------------------
+; 0000 052F           if((IK_SPEED_KM_H>=TK_SPEED_KM_H)||(TK_SPEED_KM_H<100))// 10kmh
+;PCODE: $00000816 VOL: 0
+;PCODE: $00000817 VOL: 0
+;PCODE: $00000818 VOL: 0
+;PCODE: $00000819 VOL: 0
+;PCODE: $0000081A VOL: 0
+;PCODE: $0000081B VOL: 0
+;PCODE: $0000081C VOL: 0
+;PCODE: $0000081D VOL: 0
+;PCODE: $0000081E VOL: 0
+; 0000 0530             SCOLGENIE=0;
+;PCODE: $0000081F VOL: 0
+;PCODE: $00000820 VOL: 0
+; 0000 0531           else
+;PCODE: $00000821 VOL: 0
+;PCODE: $00000822 VOL: 0
+; 0000 0532             SCOLGENIE=(int)((((long int)(TK_SPEED_KM_H-IK_SPEED_KM_H))*1000)/((long int)TK_SPEED_KM_H));
+;PCODE: $00000823 VOL: 0
+;PCODE: $00000824 VOL: 0
+;PCODE: $00000825 VOL: 0
+;PCODE: $00000826 VOL: 0
+;PCODE: $00000827 VOL: 0
+;PCODE: $00000828 VOL: 0
+;PCODE: $00000829 VOL: 0
+;PCODE: $0000082A VOL: 0
+;PCODE: $0000082B VOL: 0
+;PCODE: $0000082C VOL: 0
+;PCODE: $0000082D VOL: 0
+; 0000 0533         //-----------------------------------------------------------------------------------------------
+; 0000 0534 
+; 0000 0535 
+; 0000 0536         if(flag_start==1)
+;PCODE: $0000082E VOL: 0
+;PCODE: $0000082F VOL: 0
+;PCODE: $00000830 VOL: 0
+;PCODE: $00000831 VOL: 0
+; 0000 0537           {
+; 0000 0538            if(TK_SPEED_KM_H<750)
+;PCODE: $00000832 VOL: 0
+;PCODE: $00000833 VOL: 0
+;PCODE: $00000834 VOL: 0
+; 0000 0539            {
+; 0000 053A               PWM=NEW_REGULATOR(ZADANIE_S*10,(unsigned int)SCOLGENIE);
+;PCODE: $00000835 VOL: 0
+;PCODE: $00000836 VOL: 0
+;PCODE: $00000837 VOL: 0
+;PCODE: $00000838 VOL: 0
+;PCODE: $00000839 VOL: 0
+;PCODE: $0000083A VOL: 0
+;PCODE: $0000083B VOL: 0
+; 0000 053B            }
+; 0000 053C            else
+;PCODE: $0000083C VOL: 0
+;PCODE: $0000083D VOL: 0
+; 0000 053D            {
+; 0000 053E             PWM=255;
+;PCODE: $0000083E VOL: 0
+;PCODE: $0000083F VOL: 0
+; 0000 053F             //PID_I_S=800;
+; 0000 0540            }
+;PCODE: $00000840 VOL: 0
+; 0000 0541           }
+; 0000 0542           else
+;PCODE: $00000841 VOL: 0
+;PCODE: $00000842 VOL: 0
+; 0000 0543           {
+; 0000 0544            PWM=0;
+;PCODE: $00000843 VOL: 0
+;PCODE: $00000844 VOL: 0
+; 0000 0545           }
+;PCODE: $00000845 VOL: 0
+; 0000 0546            OCR0=255-PWM;
+;PCODE: $00000846 VOL: 0
+;PCODE: $00000847 VOL: 0
+;PCODE: $00000848 VOL: 0
+; 0000 0547 
+; 0000 0548  if(program_cycle_counter<9)
+;PCODE: $00000849 VOL: 0
+;PCODE: $0000084A VOL: 0
+;PCODE: $0000084B VOL: 0
+; 0000 0549   {program_cycle_counter++;}
+;PCODE: $0000084C VOL: 0
+;PCODE: $0000084D VOL: 0
+;PCODE: $0000084E VOL: 0
+; 0000 054A  else
+;PCODE: $0000084F VOL: 0
+;PCODE: $00000850 VOL: 0
+; 0000 054B   {
+; 0000 054C    program_cycle_flag=1;
+;PCODE: $00000851 VOL: 0
+;PCODE: $00000852 VOL: 0
+; 0000 054D    program_cycle_counter=0;
+;PCODE: $00000853 VOL: 0
+;PCODE: $00000854 VOL: 0
+; 0000 054E   }
+;PCODE: $00000855 VOL: 0
+; 0000 054F }
+;PCODE: $00000856 VOL: 0
+;PCODE: $00000857 VOL: 0
+;PCODE: $00000858 VOL: 0
+;PCODE: $00000859 VOL: 0
+;PCODE: $0000085A VOL: 0
+;
+;
+;//eeprom unsigned char EEP_CALIBR_MAS[10];
+;//eeprom unsigned char EEP_SETUP_MAS[8];
+;
+;//unsigned char CALIBR_MAS[10]={249,66,94,7,9,7,2,8,24,(66+94+7+9+7+2+8+24)/8};
+;//unsigned char SETUP_MAS[8]={248,198,130,10,1,0,0,(198+130+10+1)/6};
+;void load_from_eeprom(void)
+; 0000 0558 {
+;PCODE: $0000085B VOL: 0
+;PCODE: $0000085C VOL: 0
+; 0000 0559  unsigned char tmp;
+; 0000 055A  unsigned int cal_sum=0,setup_sum=0;
+; 0000 055B 
+; 0000 055C  CALIBR_MAS[0]=EEP_CALIBR_MAS[0];
+;PCODE: $0000085D VOL: 0
+;	tmp -> R17
+;	cal_sum -> R18,R19
+;	setup_sum -> R20,R21
+;PCODE: $0000085E VOL: 0
+;PCODE: $0000085F VOL: 0
+;PCODE: $00000860 VOL: 0
+;PCODE: $00000861 VOL: 0
+;PCODE: $00000862 VOL: 0
+;PCODE: $00000863 VOL: 0
+;PCODE: $00000864 VOL: 0
+; 0000 055D  CALIBR_MAS[9]=EEP_CALIBR_MAS[9];
+;PCODE: $00000865 VOL: 0
+;PCODE: $00000866 VOL: 0
+;PCODE: $00000867 VOL: 0
+;PCODE: $00000868 VOL: 0
+;PCODE: $00000869 VOL: 0
+; 0000 055E   for(tmp=1;tmp<=8;tmp++)
+;PCODE: $0000086A VOL: 0
+;PCODE: $0000086B VOL: 0
+;PCODE: $0000086C VOL: 0
+;PCODE: $0000086D VOL: 0
+;PCODE: $0000086E VOL: 0
+;PCODE: $0000086F VOL: 0
+;PCODE: $00000870 VOL: 0
+;PCODE: $00000871 VOL: 0
+;PCODE: $00000872 VOL: 0
+; 0000 055F  {
+; 0000 0560    CALIBR_MAS[tmp]=EEP_CALIBR_MAS[tmp];
+;PCODE: $00000873 VOL: 0
+;PCODE: $00000874 VOL: 0
+;PCODE: $00000875 VOL: 0
+;PCODE: $00000876 VOL: 0
+;PCODE: $00000877 VOL: 0
+;PCODE: $00000878 VOL: 0
+;PCODE: $00000879 VOL: 0
+;PCODE: $0000087A VOL: 0
+;PCODE: $0000087B VOL: 0
+;PCODE: $0000087C VOL: 0
+; 0000 0561    cal_sum=cal_sum+CALIBR_MAS[tmp];
+;PCODE: $0000087D VOL: 0
+;PCODE: $0000087E VOL: 0
+;PCODE: $0000087F VOL: 0
+;PCODE: $00000880 VOL: 0
+;PCODE: $00000881 VOL: 0
+;PCODE: $00000882 VOL: 0
+;PCODE: $00000883 VOL: 0
+; 0000 0562  }
+;PCODE: $00000884 VOL: 0
+;PCODE: $00000885 VOL: 0
+;PCODE: $00000886 VOL: 0
+;PCODE: $00000887 VOL: 0
+;PCODE: $00000888 VOL: 0
+; 0000 0563  cal_sum=cal_sum/8;
+;PCODE: $00000889 VOL: 0
+;PCODE: $0000088A VOL: 0
+;PCODE: $0000088B VOL: 0
+; 0000 0564 
+; 0000 0565    if((CALIBR_MAS[0]!=249)||(CALIBR_MAS[9]!=cal_sum))
+;PCODE: $0000088C VOL: 0
+;PCODE: $0000088D VOL: 0
+;PCODE: $0000088E VOL: 0
+;PCODE: $0000088F VOL: 0
+;PCODE: $00000890 VOL: 0
+;PCODE: $00000891 VOL: 0
+;PCODE: $00000892 VOL: 0
+;PCODE: $00000893 VOL: 0
+;PCODE: $00000894 VOL: 0
+;PCODE: $00000895 VOL: 0
+;PCODE: $00000896 VOL: 0
+; 0000 0566  {
+; 0000 0567   for(tmp=0;tmp<=9;tmp++)
+;PCODE: $00000897 VOL: 0
+;PCODE: $00000898 VOL: 0
+;PCODE: $00000899 VOL: 0
+;PCODE: $0000089A VOL: 0
+;PCODE: $0000089B VOL: 0
+;PCODE: $0000089C VOL: 0
+;PCODE: $0000089D VOL: 0
+;PCODE: $0000089E VOL: 0
+;PCODE: $0000089F VOL: 0
+; 0000 0568   {
+; 0000 0569    CALIBR_MAS[tmp]=DEFAULT_CALIBR_MAS[tmp];
+;PCODE: $000008A0 VOL: 0
+;PCODE: $000008A1 VOL: 0
+;PCODE: $000008A2 VOL: 0
+;PCODE: $000008A3 VOL: 0
+;PCODE: $000008A4 VOL: 0
+;PCODE: $000008A5 VOL: 0
+;PCODE: $000008A6 VOL: 0
+;PCODE: $000008A7 VOL: 0
+; 0000 056A   }
+;PCODE: $000008A8 VOL: 0
+;PCODE: $000008A9 VOL: 0
+;PCODE: $000008AA VOL: 0
+;PCODE: $000008AB VOL: 0
+;PCODE: $000008AC VOL: 0
+; 0000 056B  }
+; 0000 056C 
+; 0000 056D  SETUP_MAS[0]=EEP_SETUP_MAS[0];
+;PCODE: $000008AD VOL: 0
+;PCODE: $000008AE VOL: 0
+;PCODE: $000008AF VOL: 0
+;PCODE: $000008B0 VOL: 0
+; 0000 056E  SETUP_MAS[7]=EEP_SETUP_MAS[7];
+;PCODE: $000008B1 VOL: 0
+;PCODE: $000008B2 VOL: 0
+;PCODE: $000008B3 VOL: 0
+;PCODE: $000008B4 VOL: 0
+;PCODE: $000008B5 VOL: 0
+; 0000 056F   for(tmp=1;tmp<=6;tmp++)
+;PCODE: $000008B6 VOL: 0
+;PCODE: $000008B7 VOL: 0
+;PCODE: $000008B8 VOL: 0
+;PCODE: $000008B9 VOL: 0
+;PCODE: $000008BA VOL: 0
+;PCODE: $000008BB VOL: 0
+;PCODE: $000008BC VOL: 0
+;PCODE: $000008BD VOL: 0
+;PCODE: $000008BE VOL: 0
+; 0000 0570  {
+; 0000 0571   SETUP_MAS[tmp]=EEP_SETUP_MAS[tmp];
+;PCODE: $000008BF VOL: 0
+;PCODE: $000008C0 VOL: 0
+;PCODE: $000008C1 VOL: 0
+;PCODE: $000008C2 VOL: 0
+;PCODE: $000008C3 VOL: 0
+;PCODE: $000008C4 VOL: 0
+;PCODE: $000008C5 VOL: 0
+;PCODE: $000008C6 VOL: 0
+;PCODE: $000008C7 VOL: 0
+;PCODE: $000008C8 VOL: 0
+; 0000 0572   setup_sum=setup_sum+SETUP_MAS[tmp];
+;PCODE: $000008C9 VOL: 0
+;PCODE: $000008CA VOL: 0
+;PCODE: $000008CB VOL: 0
+;PCODE: $000008CC VOL: 0
+;PCODE: $000008CD VOL: 0
+;PCODE: $000008CE VOL: 0
+;PCODE: $000008CF VOL: 0
+; 0000 0573  }
+;PCODE: $000008D0 VOL: 0
+;PCODE: $000008D1 VOL: 0
+;PCODE: $000008D2 VOL: 0
+;PCODE: $000008D3 VOL: 0
+;PCODE: $000008D4 VOL: 0
+; 0000 0574    setup_sum=setup_sum/6;
+;PCODE: $000008D5 VOL: 0
+;PCODE: $000008D6 VOL: 0
+;PCODE: $000008D7 VOL: 0
+;PCODE: $000008D8 VOL: 0
+; 0000 0575    if((SETUP_MAS[0]!=248)||(SETUP_MAS[7]!=setup_sum))
+;PCODE: $000008D9 VOL: 0
+;PCODE: $000008DA VOL: 0
+;PCODE: $000008DB VOL: 0
+;PCODE: $000008DC VOL: 0
+;PCODE: $000008DD VOL: 0
+;PCODE: $000008DE VOL: 0
+;PCODE: $000008DF VOL: 0
+;PCODE: $000008E0 VOL: 0
+;PCODE: $000008E1 VOL: 0
+;PCODE: $000008E2 VOL: 0
+;PCODE: $000008E3 VOL: 0
+; 0000 0576   {
+; 0000 0577     for(tmp=0;tmp<=7;tmp++)
+;PCODE: $000008E4 VOL: 0
+;PCODE: $000008E5 VOL: 0
+;PCODE: $000008E6 VOL: 0
+;PCODE: $000008E7 VOL: 0
+;PCODE: $000008E8 VOL: 0
+;PCODE: $000008E9 VOL: 0
+;PCODE: $000008EA VOL: 0
+;PCODE: $000008EB VOL: 0
+;PCODE: $000008EC VOL: 0
+; 0000 0578    {
+; 0000 0579     SETUP_MAS[tmp]=DEFAULT_SETUP_MAS[tmp];
+;PCODE: $000008ED VOL: 0
+;PCODE: $000008EE VOL: 0
+;PCODE: $000008EF VOL: 0
+;PCODE: $000008F0 VOL: 0
+;PCODE: $000008F1 VOL: 0
+;PCODE: $000008F2 VOL: 0
+;PCODE: $000008F3 VOL: 0
+;PCODE: $000008F4 VOL: 0
+; 0000 057A    }
+;PCODE: $000008F5 VOL: 0
+;PCODE: $000008F6 VOL: 0
+;PCODE: $000008F7 VOL: 0
+;PCODE: $000008F8 VOL: 0
+;PCODE: $000008F9 VOL: 0
+; 0000 057B  }
+; 0000 057C }
+;PCODE: $000008FA VOL: 0
+;PCODE: $000008FB VOL: 0
+;PCODE: $000008FC VOL: 0
+;PCODE: $000008FD VOL: 0
+;PCODE: $000008FE VOL: 0
+;
+;void save_to_eeprom(void)
+; 0000 057F {
+;PCODE: $000008FF VOL: 0
+;PCODE: $00000900 VOL: 0
+; 0000 0580  unsigned char tmp;
+; 0000 0581  unsigned int sum;
+; 0000 0582 
+; 0000 0583   sum=0;
+;PCODE: $00000901 VOL: 0
+;	tmp -> R17
+;	sum -> R18,R19
+;PCODE: $00000902 VOL: 0
+;PCODE: $00000903 VOL: 0
+; 0000 0584   for(tmp=1;tmp<=8;tmp++)
+;PCODE: $00000904 VOL: 0
+;PCODE: $00000905 VOL: 0
+;PCODE: $00000906 VOL: 0
+;PCODE: $00000907 VOL: 0
+;PCODE: $00000908 VOL: 0
+;PCODE: $00000909 VOL: 0
+;PCODE: $0000090A VOL: 0
+;PCODE: $0000090B VOL: 0
+;PCODE: $0000090C VOL: 0
+; 0000 0585   {
+; 0000 0586    sum=sum+CALIBR_MAS[tmp];
+;PCODE: $0000090D VOL: 0
+;PCODE: $0000090E VOL: 0
+;PCODE: $0000090F VOL: 0
+;PCODE: $00000910 VOL: 0
+;PCODE: $00000911 VOL: 0
+;PCODE: $00000912 VOL: 0
+;PCODE: $00000913 VOL: 0
+; 0000 0587   }
+;PCODE: $00000914 VOL: 0
+;PCODE: $00000915 VOL: 0
+;PCODE: $00000916 VOL: 0
+;PCODE: $00000917 VOL: 0
+;PCODE: $00000918 VOL: 0
+; 0000 0588   sum=sum/8;
+;PCODE: $00000919 VOL: 0
+;PCODE: $0000091A VOL: 0
+;PCODE: $0000091B VOL: 0
+; 0000 0589 
+; 0000 058A   if(sum==CALIBR_MAS[9])
+;PCODE: $0000091C VOL: 0
+;PCODE: $0000091D VOL: 0
+;PCODE: $0000091E VOL: 0
+;PCODE: $0000091F VOL: 0
+;PCODE: $00000920 VOL: 0
+;PCODE: $00000921 VOL: 0
+; 0000 058B   {
+; 0000 058C    for(tmp=0;tmp<=9;tmp++)
+;PCODE: $00000922 VOL: 0
+;PCODE: $00000923 VOL: 0
+;PCODE: $00000924 VOL: 0
+;PCODE: $00000925 VOL: 0
+;PCODE: $00000926 VOL: 0
+;PCODE: $00000927 VOL: 0
+;PCODE: $00000928 VOL: 0
+;PCODE: $00000929 VOL: 0
+;PCODE: $0000092A VOL: 0
+; 0000 058D    {
+; 0000 058E     EEP_CALIBR_MAS[tmp]=CALIBR_MAS[tmp];
+;PCODE: $0000092B VOL: 0
+;PCODE: $0000092C VOL: 0
+;PCODE: $0000092D VOL: 0
+;PCODE: $0000092E VOL: 0
+;PCODE: $0000092F VOL: 0
+;PCODE: $00000930 VOL: 0
+;PCODE: $00000931 VOL: 0
+;PCODE: $00000932 VOL: 0
+; 0000 058F    }
+;PCODE: $00000933 VOL: 0
+;PCODE: $00000934 VOL: 0
+;PCODE: $00000935 VOL: 0
+;PCODE: $00000936 VOL: 0
+;PCODE: $00000937 VOL: 0
+; 0000 0590   }
+; 0000 0591 
+; 0000 0592   sum=0;
+;PCODE: $00000938 VOL: 0
+;PCODE: $00000939 VOL: 0
+;PCODE: $0000093A VOL: 0
+; 0000 0593   for(tmp=1;tmp<=6;tmp++)
+;PCODE: $0000093B VOL: 0
+;PCODE: $0000093C VOL: 0
+;PCODE: $0000093D VOL: 0
+;PCODE: $0000093E VOL: 0
+;PCODE: $0000093F VOL: 0
+;PCODE: $00000940 VOL: 0
+;PCODE: $00000941 VOL: 0
+;PCODE: $00000942 VOL: 0
+;PCODE: $00000943 VOL: 0
+; 0000 0594   {
+; 0000 0595    sum=sum+SETUP_MAS[tmp];
+;PCODE: $00000944 VOL: 0
+;PCODE: $00000945 VOL: 0
+;PCODE: $00000946 VOL: 0
+;PCODE: $00000947 VOL: 0
+;PCODE: $00000948 VOL: 0
+;PCODE: $00000949 VOL: 0
+;PCODE: $0000094A VOL: 0
+; 0000 0596   }
+;PCODE: $0000094B VOL: 0
+;PCODE: $0000094C VOL: 0
+;PCODE: $0000094D VOL: 0
+;PCODE: $0000094E VOL: 0
+;PCODE: $0000094F VOL: 0
+; 0000 0597   sum=sum/6;
+;PCODE: $00000950 VOL: 0
+;PCODE: $00000951 VOL: 0
+;PCODE: $00000952 VOL: 0
+;PCODE: $00000953 VOL: 0
+; 0000 0598   if(sum==SETUP_MAS[7])
+;PCODE: $00000954 VOL: 0
+;PCODE: $00000955 VOL: 0
+;PCODE: $00000956 VOL: 0
+;PCODE: $00000957 VOL: 0
+;PCODE: $00000958 VOL: 0
+;PCODE: $00000959 VOL: 0
+; 0000 0599   {
+; 0000 059A    for(tmp=0;tmp<=7;tmp++)
+;PCODE: $0000095A VOL: 0
+;PCODE: $0000095B VOL: 0
+;PCODE: $0000095C VOL: 0
+;PCODE: $0000095D VOL: 0
+;PCODE: $0000095E VOL: 0
+;PCODE: $0000095F VOL: 0
+;PCODE: $00000960 VOL: 0
+;PCODE: $00000961 VOL: 0
+;PCODE: $00000962 VOL: 0
+; 0000 059B    {
+; 0000 059C     EEP_SETUP_MAS[tmp]=SETUP_MAS[tmp];
+;PCODE: $00000963 VOL: 0
+;PCODE: $00000964 VOL: 0
+;PCODE: $00000965 VOL: 0
+;PCODE: $00000966 VOL: 0
+;PCODE: $00000967 VOL: 0
+;PCODE: $00000968 VOL: 0
+;PCODE: $00000969 VOL: 0
+;PCODE: $0000096A VOL: 0
+; 0000 059D    }
+;PCODE: $0000096B VOL: 0
+;PCODE: $0000096C VOL: 0
+;PCODE: $0000096D VOL: 0
+;PCODE: $0000096E VOL: 0
+;PCODE: $0000096F VOL: 0
+; 0000 059E   }
+; 0000 059F 
+; 0000 05A0 }
+;PCODE: $00000970 VOL: 0
+;PCODE: $00000971 VOL: 0
+;PCODE: $00000972 VOL: 0
+;PCODE: $00000973 VOL: 0
+;PCODE: $00000974 VOL: 0
+;
+;
+;//unsigned int K_BY_KOEFFICIENTS_OLD(unsigned int M)
+;//{
+;//unsigned long F,W,K;
+;////WEIGHT_NULL=6679, LOADCELL_NULL=618, DELTA_WEIGHT10KG=748, DELTA_LOADCELL10KG=772
+;//if(M<LOADCELL_NULL)
+;// return 0;
+;//
+;//F=((M-(unsigned long)LOADCELL_NULL)*1000)/((unsigned long)DELTA_LOADCELL10KG);
+;//W=(unsigned long)WEIGHT_NULL-((unsigned long)DELTA_WEIGHT10KG*F)/1000;
+;//if(W>0)
+;// K=(F*1000)/W;
+;//else
+;// K=3000;
+;//
+;//if(K>3000)
+;// K=3000;
+;//return K;
+;//}
+;

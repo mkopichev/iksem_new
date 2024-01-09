@@ -1,0 +1,95 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+R_TK                                                                              0x0512       2
+ZADANIE_S                                                                         0x0514       2
+SETUP_MAS                                                                         0x0516       8
+CALIBR_MAS                                                                        0x051E      10
+DEFAULT_SETUP_MAS                                                                 0x0528       8
+DEFAULT_CALIBR_MAS                                                                0x0530      10
+flag_transmission                                                                 0x053A       2
+flag_receive                                                                      0x053C       2
+receive_counter                                                                   0x053E       2
+SEND_MAS                                                                          0x0540      26
+program_cycle_flag                                                                0x055A       1
+program_cycle_counter                                                             0x055B       1
+ovf_IK                                                                            0x055C       1
+ovf_TK                                                                            0x055D       1
+IK_COUNT                                                                          0x055E       8
+TK_COUNT                                                                          0x0566       8
+IK_DELTA                                                                          0x056E       4
+TK_DELTA                                                                          0x0572       4
+IK_SPEED_KM_H                                                                     0x0576       2
+TK_SPEED_KM_H                                                                     0x0578       2
+IK_SPEED_MAS                                                                      0x057A       6
+TK_SPEED_MAS                                                                      0x0580       6
+ADC_BAT                                                                           0x0586       2
+ADC_I                                                                             0x0588       2
+BAT_SUM                                                                           0x058A       2
+I_NULL                                                                            0x058C       4
+flag_I_NULL                                                                       0x0590       1
+GPS_zap_counter                                                                   0x0591       1
+GPS_sim_counter                                                                   0x0592       1
+GPS_flag_ready                                                                    0x0593       1
+GPS_string_name                                                                   0x0594       3
+GPS_flag_gp                                                                       0x0597       1
+GPS_shir                                                                          0x0598       8
+GPS_dolg                                                                          0x05A0       8
+GPS_solve                                                                         0x05A8       1
+GPS_ON_COUNTER                                                                    0x05A9       1
+flag_start                                                                        0x05AA       1
+measuring_start_counter                                                           0x05AB       1
+load_cell                                                                         0x05AC       2
+load_cell_MAS                                                                     0x05AE      40
+ADC_fault_counter                                                                 0x05D6       1
+PID_I_S                                                                           0x05D7       2
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+EEP_SETUP_MAS                                                                     0x0000       8
+EEP_CALIBR_MAS                                                                    0x0008      10
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+WEIGHT_NULL                                                                       R4,R5        2
+LOADCELL_NULL                                                                     R6,R7        2
+DELTA_WEIGHT10KG                                                                  R8,R9        2
+DELTA_LOADCELL10KG                                                                R10,R11      2
+R_IK                                                                              R12,R13      2
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+load_cell_filter                                                                  0x000DC    140
+middle                                                                            0x00168     54
+main                                                                              0x0019E    559
+ext_int6_isr                                                                      0x003CD    156
+ext_int7_isr                                                                      0x00469    170
+init_all                                                                          0x00513    112
+K_BY_KOEFFICIENTS_REAL                                                            0x00583    124
+K_BY_KOEFFICIENTS_ASFT                                                            0x005FF    122
+led_zero                                                                          0x00679      7
+led_one                                                                           0x00680      7
+lights                                                                            0x00687     43
+Read_Setup_Calibr                                                                 0x006B2     68
+Control_Sum_Send                                                                  0x006F6     26
+Control_Sum_Calibr                                                                0x00710     24
+Control_Sum_Setup                                                                 0x00728     26
+timer1_ovf_isr                                                                    0x00742     27
+delay                                                                             0x0075D     17
+SPI_MasterInit                                                                    0x0076E      7
+SPI_MasterReceive                                                                 0x00775      6
+SPI_MasterTransmit                                                                0x0077B      6
+SET_AD7799                                                                        0x00781     46
+uart1SendByte                                                                     0x007C6      9
+uart1SendString                                                                   0x007CF     15
+uart1SendArray                                                                    0x007DE     17
+usart0_rx_isr                                                                     0x007EF    512
+usart1_rx_isr                                                                     0x009EF    188
+read_adc                                                                          0x00AAB     15
+NEW_REGULATOR                                                                     0x00ABA     79
+timer2_ovf_isr                                                                    0x00B09    284
+load_from_eeprom                                                                  0x00C25    146
+save_to_eeprom                                                                    0x00CB7     92
