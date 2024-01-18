@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name" translatable="false">ИКСЭМ</string>
+    <string name="title_home">ИКСЭМ</string>
+    <string name="title_protocols">Протоколы</string>
+    <string name="title_map">Местоположение</string>
+    <string name="title_bluetooth">Подключения</string>
+    <string name="title_settings">Настройки</string>
+    <string name="title_calibration">Калибровка</string>
+</resources>
