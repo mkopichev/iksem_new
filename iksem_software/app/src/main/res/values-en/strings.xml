@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_home">Control</string>
+    <string name="title_protocols">Protocols</string>
+    <string name="title_map">Location</string>
+    <string name="title_bluetooth">Connection</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_calibration">Calibration</string>
+</resources>
