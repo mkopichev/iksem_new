@@ -6,4 +6,16 @@
     <string name="title_bluetooth">Подключение</string>
     <string name="title_settings">Настройки</string>
     <string name="title_calibration">Калибровка</string>
+    <string name="bluetooth_search">Поиск</string>
+    <string name="bluetooth_disconnect">Отключиться</string>
+    <string name="bluetooth_status_disconnected">Нет подключения</string>
+    <string name="bluetooth_status_connected">Подключено</string>
+    <string name="bluetooth_status_connection_in_progress">Подключение...</string>
+    <string name="bluetooth_devices_list">Список устройств</string>
+    <string name="map_iksem_here">Измеритель здесь</string>
+    <string name="map_iksem_coordinates">Координаты</string>
+    <string name="map_latitude">Широта:</string>
+    <string name="map_longitude">Долгота:</string>
+    <string name="map_latitude_letter" translatable="false">N</string>
+    <string name="map_longitude_letter" translatable="false">E</string>
 </resources>
