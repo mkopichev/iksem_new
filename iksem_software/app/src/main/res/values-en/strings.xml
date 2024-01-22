@@ -16,4 +16,19 @@
     <string name="map_iksem_coordinates">Coordinates</string>
     <string name="map_latitude">Latitude:</string>
     <string name="map_longitude">Longitude:</string>
+    <string name="settings_operator_name">Operator`s name</string>
+    <string name="settings_measuring_wheel_radius">Measuring wheel radius, [mm]</string>
+    <string name="settings_driving_wheel_radius">Driving wheel radius, [mm]</string>
+    <string name="settings_slip_ratio">Slip ratio, [%]</string>
+    <string name="settings_input_name">Name</string>
+    <string name="settings_input_password">Password</string>
+    <string name="settings_password_warning">For settings and calibration access enter password and press Ready</string>
+    <string name="button_apply">Apply</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="input_info">Input</string>
+    <string name="settings_input_measurings_radius">MW radius</string>
+    <string name="settings_input_driving_radius">TW radius</string>
+    <string name="settings_input_slip_ratio">Slip ratio</string>
+    <string name="settings_save_button">Save settings</string>
+    <string name="settings_calibration_button">Tester calibration</string>
 </resources>

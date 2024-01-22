@@ -18,4 +18,19 @@
     <string name="map_longitude">Долгота:</string>
     <string name="map_latitude_letter" translatable="false">N</string>
     <string name="map_longitude_letter" translatable="false">E</string>
+    <string name="settings_operator_name">Имя оператора</string>
+    <string name="settings_measuring_wheel_radius">Радиус измерительного колеса, [мм]</string>
+    <string name="settings_driving_wheel_radius">Радиус ведущего колеса, [мм]</string>
+    <string name="settings_slip_ratio">Значение проскальзывания, [%]</string>
+    <string name="settings_input_name">Имя</string>
+    <string name="settings_input_password">Пароль</string>
+    <string name="settings_password_warning">Для доступа к настройкам и калибровке введите пароль и нажмите Готово</string>
+    <string name="button_apply">Готово</string>
+    <string name="button_cancel">Отмена</string>
+    <string name="input_info">Введите</string>
+    <string name="settings_input_measurings_radius">Радиус ИК</string>
+    <string name="settings_input_driving_radius">Радиус ТК</string>
+    <string name="settings_input_slip_ratio">Скольжение</string>
+    <string name="settings_save_button">Сохранить настройки</string>
+    <string name="settings_calibration_button">Калибровка измерителя</string>
 </resources>
