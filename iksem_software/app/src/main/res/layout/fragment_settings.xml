@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="8dp"
     tools:context=".ui.settings.SettingsFragment">
 
     <TextView
@@ -55,10 +54,10 @@
         android:id="@+id/settings_password_warning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="32dp"
+        android:layout_marginVertical="16dp"
         android:text="@string/settings_password_warning"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/settings_password"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,9 +84,9 @@
     <Button
         android:id="@+id/settings_password_button"
         style="@style/button_general"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_apply"
+        android:text="@string/button_unblock_settings"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +193,7 @@
         style="@style/button_general"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginVertical="16dp"
         android:clickable="false"
         android:text="@string/settings_calibration_button"
         android:textSize="20sp"
@@ -205,7 +204,7 @@
 
     <Button
         android:id="@+id/settings_save_button"
-        style="@style/button_apply"
+        style="@style/button_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
