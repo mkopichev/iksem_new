@@ -22,22 +22,29 @@
     <string name="settings_measuring_wheel_radius">Радиус измерительного колеса, [мм]</string>
     <string name="settings_driving_wheel_radius">Радиус ведущего колеса, [мм]</string>
     <string name="settings_slip_ratio">Значение проскальзывания, [%]</string>
-    <string name="settings_input_name">Имя</string>
-    <string name="settings_input_password">Пароль</string>
+    <string name="settings_input_name">Задайте имя</string>
+    <string name="settings_input_password">Введите пароль</string>
     <string name="settings_password_warning">Для доступа к настройкам и калибровке введите пароль</string>
     <string name="button_apply">Готово</string>
     <string name="button_cancel">Отмена</string>
     <string name="input_info">Введите</string>
-    <string name="settings_input_measurings_radius">Радиус ИК</string>
-    <string name="settings_input_driving_radius">Радиус ТК</string>
-    <string name="settings_input_slip_ratio">Проскальзывание</string>
+    <string name="settings_input_measurings_radius">Введите радиус ИК</string>
+    <string name="settings_input_driving_radius">Введите радиус ТК</string>
+    <string name="settings_input_slip_ratio">Введите скольжение</string>
     <string name="settings_save_button">Сохранить изменения</string>
-    <string name="settings_calibration_button">Начать калибровку</string>
+    <string name="settings_calibration_button">Перейти к калибровке</string>
     <string name="button_unblock_settings">Разблокировать настройки</string>
     <string name="home_start_button">Старт</string>
     <string name="home_stop_button">Стоп</string>
-    <string name="home_one_way_protocol">Протокол в одну сторону</string>
-    <string name="home_both_ways_protocol">Протокол в обе стороны</string>
+    <string name="home_one_way_protocol">Заезд в одну сторону</string>
+    <string name="home_both_ways_protocol">Заезд в обе стороны</string>
     <string name="home_light_on">Включить маяк</string>
     <string name="home_light_off">Выключить маяк</string>
+    <string name="settings_set_new_password">Задайте новый пароль</string>
+    <string name="home_info_box_iksem_number">ИКСЭМ №:</string>
+    <string name="home_info_box_date">Дата:</string>
+    <string name="home_info_box_time">Время:</string>
+    <string name="home_info_box_operator">Оператор:</string>
+    <string name="home_info_box_distance">Пробег, [м]:</string>
+    <string name="unknown_value" translatable="false">-</string>
 </resources>

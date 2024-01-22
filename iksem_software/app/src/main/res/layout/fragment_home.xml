@@ -19,11 +19,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <TableLayout
+        android:id="@+id/home_info_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
-        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_box_transparent"
+        app:layout_constraintBottom_toTopOf="@id/home_switches_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/home_info_box_iksem_number"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="@string/home_info_box_iksem_number"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/home_info_box_run_distance"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="@string/home_info_box_distance"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/home_info_box_operator"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:text="@string/home_info_box_operator"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/home_info_box_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="@string/home_info_box_date"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/home_info_box_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:text="@string/home_info_box_time"
+                android:textSize="18sp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/home_switches_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_box"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/home_start_stop_buttons_area"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +107,7 @@
             android:text="@string/home_both_ways_protocol"
             android:textAlignment="textStart"
             android:textColor="@color/background_text"
-            android:textSize="22sp" />
+            android:textSize="24sp" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:layout_width="match_parent"
@@ -45,7 +116,7 @@
             android:text="@string/home_light_on"
             android:textAlignment="textStart"
             android:textColor="@color/background_text"
-            android:textSize="22sp" />
+            android:textSize="24sp" />
 
     </LinearLayout>
 
@@ -64,7 +135,7 @@
             style="@style/button_general"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="0.5"
             android:enabled="true"
             android:text="@string/home_start_button"
@@ -76,7 +147,7 @@
             style="@style/button_general"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginStart="8dp"
             android:layout_weight="0.5"
             android:enabled="false"
             android:text="@string/home_stop_button"

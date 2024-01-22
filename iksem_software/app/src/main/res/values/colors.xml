@@ -10,11 +10,12 @@
 
     <color name="background">#1f1f1f</color>
     <color name="background_over">#2d2f31</color>
-    <color name="background_text_hint">#5e5e5e</color>
+    <color name="background_text_hint">#7c7c7c</color>
     <color name="background_text">#bfbfbf</color>
     <color name="control">#004a77</color>
     <color name="control_light">#11557f</color>
     <color name="control_background">#28292a</color>
+    <color name="control_stroke">#a1acbd</color>
     <color name="control_text">#c2e7ff</color>
     <color name="green">#0f5223</color>
     <color name="green_light">#539C68</color>
