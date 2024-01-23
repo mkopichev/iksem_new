@@ -83,7 +83,6 @@
 
     <Button
         android:id="@+id/settings_password_button"
-        style="@style/button_general"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -195,7 +194,6 @@
 
     <Button
         android:id="@+id/settings_calibration_button"
-        style="@style/button_general"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -209,7 +207,7 @@
 
     <Button
         android:id="@+id/settings_save_button"
-        style="@style/button_cancel"
+        style="@style/button_apply"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

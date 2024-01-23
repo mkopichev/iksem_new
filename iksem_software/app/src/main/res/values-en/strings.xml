@@ -34,10 +34,8 @@
     <string name="button_unblock_settings">Unblock settings</string>
     <string name="home_start_button">Start</string>
     <string name="home_stop_button">Stop</string>
-    <string name="home_one_way_protocol">One-way trip</string>
     <string name="home_both_ways_protocol">Both-ways trip</string>
-    <string name="home_light_on">Strobe light on</string>
-    <string name="home_light_off">Strobe light off</string>
+    <string name="home_light_on">Flashing beacon</string>
     <string name="settings_set_new_password">Set new password</string>
     <string name="home_info_box_iksem_number">IKSEM #:</string>
     <string name="home_info_box_date">"Date: "</string>

@@ -13,7 +13,8 @@
     <color name="background_text_hint">#7c7c7c</color>
     <color name="background_text">#bfbfbf</color>
     <color name="control">#004a77</color>
-    <color name="control_light">#11557f</color>
+    <color name="control_light">#6d97b1</color>
+    <color name="control_dark">#000a10</color>
     <color name="control_background">#28292a</color>
     <color name="control_stroke">#a1acbd</color>
     <color name="control_text">#c2e7ff</color>

@@ -36,10 +36,8 @@
     <string name="button_unblock_settings">Разблокировать настройки</string>
     <string name="home_start_button">Старт</string>
     <string name="home_stop_button">Стоп</string>
-    <string name="home_one_way_protocol">Заезд в одну сторону</string>
     <string name="home_both_ways_protocol">Заезд в обе стороны</string>
-    <string name="home_light_on">Включить маяк</string>
-    <string name="home_light_off">Выключить маяк</string>
+    <string name="home_light_on">Проблесковый маяк</string>
     <string name="settings_set_new_password">Задайте новый пароль</string>
     <string name="home_info_box_iksem_number">ИКСЭМ №:</string>
     <string name="home_info_box_date">Дата:</string>
