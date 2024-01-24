@@ -35,19 +35,19 @@
 
             <TextView
                 android:id="@+id/home_info_box_iksem_number"
+                style="@style/header_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:text="@string/home_info_box_iksem_number"
-                android:textSize="18sp" />
+                android:text="@string/home_info_box_iksem_number" />
 
             <TextView
                 android:id="@+id/home_info_box_run_distance"
+                style="@style/header_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:text="@string/home_info_box_distance"
-                android:textSize="18sp" />
+                android:text="@string/home_info_box_distance" />
 
         </TableRow>
 
@@ -58,10 +58,10 @@
 
             <TextView
                 android:id="@+id/home_info_box_operator"
+                style="@style/header_edit_text"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
-                android:text="@string/home_info_box_operator"
-                android:textSize="18sp" />
+                android:text="@string/home_info_box_operator" />
 
         </TableRow>
 
@@ -71,19 +71,19 @@
 
             <TextView
                 android:id="@+id/home_info_box_date"
+                style="@style/header_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:text="@string/home_info_box_date"
-                android:textSize="18sp" />
+                android:text="@string/home_info_box_date" />
 
             <TextView
                 android:id="@+id/home_info_box_time"
+                style="@style/header_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:text="@string/home_info_box_time"
-                android:textSize="18sp" />
+                android:text="@string/home_info_box_time" />
 
         </TableRow>
 
@@ -94,29 +94,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/rounded_box"
+        android:background="@drawable/rounded_box_transparent"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/home_start_stop_buttons_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.switchmaterial.SwitchMaterial
+            style="@style/header_text_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
             android:checked="false"
             android:text="@string/home_both_ways_protocol"
             android:textAlignment="textStart"
-            android:textColor="@color/background_text"
-            android:textSize="24sp" />
+            android:textColor="@color/background_text" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
+            style="@style/header_text_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="18dp"
             android:checked="false"
             android:text="@string/home_light_on"
             android:textAlignment="textStart"
-            android:textColor="@color/background_text"
-            android:textSize="24sp" />
+            android:textColor="@color/background_text" />
 
     </LinearLayout>
 
@@ -132,7 +134,7 @@
 
         <Button
             android:id="@+id/home_start_protocol_button"
-            style="@style/button_general"
+            style="@style/button_apply"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
@@ -144,7 +146,7 @@
 
         <Button
             android:id="@+id/home_stop_protocol_button"
-            style="@style/button_general"
+            style="@style/button_cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"

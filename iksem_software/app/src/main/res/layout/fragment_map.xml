@@ -21,12 +21,12 @@
 
     <TextView
         android:id="@+id/map_location_here"
+        style="@style/header_text_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/map_iksem_here"
         android:textAlignment="center"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,12 +43,12 @@
 
     <TextView
         android:id="@+id/map_coordinates"
+        style="@style/header_text_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/map_iksem_coordinates"
         android:textAlignment="center"
-        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/map_latitude_longitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
