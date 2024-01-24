@@ -6,12 +6,12 @@
     <string name="title_bluetooth">Подключение</string>
     <string name="title_settings">Настройки</string>
     <string name="title_calibration">Калибровка</string>
-    <string name="bluetooth_search">Поиск измерителя</string>
+    <string name="bluetooth_search">Поиск</string>
     <string name="bluetooth_disconnect">Отключиться</string>
     <string name="bluetooth_status_disconnected">Нет подключения</string>
     <string name="bluetooth_status_connected">Подключено</string>
     <string name="bluetooth_status_connection_in_progress">Подключение...</string>
-    <string name="bluetooth_devices_list">Список устройств</string>
+    <string name="bluetooth_devices_list">Список измерителей</string>
     <string name="map_iksem_here">Измеритель здесь</string>
     <string name="map_iksem_coordinates">Координаты</string>
     <string name="map_latitude">Широта:</string>
@@ -31,7 +31,7 @@
     <string name="settings_input_measurings_radius">Введите радиус ИК</string>
     <string name="settings_input_driving_radius">Введите радиус ТК</string>
     <string name="settings_input_slip_ratio">Введите скольжение</string>
-    <string name="settings_save_button">Сохранить изменения</string>
+    <string name="settings_save_button">Сохранить</string>
     <string name="settings_calibration_button">Перейти к калибровке</string>
     <string name="button_unblock_settings">Разблокировать настройки</string>
     <string name="home_start_button">Старт</string>

@@ -6,7 +6,7 @@
     <string name="title_bluetooth">Connection</string>
     <string name="title_settings">Settings</string>
     <string name="title_calibration">Calibration</string>
-    <string name="bluetooth_search">Device search</string>
+    <string name="bluetooth_search">Search</string>
     <string name="bluetooth_disconnect">Disconnect</string>
     <string name="bluetooth_status_disconnected">No connection</string>
     <string name="bluetooth_status_connected">Connected</string>
@@ -29,7 +29,7 @@
     <string name="settings_input_measurings_radius">Input MW radius</string>
     <string name="settings_input_driving_radius">Input TW radius</string>
     <string name="settings_input_slip_ratio">Input slip ratio</string>
-    <string name="settings_save_button">Save changes</string>
+    <string name="settings_save_button">Save</string>
     <string name="settings_calibration_button">Start calibration</string>
     <string name="button_unblock_settings">Unblock settings</string>
     <string name="home_start_button">Start</string>

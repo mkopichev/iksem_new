@@ -23,12 +23,12 @@
 
     <TextView
         android:id="@+id/settings_operator_title"
+        style="@style/header_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/settings_operator_name"
         android:textAlignment="textStart"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/settings_operator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +36,7 @@
 
     <EditText
         android:id="@+id/settings_operator"
+        style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="name"
@@ -44,7 +45,6 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textColorHint="@color/background_text_hint"
-        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_operator_title" />
@@ -57,7 +57,7 @@
         android:layout_marginBottom="8dp"
         android:text="@string/settings_password_warning"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/settings_password"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +66,7 @@
 
     <EditText
         android:id="@+id/settings_password"
+        style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -75,7 +76,6 @@
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textColorHint="@color/background_text_hint"
-        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@id/settings_password_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -83,11 +83,11 @@
 
     <Button
         android:id="@+id/settings_password_button"
+        style="@style/button_general"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/button_unblock_settings"
-        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,12 +95,12 @@
 
     <TextView
         android:id="@+id/settings_measuring_radius_title"
+        style="@style/header_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/settings_measuring_wheel_radius"
         android:textAlignment="textStart"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +108,7 @@
 
     <EditText
         android:id="@+id/settings_measuring_radius"
+        style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -120,7 +121,6 @@
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textColorHint="@color/background_text_hint"
-        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@id/settings_driving_radius_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,12 +128,11 @@
 
     <TextView
         android:id="@+id/settings_driving_radius_title"
+        style="@style/header_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="@string/settings_measuring_wheel_radius"
         android:textAlignment="textStart"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/settings_driving_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -141,6 +140,7 @@
 
     <EditText
         android:id="@+id/settings_driving_radius"
+        style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -153,7 +153,6 @@
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textColorHint="@color/background_text_hint"
-        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@id/settings_slip_ratio_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -161,12 +160,11 @@
 
     <TextView
         android:id="@+id/settings_slip_ratio_title"
+        style="@style/header_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="@string/settings_slip_ratio"
         android:textAlignment="textStart"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/settings_slip_ratio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,6 +172,7 @@
 
     <EditText
         android:id="@+id/settings_slip_ratio"
+        style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -186,7 +185,6 @@
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textColorHint="@color/background_text_hint"
-        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@id/settings_calibration_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -194,12 +192,12 @@
 
     <Button
         android:id="@+id/settings_calibration_button"
+        style="@style/button_general"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:clickable="false"
         android:text="@string/settings_calibration_button"
-        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/settings_save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -212,7 +210,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/settings_save_button"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
