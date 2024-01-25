@@ -21,6 +21,14 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="header_text_2">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="header_text_3">
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="header_edit_text">
         <item name="android:textSize">14sp</item>
     </style>

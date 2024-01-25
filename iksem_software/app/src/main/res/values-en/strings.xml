@@ -42,4 +42,11 @@
     <string name="home_info_box_time">"Time: "</string>
     <string name="home_info_box_operator">"Operator: "</string>
     <string name="home_info_box_distance">"Run, [m]: "</string>
+    <string name="home_indicators_area_M">Load</string>
+    <string name="home_indicators_area_I">Current</string>
+    <string name="home_indicators_area_Vmw">MW velocity</string>
+    <string name="home_indicators_area_Vtw">TW velocity</string>
+    <string name="home_indicators_area_km_h">km/h</string>
+    <string name="home_indicators_area_A">A</string>
+    <string name="home_indicators_area_kg">kg</string>
 </resources>
