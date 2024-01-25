@@ -22,4 +22,9 @@
     <color name="red">#520F15</color>
     <color name="red_light">#9C5359</color>
     <color name="red_disabled">#33520F15</color>
+    <color name="yellow">#bbf9F871</color>
+    <color name="mw_velocity">#009aa3</color>
+    <color name="tw_velocity">#6d65a4</color>
+    <color name="current_a">#4a7aac</color>
+    <color name="load_kg">#e09f1f</color>
 </resources>

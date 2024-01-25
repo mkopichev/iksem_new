@@ -49,4 +49,5 @@
     <string name="home_indicators_area_km_h">km/h</string>
     <string name="home_indicators_area_A">A</string>
     <string name="home_indicators_area_kg">kg</string>
+    <string name="home_info_box_battery_level">Battery:</string>
 </resources>

@@ -26,7 +26,7 @@
     </style>
 
     <style name="header_text_3">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="header_edit_text">
@@ -63,6 +63,10 @@
 
     <style name="button_cancel" parent="button_apply">
         <item name="android:backgroundTint">@drawable/button_cancel</item>
+    </style>
+
+    <style name="myProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:innerRadius">5dp</item>
     </style>
 
 </resources>
