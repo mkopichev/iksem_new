@@ -60,8 +60,21 @@
     <string name="protocols_info_operator">Operator:</string>
     <string name="protocols_map_view">Change view</string>
     <string name="protocols_split_both_ways_protocol">Split protocol</string>
-    <string name="calibration_accept">Accept calibration</string>
+    <string name="calibration_accept">Accept table</string>
     <string name="calibration_reset">Reset calibration</string>
     <string name="calibration_next_step">Next</string>
-    <string name="calibration_load_current_calibration">Load current table</string>
+    <string name="calibration_load_current_calibration">Download from tester</string>
+    <string name="calibration_load_10_kg">Load 10 kg and press \"Next\"</string>
+    <string name="calibration_enter_vertical_load">Enter vertical load to the \"Weight\" field and press \"Next\"</string>
+    <string name="calibration_load_20_kg">Load 20 kg and press \"Next\"</string>
+    <string name="calibration_load_30_kg">Load 30 kg and press \"Next\"</string>
+    <string name="calibration_load_35_kg">Load 35 kg and press \"Next\"</string>
+    <string name="calibration_unload_30_kg">Unload down to 30 kg and press \"Next\"</string>
+    <string name="calibration_unload_20_kg">Unload down to 20 kg and press \"Next\"</string>
+    <string name="calibration_unload_10_kg">Unload down to 10 kg and press \"Next\"</string>
+    <string name="calibration_finished_accept_or_decline">Calibration finished - either accept or reset results</string>
+    <string name="calibration_moment">Moment:</string>
+    <string name="calibration_weight">" Weight:"</string>
+    <string name="calibration_friction_coef">Cfr:</string>
+    <string name="calibration_input_weight">Input weight</string>
 </resources>
