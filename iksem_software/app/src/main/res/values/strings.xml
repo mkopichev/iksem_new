@@ -70,8 +70,8 @@
     <string name="protocols_info_operator">Оператор:</string>
     <string name="protocols_map_view">Переключить вид</string>
     <string name="protocols_split_both_ways_protocol">Разделить протокол</string>
-    <string name="calibration_accept">Принять новую таблицу</string>
-    <string name="calibration_reset">Сбросить таблицу</string>
+    <string name="calibration_accept">Принять калибровку</string>
+    <string name="calibration_reset">Сбросить калибровку</string>
     <string name="calibration_next_step">Далее</string>
     <string name="calibration_load_current_calibration">Загрузить текущую таблицу</string>
 </resources>
