@@ -50,4 +50,14 @@
     <string name="home_indicators_area_A">A</string>
     <string name="home_indicators_area_kg">kg</string>
     <string name="home_info_box_battery_level">Battery:</string>
+    <string name="protocols_info_date">Record date:</string>
+    <string name="protocols_info_iksem_number">IKSEM #:</string>
+    <string name="protocols_info_time">Protocol start (end) time:</string>
+    <string name="protocols_info_average_friction">Fr. coef. average value:</string>
+    <string name="protocols_info_average_velocity">Average velocity:</string>
+    <string name="protocols_info_slip_ratio">Slip ratio:</string>
+    <string name="protocols_info_distance">Trip:</string>
+    <string name="protocols_info_operator">Operator:</string>
+    <string name="protocols_map_view">Protocol view</string>
+    <string name="protocols_split_both_ways_protocol">Split protocol</string>
 </resources>

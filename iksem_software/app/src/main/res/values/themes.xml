@@ -37,6 +37,19 @@
         <item name="android:textSize">18sp</item>
         <item name="android:minHeight">50dp</item>
         <item name="android:textColor">@color/background_text</item>
+        <item name="android:backgroundTint">@color/background_text_hint</item>
+        <item name="android:textColorHint">@color/background_text_hint</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:cursorVisible">true</item>
+    </style>
+
+    <style name="input_edit_text_disabled" parent="input_edit_text">
+        <item name="android:backgroundTint">@color/background_text_hint_disabled</item>
+        <item name="android:textColorHint">@color/background_text_hint_disabled</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+        <item name="android:cursorVisible">false</item>
     </style>
 
     <style name="button_general" parent="Widget.MaterialComponents.Button">
@@ -52,21 +65,57 @@
         <item name="cornerRadius">25dp</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
+        <item name="android:enabled">true</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:minHeight">50dp</item>
+    </style>
+
+    <style name="button_general_disabled" parent="button_general">
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:enabled">false</item>
     </style>
 
     <style name="button_apply" parent="button_general">
         <item name="android:backgroundTint">@drawable/button_apply</item>
         <item name="android:maxLines">1</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:enabled">true</item>
+    </style>
+
+    <style name="button_apply_disabled" parent="button_apply">
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:enabled">false</item>
     </style>
 
     <style name="button_cancel" parent="button_apply">
         <item name="android:backgroundTint">@drawable/button_cancel</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:enabled">true</item>
     </style>
 
-    <style name="myProgressBar" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:innerRadius">5dp</item>
+    <style name="button_cancel_disabled" parent="button_cancel">
+        <item name="android:backgroundTint">@drawable/button_cancel</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:enabled">false</item>
+    </style>
+
+    <style name="button_toggle">
+        <item name="android:autoSizeMaxTextSize">22sp</item>
+        <item name="android:autoSizeMinTextSize">18sp</item>
+        <item name="android:autoSizeTextType">uniform</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:backgroundTint">@drawable/toggle_button_item</item>
+        <item name="android:background">@drawable/rounded_box_25dp</item>
+        <item name="android:radius">25dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
 </resources>

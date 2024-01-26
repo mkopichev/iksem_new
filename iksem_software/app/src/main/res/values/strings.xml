@@ -44,7 +44,7 @@
     <string name="home_info_box_time">Время:</string>
     <string name="home_info_box_operator">Оператор:</string>
     <string name="home_info_box_distance">Пробег, [м]:</string>
-    <string name="unknown_value" translatable="false">---</string>
+    <string name="unknown_value" translatable="false">- - -</string>
     <string name="home_indicators_area_M">Нагрузка</string>
     <string name="home_indicators_area_I">Ток</string>
     <string name="home_indicators_area_Vmw">Скорость ИК</string>
@@ -60,4 +60,14 @@
     <string name="home_indicators_area_125" translatable="false">125</string>
     <string name="home_indicators_area_150" translatable="false">150</string>
     <string name="home_info_box_battery_level">Заряд:</string>
+    <string name="protocols_info_date">Дата записи:</string>
+    <string name="protocols_info_iksem_number">ИКСЭМ №:</string>
+    <string name="protocols_info_time">Время начала (конца) записи:</string>
+    <string name="protocols_info_average_friction">Среднее значение КСц:</string>
+    <string name="protocols_info_average_velocity">Средняя скорость:</string>
+    <string name="protocols_info_slip_ratio">Значение проскальзывания:</string>
+    <string name="protocols_info_distance">Пройденное расстояние:</string>
+    <string name="protocols_info_operator">Оператор:</string>
+    <string name="protocols_map_view">Вид протокола</string>
+    <string name="protocols_split_both_ways_protocol">Разделить протокол</string>
 </resources>

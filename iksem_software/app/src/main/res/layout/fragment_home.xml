@@ -22,10 +22,14 @@
     <View
         android:id="@+id/home_plot_area"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@id/home_indicators_area"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="350dp"
+        app:layout_constraintHeight_min="170dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,16 +44,15 @@
         app:layout_constraintTop_toBottomOf="@id/home_plot_area">
 
         <TableRow
-            android:id="@+id/home_indicator_Vmw"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
             <TextView
                 style="@style/header_text_3"
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingHorizontal="8dp"
                 android:text="@string/home_indicators_area_Vmw"
                 android:textAlignment="center" />
 
@@ -103,7 +106,7 @@
 
             <TextView
                 style="@style/header_text_3"
-                android:layout_width="70dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/home_indicators_area_km_h"
@@ -112,16 +115,15 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/home_indicator_Vtw"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
             <TextView
                 style="@style/header_text_3"
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:paddingHorizontal="8dp"
                 android:text="@string/home_indicators_area_Vtw"
                 android:textAlignment="center" />
 
@@ -175,7 +177,7 @@
 
             <TextView
                 style="@style/header_text_3"
-                android:layout_width="70dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/home_indicators_area_km_h"
@@ -184,13 +186,13 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/home_indicator_current"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
             <TextView
                 style="@style/header_text_3"
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/home_indicators_area_I"
@@ -247,7 +249,7 @@
 
             <TextView
                 style="@style/header_text_3"
-                android:layout_width="70dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/home_indicators_area_A"
@@ -256,13 +258,12 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/home_indicator_load"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 style="@style/header_text_3"
-                android:layout_width="80dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/home_indicators_area_M"
@@ -318,7 +319,7 @@
 
             <TextView
                 style="@style/header_text_3"
-                android:layout_width="70dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/home_indicators_area_kg"
@@ -342,6 +343,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:gravity="center">
 
             <TextView
@@ -445,12 +447,11 @@
 
         <Button
             android:id="@+id/home_stop_protocol_button"
-            style="@style/button_cancel"
+            style="@style/button_cancel_disabled"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_weight="0.5"
-            android:enabled="false"
             android:text="@string/home_stop_button"
             android:textStyle="bold" />
 
