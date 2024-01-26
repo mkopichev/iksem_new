@@ -60,4 +60,8 @@
     <string name="protocols_info_operator">Operator:</string>
     <string name="protocols_map_view">Change view</string>
     <string name="protocols_split_both_ways_protocol">Split protocol</string>
+    <string name="calibration_accept">Accept new table</string>
+    <string name="calibration_reset">Reset table</string>
+    <string name="calibration_next_step">Next</string>
+    <string name="calibration_load_current_calibration">Load current table</string>
 </resources>
