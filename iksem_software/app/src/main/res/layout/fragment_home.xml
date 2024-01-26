@@ -22,14 +22,14 @@
     <View
         android:id="@+id/home_plot_area"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_indicators_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_max="350dp"
-        app:layout_constraintHeight_min="170dp"
+        app:layout_constraintHeight_min="150dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

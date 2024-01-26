@@ -58,6 +58,6 @@
     <string name="protocols_info_slip_ratio">Slip ratio:</string>
     <string name="protocols_info_distance">Trip:</string>
     <string name="protocols_info_operator">Operator:</string>
-    <string name="protocols_map_view">Protocol view</string>
+    <string name="protocols_map_view">Change view</string>
     <string name="protocols_split_both_ways_protocol">Split protocol</string>
 </resources>
