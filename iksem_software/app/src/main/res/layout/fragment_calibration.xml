@@ -21,22 +21,428 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TableLayout
+    <TextView
+        android:id="@+id/calibration_table_title"
+        style="@style/header_text_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/calibration_table_title"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
         android:id="@+id/calibration_table_area"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constrainedHeight="true"
+        android:layout_marginBottom="8dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/calibration_info_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="400dp"
-        app:layout_constraintHeight_min="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/calibration_table_title">
 
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.55">
 
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </TableLayout>
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15"
+                    android:gravity="center"
+                    android:text="@string/calibration_force" />
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/calibration_weight" />
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:letterSpacing="-0.03"
+                    android:text="@string/calibration_moment" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15"
+                    android:gravity="center"
+                    android:text="@string/calibration_10_r" />
+
+                <TextView
+                    android:id="@+id/calibration_table_weight_10_forward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_table_moment_10_forward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15"
+                    android:gravity="center"
+                    android:text="@string/calibration_20_r" />
+
+                <TextView
+                    android:id="@+id/calibration_table_weight_20_forward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_table_moment_20_forward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15"
+                    android:gravity="center"
+                    android:text="@string/calibration_30_r" />
+
+                <TextView
+                    android:id="@+id/calibration_table_weight_30_forward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_table_moment_30_forward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15"
+                    android:gravity="center"
+                    android:text="@string/calibration_30_l" />
+
+                <TextView
+                    android:id="@+id/calibration_table_weight_30_backward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_table_moment_30_backward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15"
+                    android:gravity="center"
+                    android:text="@string/calibration_20_l" />
+
+                <TextView
+                    android:id="@+id/calibration_table_weight_20_backward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_table_moment_20_backward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.15"
+                    android:gravity="center"
+                    android:text="@string/calibration_10_l" />
+
+                <TextView
+                    android:id="@+id/calibration_table_weight_10_backward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_table_moment_10_backward"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="0.5"
+            android:gravity="center">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1" />
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:paddingHorizontal="4dp"
+                    android:text="@string/calibration_current_value" />
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/calibration_new_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:text="@string/calibration_delta_W"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/calibration_delta_weight_current"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_delta_weight_new"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:text="@string/calibration_delta_M"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/calibration_delta_moment_current"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_delta_moment_new"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:text="@string/calibration_zero_W"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/calibration_zero_weight_current"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_zero_weight_new"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:text="@string/calibration_zero_M"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/calibration_zero_moment_current"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+                <TextView
+                    android:id="@+id/calibration_zero_moment_new"
+                    style="@style/header_text_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:gravity="center"
+                    android:text="@string/unknown_value" />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/calibration_info_area"
@@ -46,18 +452,20 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_box_transparent"
         android:gravity="center"
-        android:text="@string/calibration_enter_vertical_load"
+        android:text="@string/calibration_load_10_kg"
         android:textAlignment="center"
         android:textColor="@color/yellow"
         app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calibration_table_area" />
+        app:layout_constraintTop_toBottomOf="@id/calibration_table_area"
+        tools:ignore="TextSizeCheck" />
 
     <TableLayout
         android:id="@+id/calibration_values_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@id/calibration_buttons_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,27 +542,40 @@
     <LinearLayout
         android:id="@+id/calibration_buttons_area"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="300dp"
+        app:layout_constraintHeight_min="150dp"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/calibration_accept_calibration"
-            style="@style/button_apply_disabled"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="@string/calibration_accept" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/calibration_reset_progress"
-            style="@style/button_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/calibration_reset" />
+            <Button
+                android:id="@+id/calibration_reset_progress"
+                style="@style/button_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0.5"
+                android:text="@string/calibration_reset" />
+
+            <Button
+                android:id="@+id/calibration_accept_calibration"
+                style="@style/button_apply_disabled"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="0.5"
+                android:text="@string/calibration_accept" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/calibration_next_step"

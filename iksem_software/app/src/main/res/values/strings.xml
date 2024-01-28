@@ -70,10 +70,10 @@
     <string name="protocols_info_operator">Оператор:</string>
     <string name="protocols_map_view">Переключить вид</string>
     <string name="protocols_split_both_ways_protocol">Разделить протокол</string>
-    <string name="calibration_accept">Принять таблицу</string>
-    <string name="calibration_reset">Сбросить калибровку</string>
+    <string name="calibration_accept">Принять</string>
+    <string name="calibration_reset">Сбросить</string>
     <string name="calibration_next_step">Далее</string>
-    <string name="calibration_load_current_calibration">Загрузить с измерителя</string>
+    <string name="calibration_load_current_calibration">Загрузить тек. знач.</string>
     <string name="calibration_load_10_kg">Нагрузите 10 кг и нажмите \"Далее\"</string>
     <string name="calibration_enter_vertical_load">Введите значение вертикальной нагрузки в поле \"Вес\" и нажмите \"Далее\"</string>
     <string name="calibration_load_20_kg">Нагрузите 20 кг и нажмите \"Далее\"</string>
@@ -83,8 +83,23 @@
     <string name="calibration_unload_20_kg">Разгрузите до 20 кг и нажмите \"Далее\"</string>
     <string name="calibration_unload_10_kg">Разгрузите до 10 кг и нажмите \"Далее\"</string>
     <string name="calibration_finished_accept_or_decline">Калибровка завершена - примите или сбросьте результаты</string>
-    <string name="calibration_moment">Момент:</string>
-    <string name="calibration_weight">Вес:</string>
-    <string name="calibration_friction_coef">Ксц:</string>
+    <string name="calibration_moment">Момент</string>
+    <string name="calibration_weight">Вес</string>
+    <string name="calibration_friction_coef">Ксц</string>
     <string name="calibration_input_weight">Введите вес</string>
+    <string name="protocols_list_title">Список протоколов</string>
+    <string name="calibration_table_title">Таблица калибровки</string>
+    <string name="calibration_force">Сила</string>
+    <string name="calibration_current_value">Тек. знач.</string>
+    <string name="calibration_new_value">Нов. знач.</string>
+    <string name="calibration_10_r" translatable="false">10 &gt;</string>
+    <string name="calibration_10_l" translatable="false">10 &lt;</string>
+    <string name="calibration_20_r" translatable="false">20 &gt;</string>
+    <string name="calibration_20_l" translatable="false">20 &lt;</string>
+    <string name="calibration_30_r" translatable="false">30 &gt;</string>
+    <string name="calibration_30_l" translatable="false">30 &lt;</string>
+    <string name="calibration_delta_M" translatable="false">ΔM</string>
+    <string name="calibration_delta_W" translatable="false">ΔW</string>
+    <string name="calibration_zero_M" translatable="false">0M</string>
+    <string name="calibration_zero_W" translatable="false">0W</string>
 </resources>

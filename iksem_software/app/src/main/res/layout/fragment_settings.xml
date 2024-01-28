@@ -51,6 +51,7 @@
 
     <TextView
         android:id="@+id/settings_password_warning"
+        style="@style/header_text_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -58,8 +59,6 @@
         android:text="@string/settings_password_warning"
         android:textAlignment="center"
         android:textColor="@color/yellow"
-        android:textSize="16sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/settings_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
