@@ -36,12 +36,15 @@
     <LinearLayout
         android:id="@+id/calibration_table_area"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginVertical="8dp"
         android:baselineAligned="false"
         android:orientation="horizontal"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/calibration_info_area"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_max="250dp"
+        app:layout_constraintHeight_min="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calibration_table_title">
 
@@ -436,8 +439,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.15"
-                    android:gravity="center"
                     android:background="@drawable/box_r_side_framed"
+                    android:gravity="center"
                     android:text="@string/calibration_zero_W"
                     android:textAlignment="center" />
 
@@ -475,8 +478,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.15"
-                    android:gravity="center"
                     android:background="@drawable/box_r_side_framed"
+                    android:gravity="center"
                     android:text="@string/calibration_zero_M"
                     android:textAlignment="center" />
 
@@ -606,13 +609,10 @@
     <LinearLayout
         android:id="@+id/calibration_buttons_area"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="300dp"
-        app:layout_constraintHeight_min="150dp"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout

@@ -21,33 +21,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/settings_operator_title"
-        style="@style/header_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/settings_operator_name"
-        android:textAlignment="textStart"
-        app:layout_constraintBottom_toTopOf="@id/settings_operator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_operator"
         style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="name"
-        android:backgroundTint="@color/background_text_hint"
-        android:hint="@string/settings_input_name"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColorHint="@color/background_text_hint"
+        android:layout_marginTop="16dp"
+        android:hint="@string/settings_operator_name"
+        app:boxBackgroundColor="@color/background"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
+        app:layout_constraintBottom_toTopOf="@id/settings_password_warning"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_operator_title" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconContentDescription="@string/settings_operator_name"
+        app:startIconDrawable="@drawable/ic_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/settings_password_warning"
@@ -64,22 +60,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_operator" />
 
-    <EditText
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_password"
         style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:autofillHints="password"
-        android:backgroundTint="@color/background_text_hint"
         android:hint="@string/settings_input_password"
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        android:textColorHint="@color/background_text_hint"
+        app:boxBackgroundColor="@color/background"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="password_toggle"
         app:layout_constraintBottom_toTopOf="@id/settings_password_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_password_warning" />
+        app:layout_constraintTop_toBottomOf="@id/settings_password_warning"
+        app:startIconContentDescription="@string/settings_input_password"
+        app:startIconDrawable="@drawable/ic_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/settings_password_button"
@@ -88,94 +92,83 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="@string/button_unblock_settings"
-        app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
+        app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_password" />
 
-    <TextView
-        android:id="@+id/settings_measuring_radius_title"
-        style="@style/header_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/settings_measuring_wheel_radius"
-        android:textAlignment="textStart"
-        app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_password_button" />
-
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_measuring_radius"
         style="@style/input_edit_text_disabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:autofillHints="name"
-        android:hint="@string/settings_input_measurings_radius"
-        android:inputType="numberDecimal"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/settings_driving_radius_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_measuring_radius_title" />
-
-    <TextView
-        android:id="@+id/settings_driving_radius_title"
-        style="@style/header_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_measuring_wheel_radius"
-        android:textAlignment="textStart"
+        android:hint="@string/settings_driving_wheel_radius"
+        app:boxBackgroundColor="@color/background"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@id/settings_driving_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_measuring_radius" />
+        app:layout_constraintTop_toBottomOf="@id/settings_password_button"
+        app:startIconContentDescription="@string/settings_driving_wheel_radius"
+        app:startIconDrawable="@drawable/ic_name">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_driving_radius"
         style="@style/input_edit_text_disabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:autofillHints="name"
-        android:hint="@string/settings_input_driving_radius"
-        android:inputType="numberDecimal"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/settings_slip_ratio_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_driving_radius_title" />
-
-    <TextView
-        android:id="@+id/settings_slip_ratio_title"
-        style="@style/header_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_slip_ratio"
-        android:textAlignment="textStart"
+        android:hint="@string/settings_measuring_wheel_radius"
+        app:boxBackgroundColor="@color/background"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@id/settings_slip_ratio"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_driving_radius" />
+        app:layout_constraintTop_toBottomOf="@id/settings_measuring_radius"
+        app:startIconContentDescription="@string/settings_measuring_wheel_radius"
+        app:startIconDrawable="@drawable/ic_name">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_slip_ratio"
         style="@style/input_edit_text_disabled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:autofillHints="name"
-        android:hint="@string/settings_input_slip_ratio"
-        android:inputType="numberDecimal"
-        android:textAlignment="center"
+        android:hint="@string/settings_slip_ratio"
+        app:boxBackgroundColor="@color/background"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@id/settings_calibration_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_slip_ratio_title" />
+        app:layout_constraintTop_toBottomOf="@id/settings_driving_radius"
+        app:startIconContentDescription="@string/settings_slip_ratio"
+        app:startIconDrawable="@drawable/ic_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/settings_calibration_button"
