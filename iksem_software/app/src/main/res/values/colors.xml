@@ -9,6 +9,8 @@
     <color name="background_text_disabled">#22bfbfbf</color>
     <color name="background_text_hint">#aabfbfbf</color>
     <color name="background_text_hint_disabled">#22bfbfbf</color>
+    <color name="background_text_accent_green">#a5ffc9</color>
+    <color name="background_text_accent_blue">#a5c9ff</color>
     <color name="control">#004a77</color>
     <color name="control_2">#a1acbd</color>
     <color name="control_light">#5d97bb</color>
