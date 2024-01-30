@@ -7,10 +7,6 @@
     <string name="title_settings">Настройки</string>
     <string name="title_calibration">Калибровка</string>
     <string name="bluetooth_search">Поиск</string>
-    <string name="bluetooth_disconnect">Отключиться</string>
-    <string name="bluetooth_status_disconnected">Нет подключения</string>
-    <string name="bluetooth_status_connected">Подключено</string>
-    <string name="bluetooth_status_connection_in_progress">Подключение...</string>
     <string name="bluetooth_devices_list">Список измерителей</string>
     <string name="map_iksem_here">Измеритель здесь</string>
     <string name="map_iksem_coordinates">Координаты</string>
@@ -22,17 +18,12 @@
     <string name="settings_measuring_wheel_radius">Радиус измерительного колеса, [мм]</string>
     <string name="settings_driving_wheel_radius">Радиус ведущего колеса, [мм]</string>
     <string name="settings_slip_ratio">Значение проскальзывания, [%]</string>
-    <string name="settings_input_name">Задайте имя</string>
     <string name="settings_input_password">Введите пароль</string>
     <string name="settings_password_warning">Для доступа к настройкам и калибровке введите пароль</string>
     <string name="button_apply">Готово</string>
     <string name="button_cancel">Отмена</string>
-    <string name="input_info">Введите</string>
-    <string name="settings_input_measurings_radius">Введите радиус ИК</string>
-    <string name="settings_input_driving_radius">Введите радиус ТК</string>
-    <string name="settings_input_slip_ratio">Введите скольжение</string>
     <string name="settings_save_button">Сохранить</string>
-    <string name="settings_calibration_button">Перейти к калибровке</string>
+    <string name="settings_calibration_button">Калибровка</string>
     <string name="button_unblock_settings">Разблокировать настройки</string>
     <string name="home_start_button">Старт</string>
     <string name="home_stop_button">Стоп</string>
@@ -53,11 +44,9 @@
     <string name="home_indicators_area_A">А</string>
     <string name="home_indicators_area_kg">кг</string>
     <string name="home_indicators_area_0" translatable="false">0</string>
-    <string name="home_indicators_area_25" translatable="false">25</string>
     <string name="home_indicators_area_50" translatable="false">50</string>
     <string name="home_indicators_area_75" translatable="false">75</string>
     <string name="home_indicators_area_100" translatable="false">100</string>
-    <string name="home_indicators_area_125" translatable="false">125</string>
     <string name="home_indicators_area_150" translatable="false">150</string>
     <string name="home_info_box_battery_level">Заряд:</string>
     <string name="protocols_info_date">Дата записи:</string>

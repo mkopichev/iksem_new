@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toTopOf="@id/calibration_info_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_max="250dp"
-        app:layout_constraintHeight_min="200dp"
+        app:layout_constraintHeight_min="150dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calibration_table_title">
 
@@ -544,7 +544,7 @@
             android:layout_marginBottom="8dp">
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
@@ -561,7 +561,7 @@
                 android:gravity="center" />
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
@@ -583,7 +583,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
