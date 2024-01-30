@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_protocols"
         android:name="com.iksem.ui.protocols.ProtocolsFragment"
-        android:label="@string/title_protocols"
+        android:label="@string/title_charts"
         tools:layout="@layout/fragment_map" />
 
     <fragment
@@ -20,13 +20,13 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.iksem.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_main"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_bluetooth"
         android:name="com.iksem.ui.bluetooth.BluetoothFragment"
-        android:label="@string/title_bluetooth"
+        android:label="@string/title_connection"
         tools:layout="@layout/fragment_bluetooth" />
 
     <fragment

@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
-        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_home);
         viewPager2 = findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(viewPagerAdapter);
@@ -52,23 +51,18 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_protocols).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_protocols);
                         break;
                     case 1:
                         bottomNavigationView.getMenu().findItem(navigation_map).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_map);
                         break;
                     case 2:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_home);
                         break;
                     case 3:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_bluetooth).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_bluetooth);
                         break;
                     case 4:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_settings).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_settings);
                         break;
                 }
                 super.onPageSelected(position);

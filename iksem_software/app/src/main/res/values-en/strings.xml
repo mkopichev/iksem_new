@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_home">Control</string>
-    <string name="title_protocols">Protocols</string>
-    <string name="title_map">Location</string>
-    <string name="title_bluetooth">Connection</string>
+    <string name="title_main">Main</string>
+    <string name="title_charts">Charts</string>
+    <string name="title_map">Map</string>
+    <string name="title_connection">Connect</string>
     <string name="title_settings">Settings</string>
     <string name="title_calibration">Calibration</string>
-    <string name="bluetooth_search">Search</string>
-    <string name="bluetooth_devices_list">Devices list</string>
-    <string name="map_iksem_here">Tester is here</string>
+    <string name="bluetooth_refresh">Refresh</string>
+    <string name="bluetooth_devices_available">Available devices</string>
+    <string name="map_iksem_location">Friction tester`s location</string>
     <string name="map_iksem_coordinates">Coordinates</string>
     <string name="map_latitude">Latitude:</string>
     <string name="map_longitude">Longitude:</string>
@@ -22,7 +22,7 @@
     <string name="button_cancel">Cancel</string>
     <string name="settings_save_button">Save</string>
     <string name="settings_calibration_button">Calibration</string>
-    <string name="button_unblock_settings">Unblock settings</string>
+    <string name="button_unblock_settings">Unblock</string>
     <string name="home_start_button">Start</string>
     <string name="home_stop_button">Stop</string>
     <string name="home_both_ways_protocol">Both-ways trip</string>
@@ -54,11 +54,11 @@
     <string name="calibration_accept">Accept</string>
     <string name="calibration_reset">Reset</string>
     <string name="calibration_next_step">Next</string>
-    <string name="calibration_load_current_calibration">Download cur. val.</string>
-    <string name="calibration_load_10_kg">Load 10 kg and press \"Next\"</string>
-    <string name="calibration_enter_vertical_load">Enter vertical load to the \"Weight\" field and press \"Next\"</string>
-    <string name="calibration_load_20_kg">Load 20 kg and press \"Next\"</string>
-    <string name="calibration_load_30_kg">Load 30 kg and press \"Next\"</string>
+    <string name="calibration_load_current_calibration">Download from tester</string>
+    <string name="calibration_load_10_kg">Load 10 kg and press \"Next\" button</string>
+    <string name="calibration_enter_vertical_load">Enter vertical load to the \"Weight\" field and press \"Next\" button</string>
+    <string name="calibration_load_20_kg">Load 20 kg and press \"Next\" button</string>
+    <string name="calibration_load_30_kg">Load 30 kg and press \"Next\" button</string>
     <string name="calibration_load_35_kg">Load 35 kg and press \"Next\"</string>
     <string name="calibration_unload_30_kg">Unload down to 30 kg and press \"Next\"</string>
     <string name="calibration_unload_20_kg">Unload down to 20 kg and press \"Next\"</string>
@@ -73,4 +73,5 @@
     <string name="calibration_force">Force</string>
     <string name="calibration_current_value">Cur. val.</string>
     <string name="calibration_new_value">New val.</string>
+    <string name="calibration_back">Back</string>
 </resources>

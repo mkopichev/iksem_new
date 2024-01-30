@@ -26,7 +26,7 @@
         style="@style/header_text_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:text="@string/calibration_table_title"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
         android:id="@+id/calibration_table_area"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_constrainedHeight="true"
@@ -336,8 +336,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_br_side_framed"
                     android:gravity="center"
-                    android:text="@string/calibration_current_value"
-                    android:textColor="@color/background_text_accent_blue" />
+                    android:text="@string/calibration_current_value" />
 
                 <TextView
                     style="@style/header_text_2"
@@ -346,8 +345,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_br_side_framed"
                     android:gravity="center"
-                    android:text="@string/calibration_new_value"
-                    android:textColor="@color/background_text_accent_green" />
+                    android:text="@string/calibration_new_value" />
 
             </TableRow>
 
@@ -374,8 +372,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_r_side_framed"
                     android:gravity="center"
-                    android:text="@string/unknown_value"
-                    android:textColor="@color/background_text_accent_blue" />
+                    android:text="@string/unknown_value" />
 
                 <TextView
                     android:id="@+id/calibration_delta_weight_new"
@@ -385,8 +382,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_r_side_framed"
                     android:gravity="center"
-                    android:text="@string/unknown_value"
-                    android:textColor="@color/background_text_accent_green" />
+                    android:text="@string/unknown_value" />
 
             </TableRow>
 
@@ -413,8 +409,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_br_side_framed"
                     android:gravity="center"
-                    android:text="@string/unknown_value"
-                    android:textColor="@color/background_text_accent_blue" />
+                    android:text="@string/unknown_value" />
 
                 <TextView
                     android:id="@+id/calibration_delta_moment_new"
@@ -424,8 +419,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_br_side_framed"
                     android:gravity="center"
-                    android:text="@string/unknown_value"
-                    android:textColor="@color/background_text_accent_green" />
+                    android:text="@string/unknown_value" />
 
             </TableRow>
 
@@ -452,8 +446,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_r_side_framed"
                     android:gravity="center"
-                    android:text="@string/unknown_value"
-                    android:textColor="@color/background_text_accent_blue" />
+                    android:text="@string/unknown_value" />
 
                 <TextView
                     android:id="@+id/calibration_zero_weight_new"
@@ -463,8 +456,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_r_side_framed"
                     android:gravity="center"
-                    android:text="@string/unknown_value"
-                    android:textColor="@color/background_text_accent_green" />
+                    android:text="@string/unknown_value" />
 
             </TableRow>
 
@@ -491,8 +483,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_r_side_framed"
                     android:gravity="center"
-                    android:text="@string/unknown_value"
-                    android:textColor="@color/background_text_accent_blue" />
+                    android:text="@string/unknown_value" />
 
                 <TextView
                     android:id="@+id/calibration_zero_moment_new"
@@ -502,8 +493,7 @@
                     android:layout_weight="0.2"
                     android:background="@drawable/box_br_side_framed"
                     android:gravity="center"
-                    android:text="@string/unknown_value"
-                    android:textColor="@color/background_text_accent_green" />
+                    android:text="@string/unknown_value" />
 
             </TableRow>
 
@@ -513,98 +503,89 @@
 
     <TextView
         android:id="@+id/calibration_info_area"
-        style="@style/header_text_1"
+        style="@style/header_text_2"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_box_transparent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/rounded_box_framed"
         android:gravity="center"
-        android:text="@string/calibration_load_10_kg"
+        android:text="@string/calibration_enter_vertical_load"
         android:textAlignment="center"
-        android:textColor="@color/yellow"
         app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calibration_table_area"
         tools:ignore="TextSizeCheck" />
 
-    <TableLayout
+    <LinearLayout
         android:id="@+id/calibration_values_area"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/calibration_buttons_area"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/calibration_weight_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calibration_info_area">
 
-        <TableRow
+        <TextView
+            style="@style/header_text_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center|end"
+            android:text="@string/calibration_moment"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/calibration_moment"
+            style="@style/header_text_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center" />
+
+        <TextView
+            style="@style/header_text_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center|end"
+            android:text="@string/calibration_friction_coef"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/calibration_friction"
+            style="@style/header_text_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.25"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/calibration_weight_title"
+        style="@style/input_edit_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:hint="@string/calibration_weight"
+        app:layout_constraintBottom_toTopOf="@id/calibration_buttons_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calibration_values_area"
+        app:startIconContentDescription="@string/calibration_input_weight"
+        app:startIconDrawable="@drawable/ic_weight">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/calibration_weight"
+            style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp">
+            android:gravity="center"
+            android:inputType="numberDecimal" />
 
-            <TextView
-                style="@style/header_text_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:gravity="center|end"
-                android:text="@string/calibration_moment"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/calibration_moment"
-                style="@style/header_text_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:gravity="center" />
-
-            <TextView
-                style="@style/header_text_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:gravity="center|end"
-                android:text="@string/calibration_friction_coef"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/calibration_friction"
-                style="@style/header_text_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:gravity="center" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/header_text_1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:gravity="center|end"
-                android:text="@string/calibration_weight"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/calibration_weight"
-                style="@style/input_edit_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:autofillHints="name"
-                android:gravity="center"
-                android:hint="@string/calibration_input_weight"
-                android:inputType="numberDecimal" />
-
-        </TableRow>
-
-    </TableLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:id="@+id/calibration_buttons_area"
@@ -618,21 +599,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/calibration_reset_progress"
-                style="@style/button_cancel"
+                style="@style/button_general"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="0.5"
                 android:text="@string/calibration_reset" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/calibration_accept_calibration"
-                style="@style/button_apply_disabled"
+                style="@style/button_general_disabled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
@@ -641,21 +622,31 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/calibration_next_step"
-            style="@style/button_general"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/calibration_next_step" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/calibration_load_current_table"
-            style="@style/button_general"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/calibration_load_current_calibration" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/calibration_back"
+                style="@style/button_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0.5"
+                android:text="@string/calibration_back"
+                app:icon="@drawable/ic_back" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/calibration_next_step"
+                style="@style/button_general"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="0.5"
+                android:text="@string/calibration_next_step" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

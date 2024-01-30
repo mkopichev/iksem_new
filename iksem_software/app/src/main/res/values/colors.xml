@@ -2,7 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
     <color name="background">#1f1f1f</color>
     <color name="background_over">#2d2f31</color>
     <color name="background_over_disabled">#442d2f31</color>
@@ -10,17 +9,15 @@
     <color name="background_text_disabled">#22bfbfbf</color>
     <color name="background_text_hint">#aabfbfbf</color>
     <color name="background_text_hint_disabled">#22bfbfbf</color>
-    <color name="background_text_accent_green">#a5ffc9</color>
-    <color name="background_text_accent_blue">#a5c9ff</color>
-    <color name="control">#004a77</color>
-    <color name="control_2">#6c9926</color>
-    <color name="control_light">#5d97bb</color>
-    <color name="control_dark">#002a44</color>
-    <color name="control_2_dark">#7796bb5d</color>
-    <color name="control_background">#28292a</color>
-    <color name="control_stroke">#a1acbd</color>
-    <color name="control_text">#c2e7ff</color>
-    <color name="control_2_accent">#497700</color>
+    <color name="green_pale">#a5ffc9</color>
+    <color name="blue_pale">#a5c9ff</color>
+    <color name="blue_deep">#004a77</color>
+    <color name="blue_light">#0070b4</color>
+    <color name="blue_dark">#002339</color>
+    <color name="blue_grayish_light">#a1acbd</color>
+    <color name="cyan_grayish">#2f4f4f</color>
+    <color name="cyan_dark">#0A1111</color>
+    <color name="red_grayish_dark">#4f2f2f</color>
     <color name="green">#0f5223</color>
     <color name="green_light">#539C68</color>
     <color name="green_disabled">#330f5223</color>

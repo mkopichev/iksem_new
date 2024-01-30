@@ -23,7 +23,7 @@
         android:id="@+id/home_plot_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="8dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_indicators_area"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:id="@+id/home_indicators_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_info_box"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="8dp">
 
-                <ProgressBar
+                <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/home_measuring_velocity_indicator"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="8dp">
 
-                <ProgressBar
+                <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/home_transport_velocity_indicator"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
@@ -204,7 +204,7 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="8dp">
 
-                <ProgressBar
+                <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/home_current_indicator"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
@@ -276,7 +276,7 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="8dp">
 
-                <ProgressBar
+                <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/home_torque_indicator"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
@@ -334,8 +334,8 @@
         android:id="@+id/home_info_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_box_transparent"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/rounded_box_framed"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@id/home_switches_area"
         app:layout_constraintEnd_toEndOf="parent"
@@ -394,8 +394,8 @@
         android:id="@+id/home_switches_area"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_box_transparent"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/rounded_box_framed"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constrainedHeight="true"
@@ -403,22 +403,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_max="170dp"
         app:layout_constraintHeight_min="120dp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_info_box">
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            style="@style/header_text_1"
+        <com.google.android.material.materialswitch.MaterialSwitch
+            style="@style/header_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:checked="true"
+            android:checked="false"
             android:minHeight="50dp"
             android:text="@string/home_both_ways_protocol"
             android:textAlignment="textStart"
-            android:textColor="@color/background_text" />
+            android:textColor="@color/background_text"
+            app:thumbIcon="@drawable/ic_both_ways" />
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            style="@style/header_text_1"
+        <com.google.android.material.materialswitch.MaterialSwitch
+            style="@style/header_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
@@ -426,7 +428,8 @@
             android:minHeight="50dp"
             android:text="@string/home_light_on"
             android:textAlignment="textStart"
-            android:textColor="@color/background_text" />
+            android:textColor="@color/background_text"
+            app:thumbIcon="@drawable/ic_strobe" />
 
     </LinearLayout>
 
@@ -434,13 +437,12 @@
         android:id="@+id/home_start_stop_buttons_area"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginBottom="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/home_start_protocol_button"
             style="@style/button_apply"
             android:layout_width="0dp"
@@ -451,7 +453,7 @@
             android:text="@string/home_start_button"
             android:textStyle="bold" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/home_stop_protocol_button"
             style="@style/button_cancel_disabled"
             android:layout_width="0dp"

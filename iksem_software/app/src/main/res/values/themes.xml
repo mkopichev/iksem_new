@@ -1,20 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.IKSEMSoftware" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/control</item>
-        <item name="colorPrimaryVariant">@color/control_dark</item>
+        <item name="colorPrimary">@color/blue_deep</item>
+        <item name="colorPrimaryVariant">@color/blue_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/control_2</item>
-        <item name="colorSecondaryVariant">@color/control_2_dark</item>
-        <item name="colorOnSecondary">@color/control_2_accent</item>
-        <item name="colorOnSurface">@color/black</item>
+        <item name="colorSecondary">@color/cyan_grayish</item>
+        <item name="colorSecondaryVariant">@color/cyan_dark</item>
+        <item name="colorOnSecondary">@color/red_grayish_dark</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/background_over</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/background</item>
-        <item name="android:navigationBarColor">@color/control_background</item>
+        <item name="android:navigationBarColor">@color/background_over</item>
         <item name="android:textColor">@color/background_text</item>
     </style>
 
@@ -54,27 +53,25 @@
         <item name="endIconTint">@color/background_text_disabled</item>
     </style>
 
-    <style name="button_general" parent="Widget.MaterialComponents.Button">
-        <item name="android:autoSizeMaxTextSize">22sp</item>
+    <style name="button_general" parent="Widget.Material3.Button">
+        <item name="android:autoSizeMaxTextSize">20sp</item>
         <item name="android:autoSizeMinTextSize">18sp</item>
         <item name="android:autoSizeTextType">uniform</item>
-        <item name="android:paddingVertical">8dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textAllCaps">true</item>
         <item name="android:breakStrategy">balanced</item>
         <item name="android:backgroundTint">@drawable/button_general</item>
-        <item name="cornerRadius">25dp</item>
+        <item name="android:textColor">@color/background_text</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:enabled">true</item>
-        <item name="android:stateListAnimator">@null</item>
-        <item name="android:minHeight">60dp</item>
+        <item name="android:minHeight">50dp</item>
     </style>
 
     <style name="button_general_disabled" parent="button_general">
         <item name="android:focusable">false</item>
         <item name="android:clickable">false</item>
         <item name="android:enabled">false</item>
+        <item name="android:textColor">@color/background_text_disabled</item>
     </style>
 
     <style name="button_apply" parent="button_general">
@@ -105,17 +102,16 @@
     </style>
 
     <style name="button_toggle">
-        <item name="android:autoSizeMaxTextSize">22sp</item>
+        <item name="android:autoSizeMaxTextSize">20sp</item>
         <item name="android:autoSizeMinTextSize">18sp</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:paddingVertical">8dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:backgroundTint">@drawable/toggle_button_item</item>
-        <item name="android:background">@drawable/rounded_box_25dp_corner</item>
-        <item name="android:radius">25dp</item>
+        <item name="android:background">@drawable/rounded_box_unframed</item>
+        <item name="android:radius">8dp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:stateListAnimator">@null</item>
     </style>
 
 </resources>

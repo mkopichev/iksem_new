@@ -20,12 +20,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/bluetooth_devices_list"
+        android:id="@+id/bluetooth_title"
         style="@style/header_text_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/bluetooth_devices_list"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:text="@string/bluetooth_devices_available"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,19 +35,20 @@
         android:id="@+id/bluetooth_discovered_devices_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bluetooth_devices_list" />
+        app:layout_constraintTop_toBottomOf="@id/bluetooth_title" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/bluetooth_search_button"
         style="@style/button_general"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/bluetooth_search"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/bluetooth_refresh"
+        app:icon="@drawable/ic_refresh"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

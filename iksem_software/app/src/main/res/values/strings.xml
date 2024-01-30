@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name" translatable="false">ИКСЭМ</string>
-    <string name="title_home">Управление</string>
-    <string name="title_protocols">Протоколы</string>
-    <string name="title_map">Местоположение</string>
-    <string name="title_bluetooth">Подключение</string>
+    <string name="title_main">Главная</string>
+    <string name="title_charts">Графики</string>
+    <string name="title_map">Карта</string>
+    <string name="title_connection">Связь</string>
     <string name="title_settings">Настройки</string>
     <string name="title_calibration">Калибровка</string>
-    <string name="bluetooth_search">Поиск</string>
-    <string name="bluetooth_devices_list">Список измерителей</string>
-    <string name="map_iksem_here">Измеритель здесь</string>
+    <string name="bluetooth_refresh">Обновить</string>
+    <string name="bluetooth_devices_available">Доступные устройства</string>
+    <string name="map_iksem_location">Местоположение измерителя</string>
     <string name="map_iksem_coordinates">Координаты</string>
     <string name="map_latitude">Широта:</string>
     <string name="map_longitude">Долгота:</string>
@@ -24,7 +24,7 @@
     <string name="button_cancel">Отмена</string>
     <string name="settings_save_button">Сохранить</string>
     <string name="settings_calibration_button">Калибровка</string>
-    <string name="button_unblock_settings">Разблокировать настройки</string>
+    <string name="button_unblock_settings">Разблокировать</string>
     <string name="home_start_button">Старт</string>
     <string name="home_stop_button">Стоп</string>
     <string name="home_both_ways_protocol">Заезд в обе стороны</string>
@@ -62,12 +62,12 @@
     <string name="calibration_accept">Принять</string>
     <string name="calibration_reset">Сбросить</string>
     <string name="calibration_next_step">Далее</string>
-    <string name="calibration_load_current_calibration">Загрузить тек. знач.</string>
-    <string name="calibration_load_10_kg">Нагрузите 10 кг и нажмите \"Далее\"</string>
-    <string name="calibration_enter_vertical_load">Введите значение вертикальной нагрузки в поле \"Вес\" и нажмите \"Далее\"</string>
-    <string name="calibration_load_20_kg">Нагрузите 20 кг и нажмите \"Далее\"</string>
-    <string name="calibration_load_30_kg">Нагрузите 30 кг и нажмите \"Далее\"</string>
-    <string name="calibration_load_35_kg">Нагрузите 35 кг и нажмите \"Далее\"</string>
+    <string name="calibration_load_current_calibration">Загрузить с измерителя</string>
+    <string name="calibration_load_10_kg">Нагрузите 10 кг и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_enter_vertical_load">Введите значение вертикальной нагрузки в поле \"Вес\" и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_load_20_kg">Нагрузите 20 кг и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_load_30_kg">Нагрузите 30 кг и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_load_35_kg">Нагрузите 35 кг и нажмите кнопку \"Далее\"</string>
     <string name="calibration_unload_30_kg">Разгрузите до 30 кг и нажмите \"Далее\"</string>
     <string name="calibration_unload_20_kg">Разгрузите до 20 кг и нажмите \"Далее\"</string>
     <string name="calibration_unload_10_kg">Разгрузите до 10 кг и нажмите \"Далее\"</string>
@@ -91,4 +91,5 @@
     <string name="calibration_delta_W" translatable="false">ΔW</string>
     <string name="calibration_zero_M" translatable="false">0M</string>
     <string name="calibration_zero_W" translatable="false">0W</string>
+    <string name="calibration_back">Назад</string>
 </resources>
