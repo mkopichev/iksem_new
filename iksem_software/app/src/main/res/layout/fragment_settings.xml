@@ -30,7 +30,6 @@
         android:hint="@string/settings_operator_name"
         app:endIconDrawable="@drawable/ic_clear"
         app:endIconMode="clear_text"
-        app:layout_constraintBottom_toTopOf="@id/settings_password_warning"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,19 +41,20 @@
             style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/settings_password_warning"
-        style="@style/header_text_1"
+        style="@style/header_text_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:background="@drawable/rounded_box_framed"
         android:text="@string/settings_password_warning"
         android:textAlignment="center"
-        android:textColor="@color/yellow"
         app:layout_constraintBottom_toTopOf="@id/settings_password_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,20 +82,22 @@
             style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/settings_password_button"
         style="@style/button_general"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:minWidth="220dp"
         android:text="@string/button_unblock_settings"
+        app:icon="@drawable/ic_unlock"
         app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_password_title" />
 
@@ -105,15 +107,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:hint="@string/settings_driving_wheel_radius"
+        android:hint="@string/settings_transport_wheel"
         app:endIconDrawable="@drawable/ic_clear"
         app:endIconMode="clear_text"
+        app:helperText="@string/settings_input_radius"
         app:layout_constraintBottom_toTopOf="@id/settings_driving_radius_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_password_button"
-        app:startIconContentDescription="@string/settings_driving_wheel_radius"
-        app:startIconDrawable="@drawable/ic_tool">
+        app:suffixText="@string/settings_mm">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/settings_measuring_radius"
@@ -130,15 +132,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:hint="@string/settings_measuring_wheel_radius"
+        android:hint="@string/settings_measuring_wheel"
         app:endIconDrawable="@drawable/ic_clear"
         app:endIconMode="clear_text"
+        app:helperText="@string/settings_input_radius"
         app:layout_constraintBottom_toTopOf="@id/settings_slip_ratio_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_measuring_radius_title"
-        app:startIconContentDescription="@string/settings_measuring_wheel_radius"
-        app:startIconDrawable="@drawable/ic_tool">
+        app:suffixText="@string/settings_mm">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/settings_driving_radius"
@@ -158,12 +160,12 @@
         android:hint="@string/settings_slip_ratio"
         app:endIconDrawable="@drawable/ic_clear"
         app:endIconMode="clear_text"
+        app:helperText="@string/settings_input_value"
         app:layout_constraintBottom_toTopOf="@id/settings_calibration_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_driving_radius_title"
-        app:startIconContentDescription="@string/settings_slip_ratio"
-        app:startIconDrawable="@drawable/ic_tool">
+        app:suffixText="@string/settings_percent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/settings_slip_ratio"
@@ -174,24 +176,28 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/settings_calibration_button"
         style="@style/button_general_disabled"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:minWidth="220dp"
         android:text="@string/settings_calibration_button"
+        app:icon="@drawable/ic_calibration"
         app:layout_constraintBottom_toTopOf="@id/settings_save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_slip_ratio_title" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/settings_save_button"
-        style="@style/button_apply"
-        android:layout_width="match_parent"
+        style="@style/button_general_disabled"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minWidth="220dp"
         android:text="@string/settings_save_button"
+        app:icon="@drawable/ic_check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

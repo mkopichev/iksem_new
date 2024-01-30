@@ -509,24 +509,52 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/rounded_box_framed"
         android:gravity="center"
-        android:text="@string/calibration_enter_vertical_load"
+        android:text="@string/calibration_load_10_kg"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calibration_table_area"
-        tools:ignore="TextSizeCheck" />
-
-    <LinearLayout
-        android:id="@+id/calibration_values_area"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/calibration_weight_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calibration_info_area">
+        app:layout_constraintTop_toBottomOf="@+id/calibration_table_area"
+        tools:ignore="TextSizeCheck" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/calibration_weight_title"
+        style="@style/input_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:hint="@string/calibration_weight"
+        android:minWidth="220dp"
+        app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calibration_info_area"
+        app:startIconContentDescription="@string/calibration_input_weight"
+        app:startIconDrawable="@drawable/ic_weight"
+        app:suffixText="@string/home_indicators_area_kg">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/calibration_weight"
+            style="@style/input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/calibration_values_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toTopOf="@id/calibration_buttons_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calibration_weight_title">
 
         <TextView
             style="@style/header_text_2"
@@ -561,31 +589,8 @@
             android:layout_height="match_parent"
             android:layout_weight="0.25"
             android:gravity="center" />
+
     </LinearLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/calibration_weight_title"
-        style="@style/input_edit_text"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:hint="@string/calibration_weight"
-        app:layout_constraintBottom_toTopOf="@id/calibration_buttons_area"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calibration_values_area"
-        app:startIconContentDescription="@string/calibration_input_weight"
-        app:startIconDrawable="@drawable/ic_weight">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/calibration_weight"
-            style="@style/input_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:inputType="numberDecimal" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:id="@+id/calibration_buttons_area"
@@ -609,7 +614,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="0.5"
-                android:text="@string/calibration_reset" />
+                android:text="@string/calibration_reset"
+                app:icon="@drawable/ic_erase" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/calibration_accept_calibration"
@@ -618,7 +624,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_weight="0.5"
-                android:text="@string/calibration_accept" />
+                android:text="@string/calibration_accept"
+                app:icon="@drawable/ic_check" />
 
         </LinearLayout>
 
@@ -644,7 +651,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_weight="0.5"
-                android:text="@string/calibration_next_step" />
+                android:text="@string/calibration_next_step"
+                app:icon="@drawable/ic_next" />
 
         </LinearLayout>
 

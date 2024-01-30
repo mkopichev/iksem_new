@@ -13,9 +13,9 @@
     <string name="map_latitude">Latitude:</string>
     <string name="map_longitude">Longitude:</string>
     <string name="settings_operator_name">Operator`s name</string>
-    <string name="settings_measuring_wheel_radius">Measuring wheel radius, [mm]</string>
-    <string name="settings_driving_wheel_radius">Driving wheel radius, [mm]</string>
-    <string name="settings_slip_ratio">Slip ratio, [%]</string>
+    <string name="settings_measuring_wheel">Measuring wheel</string>
+    <string name="settings_transport_wheel">Transport wheel</string>
+    <string name="settings_slip_ratio">Slip ratio</string>
     <string name="settings_input_password">Enter password</string>
     <string name="settings_password_warning">For settings access and calibration enter password</string>
     <string name="button_apply">Apply</string>
@@ -74,4 +74,7 @@
     <string name="calibration_current_value">Cur. val.</string>
     <string name="calibration_new_value">New val.</string>
     <string name="calibration_back">Back</string>
+    <string name="settings_mm">mm</string>
+    <string name="settings_input_radius">Input radius</string>
+    <string name="settings_input_value">Input value</string>
 </resources>

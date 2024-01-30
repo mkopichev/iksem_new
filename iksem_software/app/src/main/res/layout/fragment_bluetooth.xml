@@ -44,9 +44,10 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/bluetooth_search_button"
         style="@style/button_general"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:minWidth="220dp"
         android:text="@string/bluetooth_refresh"
         app:icon="@drawable/ic_refresh"
         app:layout_constraintBottom_toBottomOf="parent"

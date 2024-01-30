@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">ИКСЭМ</string>
     <string name="title_main">Главная</string>
@@ -15,9 +16,9 @@
     <string name="map_latitude_letter" translatable="false">N</string>
     <string name="map_longitude_letter" translatable="false">E</string>
     <string name="settings_operator_name">Имя оператора</string>
-    <string name="settings_measuring_wheel_radius">Радиус измерительного колеса, [мм]</string>
-    <string name="settings_driving_wheel_radius">Радиус ведущего колеса, [мм]</string>
-    <string name="settings_slip_ratio">Значение проскальзывания, [%]</string>
+    <string name="settings_measuring_wheel">Измерительное колесо</string>
+    <string name="settings_transport_wheel">Транспортное колесо</string>
+    <string name="settings_slip_ratio">Проскальзывание</string>
     <string name="settings_input_password">Введите пароль</string>
     <string name="settings_password_warning">Для доступа к настройкам и калибровке введите пароль</string>
     <string name="button_apply">Готово</string>
@@ -92,4 +93,8 @@
     <string name="calibration_zero_M" translatable="false">0M</string>
     <string name="calibration_zero_W" translatable="false">0W</string>
     <string name="calibration_back">Назад</string>
+    <string name="settings_mm">мм</string>
+    <string name="settings_percent" translatable="false">%</string>
+    <string name="settings_input_radius">Введите радиус</string>
+    <string name="settings_input_value">Введите значение</string>
 </resources>

@@ -29,8 +29,7 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="input_edit_text">
-        <item name="android:textSize">18sp</item>
+    <style name="input_edit_text" parent="header_text_2">
         <item name="android:minHeight">50dp</item>
         <item name="android:textColor">@color/background_text</item>
         <item name="android:textColorHint">@color/background_text</item>
@@ -61,6 +60,7 @@
         <item name="android:breakStrategy">balanced</item>
         <item name="android:backgroundTint">@drawable/button_general</item>
         <item name="android:textColor">@color/background_text</item>
+        <item name="iconTint">@color/background_text</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:enabled">true</item>
@@ -72,6 +72,7 @@
         <item name="android:clickable">false</item>
         <item name="android:enabled">false</item>
         <item name="android:textColor">@color/background_text_disabled</item>
+        <item name="iconTint">@color/background_text_disabled</item>
     </style>
 
     <style name="button_apply" parent="button_general">
