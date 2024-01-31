@@ -31,7 +31,6 @@
 
     <style name="input_edit_text" parent="header_text_2">
         <item name="android:minHeight">50dp</item>
-        <item name="android:minWidth">220dp</item>
         <item name="android:textColor">@color/background_text</item>
         <item name="android:textColorHint">@color/background_text</item>
         <item name="hintTextColor">@color/background_text</item>
