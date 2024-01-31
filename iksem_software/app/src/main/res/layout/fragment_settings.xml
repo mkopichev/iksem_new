@@ -11,9 +11,8 @@
         android:id="@+id/text_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
         android:visibility="gone"
@@ -28,14 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:hint="@string/settings_operator_name"
+        android:hint="@string/settings_operator"
         app:endIconDrawable="@drawable/ic_clear"
         app:endIconMode="clear_text"
-        app:layout_constraintBottom_toTopOf="@id/settings_password_warning"
+        app:helperText="@string/settings_input_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:startIconContentDescription="@string/settings_operator_name"
+        app:startIconContentDescription="@string/settings_operator"
         app:startIconDrawable="@drawable/ic_name">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -48,36 +47,22 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/settings_password_warning"
-        style="@style/header_text_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@drawable/rounded_box_framed"
-        android:text="@string/settings_password_warning"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@id/settings_password_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_operator_title" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_password_title"
         style="@style/input_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:hint="@string/settings_password"
         app:endIconDrawable="@drawable/button_visibility"
         app:endIconMode="password_toggle"
         app:helperText="@string/settings_input_password"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
+        app:layout_constraintBottom_toTopOf="@id/settings_password_warning"
         app:layout_constraintEnd_toStartOf="@id/settings_password_button"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_password_warning"
+        app:layout_constraintTop_toBottomOf="@id/settings_operator_title"
         app:layout_constraintWidth_percent="0.8"
         app:startIconContentDescription="@string/settings_input_password"
         app:startIconDrawable="@drawable/ic_password">
@@ -107,10 +92,42 @@
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="24dp"
-        app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
+        app:layout_constraintBottom_toTopOf="@id/settings_password_warning"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_password_warning" />
+        app:layout_constraintTop_toBottomOf="@id/settings_operator_title" />
+
+    <LinearLayout
+        android:id="@+id/settings_password_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/rounded_box_framed"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_password_title">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:contentDescription="@string/settings_password_warning"
+            android:src="@drawable/ic_info"
+            android:tint="@color/background_text" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/header_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="@dimen/activity_horizontal_margin"
+            android:text="@string/settings_password_warning"
+            android:textAlignment="center" />
+
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_measuring_radius_title"
@@ -125,7 +142,7 @@
         app:layout_constraintBottom_toTopOf="@id/settings_driving_radius_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_password_title"
+        app:layout_constraintTop_toBottomOf="@id/settings_password_warning"
         app:suffixText="@string/settings_mm">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -195,6 +212,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:text="@string/settings_calibration_button"
         app:icon="@drawable/ic_calibration"
+        app:layout_constraintBottom_toTopOf="@id/settings_save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_slip_ratio_title" />

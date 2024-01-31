@@ -501,21 +501,37 @@
 
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:id="@+id/calibration_info_area"
-        style="@style/header_text_2"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/rounded_box_framed"
-        android:gravity="center"
-        android:text="@string/calibration_load_10_kg"
-        android:textAlignment="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
         app:layout_constraintBottom_toTopOf="@id/calibration_weight_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calibration_table_area"
-        tools:ignore="TextSizeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/calibration_table_area">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:contentDescription="@string/settings_password_warning"
+            android:src="@drawable/ic_info"
+            android:tint="@color/background_text" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/header_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="@dimen/activity_horizontal_margin"
+            android:text="@string/calibration_load_10_kg"
+            android:textAlignment="center" />
+
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/calibration_weight_title"
@@ -525,6 +541,7 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:hint="@string/calibration_weight"
         android:minWidth="220dp"
+        app:helperText="@string/calibration_input_weight"
         app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -609,7 +626,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/calibration_reset_progress"
-                style="@style/button_general"
+                style="@style/button_general_disabled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"

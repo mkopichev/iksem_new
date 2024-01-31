@@ -27,8 +27,7 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/protocols_info_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="250dp"
-        app:layout_constraintHeight_min="150dp"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,10 +36,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="center"
         android:background="@drawable/rounded_box_framed"
         android:padding="4dp"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/protocols_list_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.23"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/protocols_plot_area">
 
@@ -246,9 +248,11 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:text="@string/protocols_list_title"
         android:textAlignment="center"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/protocols_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHeight_percent="0.04"
         app:layout_constraintTop_toBottomOf="@id/protocols_info_area" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -260,8 +264,7 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/protocols_switches_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="400dp"
-        app:layout_constraintHeight_min="200dp"
+        app:layout_constraintHeight_percent="0.32"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/protocols_list_title" />
 
@@ -270,8 +273,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.materialswitch.MaterialSwitch

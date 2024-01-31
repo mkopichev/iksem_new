@@ -25,10 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@id/home_indicators_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="250dp"
-        app:layout_constraintHeight_min="150dp"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,9 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="center"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_info_box"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_plot_area">
 
@@ -332,8 +332,10 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/rounded_box_framed"
         android:gravity="center"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_switches_area"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_indicators_area">
 
@@ -396,8 +398,7 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_start_stop_buttons_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="150dp"
-        app:layout_constraintHeight_min="120dp"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_info_box">
 
@@ -428,10 +429,12 @@
     <LinearLayout
         android:id="@+id/home_start_stop_buttons_area"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.14"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
@@ -441,6 +444,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
+            android:autoSizeMaxTextSize="32sp"
             android:enabled="true"
             android:text="@string/home_start_button"
             android:textStyle="bold" />
@@ -452,6 +456,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="4dp"
             android:layout_weight="0.5"
+            android:autoSizeMaxTextSize="32sp"
             android:text="@string/home_stop_button"
             android:textStyle="bold" />
 

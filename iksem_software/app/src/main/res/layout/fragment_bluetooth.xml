@@ -37,20 +37,30 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/bluetooth_refresh_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bluetooth_title" />
+        app:layout_constraintTop_toBottomOf="@id/bluetooth_title"
+        app:layout_constraintVertical_bias="0" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/bluetooth_search_button"
+        android:id="@+id/bluetooth_refresh_button"
         style="@style/button_general"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:minWidth="220dp"
-        android:text="@string/bluetooth_refresh"
+        android:contentDescription="@string/bluetooth_refresh"
+        android:insetLeft="0dp"
+        android:insetTop="0dp"
+        android:insetRight="0dp"
+        android:insetBottom="0dp"
         app:icon="@drawable/ic_refresh"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
