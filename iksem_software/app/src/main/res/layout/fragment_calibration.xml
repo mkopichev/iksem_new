@@ -636,7 +636,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/calibration_back"
-                style="@style/button_cancel"
+                style="@style/button_red"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"

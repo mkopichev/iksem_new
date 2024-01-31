@@ -53,7 +53,7 @@
     </style>
 
     <style name="button_general" parent="Widget.Material3.Button">
-        <item name="android:autoSizeMaxTextSize">20sp</item>
+        <item name="android:autoSizeMaxTextSize">28sp</item>
         <item name="android:autoSizeMinTextSize">18sp</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:gravity">center</item>
@@ -75,28 +75,28 @@
         <item name="iconTint">@color/background_text_disabled</item>
     </style>
 
-    <style name="button_apply" parent="button_general">
-        <item name="android:backgroundTint">@drawable/button_apply</item>
+    <style name="button_green" parent="button_general">
+        <item name="android:backgroundTint">@drawable/button_green</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:enabled">true</item>
     </style>
 
-    <style name="button_apply_disabled" parent="button_apply">
+    <style name="button_green_disabled" parent="button_green">
         <item name="android:focusable">false</item>
         <item name="android:clickable">false</item>
         <item name="android:enabled">false</item>
     </style>
 
-    <style name="button_cancel" parent="button_apply">
-        <item name="android:backgroundTint">@drawable/button_cancel</item>
+    <style name="button_red" parent="button_green">
+        <item name="android:backgroundTint">@drawable/button_red</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:enabled">true</item>
     </style>
 
-    <style name="button_cancel_disabled" parent="button_cancel">
-        <item name="android:backgroundTint">@drawable/button_cancel</item>
+    <style name="button_red_disabled" parent="button_red">
+        <item name="android:backgroundTint">@drawable/button_red</item>
         <item name="android:focusable">false</item>
         <item name="android:clickable">false</item>
         <item name="android:enabled">false</item>

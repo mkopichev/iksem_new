@@ -45,251 +45,247 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:minHeight="40dp">
 
             <TextView
-                style="@style/header_text_3"
-                android:layout_width="80dp"
+                style="@style/header_text_2"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.25"
                 android:gravity="center"
-                android:text="@string/home_indicators_area_Vmw"
-                android:textAlignment="center" />
+                android:text="@string/home_indicators_area_Vtw" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingHorizontal="8dp">
-
-                <com.google.android.material.progressindicator.LinearProgressIndicator
-                    android:id="@+id/home_measuring_velocity_indicator"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:progress="60"
-                    android:progressTint="@color/mw_velocity"
-                    android:scaleY="3" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5">
-
-                    <TextView
-                        style="@style/header_text_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_0"
-                        android:textAlignment="textStart" />
-
-                    <TextView
-                        style="@style/header_text_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_50"
-                        android:textAlignment="center" />
-
-                    <TextView
-                        style="@style/header_text_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_100"
-                        android:textAlignment="textEnd" />
-                </TableRow>
-
-            </LinearLayout>
-
-            <TextView
-                style="@style/header_text_3"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
+                android:layout_weight="0.5"
                 android:gravity="center"
-                android:text="@string/home_indicators_area_km_h"
-                android:textAlignment="center" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/header_text_3"
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/home_indicators_area_Vtw"
-                android:textAlignment="center" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingHorizontal="8dp">
+                android:orientation="vertical">
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/home_transport_velocity_indicator"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Widget.Material3.LinearProgressIndicator"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
-                    android:progress="54"
-                    android:progressTint="@color/tw_velocity"
-                    android:scaleY="3" />
+                    android:layout_height="wrap_content"
+                    android:progress="64"
+                    app:indicatorColor="@color/tw_velocity"
+                    app:trackThickness="10dp" />
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/header_text_3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_0"
-                        android:textAlignment="textStart" />
+                        android:layout_weight="0.33"
+                        android:gravity="center|start"
+                        android:text="@string/home_indicators_area_0" />
 
                     <TextView
                         style="@style/header_text_3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_50"
-                        android:textAlignment="center" />
+                        android:layout_weight="0.33"
+                        android:gravity="center"
+                        android:text="@string/home_indicators_area_50" />
 
                     <TextView
                         style="@style/header_text_3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_100"
-                        android:textAlignment="textEnd" />
+                        android:layout_weight="0.33"
+                        android:gravity="center|end"
+                        android:text="@string/home_indicators_area_100" />
                 </TableRow>
 
             </LinearLayout>
 
             <TextView
-                style="@style/header_text_3"
-                android:layout_width="80dp"
+                style="@style/header_text_2"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.25"
                 android:gravity="center"
-                android:text="@string/home_indicators_area_km_h"
-                android:textAlignment="center" />
+                android:text="@string/home_indicators_area_km_h" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:minHeight="40dp">
 
             <TextView
-                style="@style/header_text_3"
-                android:layout_width="80dp"
+                style="@style/header_text_2"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.25"
                 android:gravity="center"
-                android:text="@string/home_indicators_area_I"
-                android:textAlignment="center" />
+                android:text="@string/home_indicators_area_Vmw" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingHorizontal="8dp">
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/home_measuring_velocity_indicator"
+                    style="@style/Widget.Material3.LinearProgressIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:progress="57"
+                    app:indicatorColor="@color/mw_velocity"
+                    app:trackThickness="10dp" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/header_text_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:gravity="center|start"
+                        android:text="@string/home_indicators_area_0" />
+
+                    <TextView
+                        style="@style/header_text_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:gravity="center"
+                        android:text="@string/home_indicators_area_50" />
+
+                    <TextView
+                        style="@style/header_text_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.33"
+                        android:gravity="center|end"
+                        android:text="@string/home_indicators_area_100" />
+                </TableRow>
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/header_text_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="@string/home_indicators_area_km_h" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp">
+
+            <TextView
+                style="@style/header_text_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="@string/home_indicators_area_I" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/home_current_indicator"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Widget.Material3.LinearProgressIndicator"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
                     android:max="150"
                     android:progress="75"
-                    android:progressTint="@color/current_a"
-                    android:scaleY="3" />
+                    app:indicatorColor="@color/current_a"
+                    app:trackThickness="10dp" />
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/header_text_3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_0"
-                        android:textAlignment="textStart" />
+                        android:layout_weight="0.33"
+                        android:gravity="center|start"
+                        android:text="@string/home_indicators_area_0" />
 
                     <TextView
                         style="@style/header_text_3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_75"
-                        android:textAlignment="center" />
+                        android:layout_weight="0.33"
+                        android:gravity="center"
+                        android:text="@string/home_indicators_area_75" />
 
                     <TextView
                         style="@style/header_text_3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:text="@string/home_indicators_area_150"
-                        android:textAlignment="textEnd" />
+                        android:layout_weight="0.33"
+                        android:gravity="center|end"
+                        android:text="@string/home_indicators_area_150" />
                 </TableRow>
 
             </LinearLayout>
 
             <TextView
-                style="@style/header_text_3"
-                android:layout_width="80dp"
+                style="@style/header_text_2"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.25"
                 android:gravity="center"
-                android:text="@string/home_indicators_area_A"
-                android:textAlignment="center" />
+                android:text="@string/home_indicators_area_A" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:minHeight="40dp">
 
             <TextView
-                style="@style/header_text_3"
-                android:layout_width="80dp"
+                style="@style/header_text_2"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.25"
                 android:gravity="center"
-                android:text="@string/home_indicators_area_M"
-                android:textAlignment="center" />
+                android:text="@string/home_indicators_area_M" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingHorizontal="8dp">
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/home_torque_indicator"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    style="@style/Widget.Material3.LinearProgressIndicator"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
                     android:progress="80"
-                    android:progressTint="@color/load_kg"
-                    android:scaleY="3" />
+                    app:indicatorColor="@color/load_kg"
+                    app:trackThickness="10dp" />
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.5">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/header_text_3"
@@ -319,12 +315,12 @@
             </LinearLayout>
 
             <TextView
-                style="@style/header_text_3"
-                android:layout_width="80dp"
+                style="@style/header_text_2"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="0.25"
                 android:gravity="center"
-                android:text="@string/home_indicators_area_kg"
-                android:textAlignment="center" />
+                android:text="@string/home_indicators_area_kg" />
 
         </TableRow>
 
@@ -345,7 +341,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:gravity="center">
 
             <TextView
@@ -401,9 +397,8 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_start_stop_buttons_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="170dp"
+        app:layout_constraintHeight_max="150dp"
         app:layout_constraintHeight_min="120dp"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_info_box">
 
@@ -411,7 +406,6 @@
             style="@style/header_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
             android:checked="false"
             android:minHeight="50dp"
             android:text="@string/home_both_ways_protocol"
@@ -423,7 +417,6 @@
             style="@style/header_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
             android:checked="false"
             android:minHeight="50dp"
             android:text="@string/home_light_on"
@@ -444,7 +437,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/home_start_protocol_button"
-            style="@style/button_apply"
+            style="@style/button_green"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
@@ -455,7 +448,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/home_stop_protocol_button"
-            style="@style/button_cancel_disabled"
+            style="@style/button_red_disabled"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="4dp"
