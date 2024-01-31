@@ -25,7 +25,7 @@
     <string name="button_cancel">Отмена</string>
     <string name="settings_save_button">Сохранить</string>
     <string name="settings_calibration_button">Калибровка</string>
-    <string name="button_unblock_settings">Разблокировать</string>
+    <string name="button_unlock_settings">Разблокировать</string>
     <string name="home_start_button">Старт</string>
     <string name="home_stop_button">Стоп</string>
     <string name="home_both_ways_protocol">Заезд в обе стороны</string>
@@ -97,4 +97,5 @@
     <string name="settings_percent" translatable="false">%</string>
     <string name="settings_input_radius">Введите радиус</string>
     <string name="settings_input_value">Введите значение</string>
+    <string name="settings_password">Пароль</string>
 </resources>

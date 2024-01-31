@@ -45,10 +45,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp">
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
@@ -103,7 +104,7 @@
             </LinearLayout>
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
@@ -114,10 +115,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp">
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
@@ -172,7 +174,7 @@
             </LinearLayout>
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
@@ -183,10 +185,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp">
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
@@ -242,7 +245,7 @@
             </LinearLayout>
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"
@@ -256,7 +259,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                style="@style/header_text_2"
+                style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.25"

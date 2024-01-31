@@ -22,7 +22,7 @@
     <string name="button_cancel">Cancel</string>
     <string name="settings_save_button">Save</string>
     <string name="settings_calibration_button">Calibration</string>
-    <string name="button_unblock_settings">Unblock</string>
+    <string name="button_unlock_settings">Unblock</string>
     <string name="home_start_button">Start</string>
     <string name="home_stop_button">Stop</string>
     <string name="home_both_ways_protocol">Both-ways trip</string>
@@ -77,4 +77,5 @@
     <string name="settings_mm">mm</string>
     <string name="settings_input_radius">Input radius</string>
     <string name="settings_input_value">Input value</string>
+    <string name="settings_password">Password</string>
 </resources>

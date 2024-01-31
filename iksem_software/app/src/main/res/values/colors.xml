@@ -6,9 +6,9 @@
     <color name="background_over">#2d2f31</color>
     <color name="background_over_disabled">#442d2f31</color>
     <color name="background_text">#bfbfbf</color>
-    <color name="background_text_disabled">#77bfbfbf</color>
+    <color name="background_text_disabled">#44bfbfbf</color>
     <color name="background_text_hint">#aabfbfbf</color>
-    <color name="background_text_hint_disabled">#77bfbfbf</color>
+    <color name="background_text_hint_disabled">#44bfbfbf</color>
     <color name="green_pale">#a5ffc9</color>
     <color name="blue_pale">#a5c9ff</color>
     <color name="blue_deep">#004a77</color>
