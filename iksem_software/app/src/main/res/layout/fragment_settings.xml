@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin_big"
     tools:context=".ui.settings.SettingsFragment">
 
     <TextView
@@ -42,7 +41,6 @@
             style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +70,6 @@
             style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -143,7 +140,6 @@
             style="@style/input_edit_text_disabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -169,7 +165,6 @@
             style="@style/input_edit_text_disabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -195,7 +190,6 @@
             style="@style/input_edit_text_disabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>

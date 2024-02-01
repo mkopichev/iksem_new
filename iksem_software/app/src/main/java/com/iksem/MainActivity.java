@@ -11,8 +11,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.iksem.ui.ViewPagerAdapter;
 
-import java.util.Objects;
-
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     ViewPager2 viewPager2;
