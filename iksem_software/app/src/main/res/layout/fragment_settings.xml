@@ -196,7 +196,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/settings_calibration_button"
-        style="@style/button_general_disabled"
+        style="@style/button_general"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"

@@ -9,10 +9,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.ListFragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.iksem.R;
 import com.iksem.databinding.FragmentSettingsBinding;
+import com.iksem.fragmentsCommunicator.FragmentsChangeListener;
+import com.iksem.fragmentsCommunicator.FragmentsList;
 
 import java.util.Objects;
 
@@ -48,8 +53,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == calibrationButton.getId()){
 
-        }
     }
 }
