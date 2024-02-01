@@ -34,11 +34,11 @@
     <TableLayout
         android:id="@+id/protocols_info_area"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:gravity="center"
         android:background="@drawable/rounded_box_framed"
-        android:padding="4dp"
+        android:gravity="center"
+        android:paddingHorizontal="4dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/protocols_list_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -200,11 +200,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="0.5"
-                android:text="@string/protocols_info_average_friction"
+                android:text="@string/protocols_info_average_velocity"
                 android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/protocols_info_area_average_friction"
+                android:id="@+id/protocols_info_area_average_velocity"
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -224,11 +224,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="0.5"
-                android:text="@string/protocols_info_average_velocity"
+                android:text="@string/protocols_info_average_friction"
                 android:textAlignment="textEnd" />
 
             <TextView
-                android:id="@+id/protocols_info_area_average_velocity"
+                android:id="@+id/protocols_info_area_average_friction"
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -251,8 +251,8 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/protocols_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHeight_percent="0.04"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/protocols_info_area" />
 
     <androidx.recyclerview.widget.RecyclerView

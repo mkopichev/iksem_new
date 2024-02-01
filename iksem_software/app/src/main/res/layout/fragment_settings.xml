@@ -79,21 +79,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/settings_password_button"
-        style="@style/button_general"
+        style="@style/button_icon_round"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/button_unlock_settings"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
         app:icon="@drawable/ic_unlock"
-        app:iconGravity="textStart"
-        app:iconPadding="0dp"
-        app:iconSize="24dp"
         app:layout_constraintBottom_toTopOf="@id/settings_password_warning"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settings_operator_title" />
 
@@ -123,6 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
             android:text="@string/settings_password_warning"
             android:textAlignment="center" />
@@ -150,6 +143,7 @@
             style="@style/input_edit_text_disabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -175,6 +169,7 @@
             style="@style/input_edit_text_disabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -200,6 +195,7 @@
             style="@style/input_edit_text_disabled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>

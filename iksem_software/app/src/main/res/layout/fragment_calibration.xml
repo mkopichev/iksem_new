@@ -504,7 +504,8 @@
     <LinearLayout
         android:id="@+id/calibration_info_area"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin_big"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/rounded_box_framed"
         android:orientation="horizontal"
@@ -518,7 +519,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
-            android:contentDescription="@string/settings_password_warning"
+            android:contentDescription="@string/calibration_input_weight"
             android:src="@drawable/ic_info"
             android:tint="@color/background_text" />
 
@@ -527,6 +528,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
             android:text="@string/calibration_load_10_kg"
             android:textAlignment="center" />
@@ -541,6 +543,8 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:hint="@string/calibration_weight"
         android:minWidth="220dp"
+        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconMode="clear_text"
         app:helperText="@string/calibration_input_weight"
         app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
         app:layout_constraintEnd_toEndOf="parent"
