@@ -46,7 +46,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp">
+            android:layout_weight="0.2">
 
             <TextView
                 style="@style/header_text_3"
@@ -116,7 +116,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp">
+            android:layout_weight="0.2">
 
             <TextView
                 style="@style/header_text_3"
@@ -186,7 +186,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="4dp">
+            android:layout_weight="0.2">
 
             <TextView
                 style="@style/header_text_3"
@@ -256,7 +256,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2">
 
             <TextView
                 style="@style/header_text_3"
@@ -343,7 +344,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:gravity="center">
+            android:layout_weight="0.5">
 
             <TextView
                 android:id="@+id/home_info_box_operator"
@@ -351,6 +352,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
+                android:gravity="center_vertical"
                 android:text="@string/home_info_box_operator" />
 
             <TextView
@@ -359,13 +361,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
+                android:gravity="center_vertical"
                 android:text="@string/home_info_box_iksem_number" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
 
             <TextView
                 android:id="@+id/home_info_box_run_distance"
@@ -373,6 +377,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
+                android:gravity="center_vertical"
                 android:text="@string/home_info_box_distance" />
 
             <TextView
@@ -381,6 +386,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
+                android:gravity="center_vertical"
                 android:text="@string/home_info_box_battery_level" />
 
         </TableRow>
@@ -406,7 +412,8 @@
             style="@style/header_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="false"
+            android:layout_weight="0.5"
+            android:checked="true"
             android:minHeight="50dp"
             android:text="@string/home_both_ways_protocol"
             android:textAlignment="textStart"
@@ -417,6 +424,7 @@
             style="@style/header_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0.5"
             android:checked="false"
             android:minHeight="50dp"
             android:text="@string/home_light_on"

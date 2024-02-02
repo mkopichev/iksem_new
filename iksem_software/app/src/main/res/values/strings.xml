@@ -92,7 +92,7 @@
     <string name="calibration_delta_W" translatable="false">ΔW</string>
     <string name="calibration_zero_M" translatable="false">0M</string>
     <string name="calibration_zero_W" translatable="false">0W</string>
-    <string name="calibration_back">Назад</string>
+    <string name="calibration_exit">Выйти</string>
     <string name="settings_mm">мм</string>
     <string name="settings_percent" translatable="false">%</string>
     <string name="settings_input_radius">Введите радиус</string>

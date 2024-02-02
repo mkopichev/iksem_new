@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blue_deep</item>
         <item name="colorPrimaryVariant">@color/blue_dark</item>
@@ -66,6 +66,10 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:enabled">true</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
     </style>
 
     <style name="button_general_disabled" parent="button_general">
@@ -78,10 +82,6 @@
 
     <style name="button_icon_round" parent="button_general">
         <item name="iconSize">24dp</item>
-        <item name="android:insetTop">0dp</item>
-        <item name="android:insetRight">0dp</item>
-        <item name="android:insetBottom">0dp</item>
-        <item name="android:insetLeft">0dp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
         <item name="layout_constraintDimensionRatio">1:1</item>

@@ -505,7 +505,6 @@
         android:id="@+id/calibration_info_area"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_marginHorizontal="@dimen/activity_horizontal_margin_big"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/rounded_box_framed"
         android:orientation="horizontal"
@@ -542,10 +541,12 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:hint="@string/calibration_weight"
-        android:minWidth="220dp"
         app:endIconDrawable="@drawable/ic_clear"
         app:endIconMode="clear_text"
         app:helperText="@string/calibration_input_weight"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintWidth_percent="0.55"
         app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -564,12 +565,25 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calibration_next_step"
+        style="@style/button_general"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:minWidth="150dp"
+        android:text="@string/calibration_next_step"
+        app:icon="@drawable/ic_next"
+        app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calibration_info_area" />
+
     <LinearLayout
         android:id="@+id/calibration_values_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toTopOf="@id/calibration_buttons_area"
@@ -617,66 +631,44 @@
         android:id="@+id/calibration_buttons_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/calibration_back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calibration_values_area">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/calibration_reset_progress"
+            style="@style/button_general_disabled"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:orientation="horizontal">
+            android:layout_marginEnd="4dp"
+            android:layout_weight="0.5"
+            android:text="@string/calibration_reset"
+            app:icon="@drawable/ic_erase" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/calibration_reset_progress"
-                style="@style/button_general_disabled"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="0.5"
-                android:text="@string/calibration_reset"
-                app:icon="@drawable/ic_erase" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/calibration_accept_calibration"
-                style="@style/button_general_disabled"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="0.5"
-                android:text="@string/calibration_accept"
-                app:icon="@drawable/ic_check" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/calibration_accept_calibration"
+            style="@style/button_general_disabled"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/calibration_back"
-                style="@style/button_red"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="0.5"
-                android:text="@string/calibration_back"
-                app:icon="@drawable/ic_back" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/calibration_next_step"
-                style="@style/button_general"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="0.5"
-                android:text="@string/calibration_next_step"
-                app:icon="@drawable/ic_next" />
-
-        </LinearLayout>
+            android:layout_marginStart="4dp"
+            android:layout_weight="0.5"
+            android:text="@string/calibration_accept"
+            app:icon="@drawable/ic_check" />
 
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calibration_back"
+        style="@style/button_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/calibration_exit"
+        app:icon="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
