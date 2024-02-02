@@ -27,8 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:gravity="center"
         android:text="@string/calibration_table_title"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,8 +43,7 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/calibration_info_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="250dp"
-        app:layout_constraintHeight_min="150dp"
+        app:layout_constraintHeight_percent="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calibration_table_title">
 
@@ -504,13 +503,15 @@
     <LinearLayout
         android:id="@+id/calibration_info_area"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/rounded_box_framed"
         android:orientation="horizontal"
         android:paddingHorizontal="12dp"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/calibration_weight_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calibration_table_area">
 
@@ -524,20 +525,20 @@
 
         <com.google.android.material.textview.MaterialTextView
             style="@style/header_text_2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="center"
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
-            android:text="@string/calibration_load_10_kg"
-            android:textAlignment="center" />
+            android:text="@string/calibration_load_10_kg" />
 
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/calibration_weight_title"
         style="@style/input_edit_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:hint="@string/calibration_weight"
@@ -545,12 +546,12 @@
         app:endIconMode="clear_text"
         app:helperText="@string/calibration_input_weight"
         app:layout_constrainedWidth="true"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintWidth_percent="0.55"
         app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/calibration_next_step"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calibration_info_area"
+        app:layout_constraintWidth_percent="0.5"
         app:startIconContentDescription="@string/calibration_input_weight"
         app:startIconDrawable="@drawable/ic_weight"
         app:suffixText="@string/home_indicators_area_kg">
@@ -585,7 +586,6 @@
         android:layout_marginHorizontal="40dp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/activity_horizontal_margin"
         app:layout_constraintBottom_toTopOf="@id/calibration_buttons_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -631,12 +631,10 @@
         android:id="@+id/calibration_buttons_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/calibration_back"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calibration_values_area">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/calibration_reset_progress"
@@ -660,15 +658,15 @@
 
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/calibration_back"
-        style="@style/button_red"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/calibration_exit"
-        app:icon="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--        android:id="@+id/calibration_back"-->
+    <!--        style="@style/button_red"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/calibration_exit"-->
+    <!--        app:icon="@drawable/ic_back"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
