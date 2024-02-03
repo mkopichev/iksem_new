@@ -5,7 +5,7 @@
         android:id="@+id/navigation_protocols"
         android:icon="@drawable/ic_nav_charts"
         android:orderInCategory="1"
-        android:title= "@string/title_charts" />
+        android:title="@string/title_charts" />
 
     <item
         android:id="@+id/navigation_map"
