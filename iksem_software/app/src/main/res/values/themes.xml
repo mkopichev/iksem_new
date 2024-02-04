@@ -15,6 +15,15 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="android:navigationBarColor">@color/background_over</item>
         <item name="android:textColor">@color/background_text</item>
+        <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
+    </style>
+
+    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorPrimary">@color/green_light</item>
     </style>
 
     <style name="header_text_1">
@@ -55,11 +64,10 @@
     <style name="button_general" parent="Widget.Material3.Button">
         <item name="android:minHeight">50dp</item>
         <item name="android:minWidth">220dp</item>
-        <item name="android:autoSizeMaxTextSize">22sp</item>
-        <item name="android:autoSizeMinTextSize">18sp</item>
+        <item name="android:autoSizeMaxTextSize">20sp</item>
+        <item name="android:autoSizeMinTextSize">16sp</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:gravity">center</item>
-        <item name="android:breakStrategy">balanced</item>
         <item name="android:backgroundTint">@drawable/button_general</item>
         <item name="android:textColor">@color/background_text</item>
         <item name="iconTint">@color/background_text</item>
@@ -72,7 +80,7 @@
         <item name="android:insetLeft">0dp</item>
     </style>
 
-    <style name="button_general_disabled" parent="button_general">
+    <style name="button_disabled" parent="button_general">
         <item name="android:focusable">false</item>
         <item name="android:clickable">false</item>
         <item name="android:enabled">false</item>
@@ -80,7 +88,14 @@
         <item name="iconTint">@color/background_text_disabled</item>
     </style>
 
-    <style name="button_icon_round" parent="button_general">
+    <style name="button_icon" parent="button_general">
+        <item name="iconSize">24dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="layout_constraintDimensionRatio">1:1</item>
+    </style>
+
+    <style name="button_icon_disabled" parent="button_disabled">
         <item name="iconSize">24dp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
@@ -94,10 +109,11 @@
         <item name="android:enabled">true</item>
     </style>
 
-    <style name="button_green_disabled" parent="button_general_disabled">
-        <item name="android:focusable">false</item>
-        <item name="android:clickable">false</item>
-        <item name="android:enabled">false</item>
+    <style name="button_icon_green" parent="button_green">
+        <item name="iconSize">24dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="layout_constraintDimensionRatio">1:1</item>
     </style>
 
     <style name="button_red" parent="button_general">
@@ -107,21 +123,21 @@
         <item name="android:enabled">true</item>
     </style>
 
-    <style name="button_red_disabled" parent="button_general_disabled">
-        <item name="android:backgroundTint">@drawable/button_red</item>
-        <item name="android:focusable">false</item>
-        <item name="android:clickable">false</item>
-        <item name="android:enabled">false</item>
+    <style name="button_icon_red" parent="button_red">
+        <item name="iconSize">24dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="layout_constraintDimensionRatio">1:1</item>
     </style>
 
     <style name="button_toggle">
-        <item name="android:autoSizeMaxTextSize">20sp</item>
+        <item name="android:autoSizeMaxTextSize">22sp</item>
         <item name="android:autoSizeMinTextSize">18sp</item>
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:paddingVertical">8dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:backgroundTint">@drawable/toggle_button_item</item>
+        <item name="android:backgroundTint">@drawable/button_toggle</item>
         <item name="android:background">@drawable/rounded_box_unframed</item>
         <item name="android:textColor">@color/black</item>
     </style>

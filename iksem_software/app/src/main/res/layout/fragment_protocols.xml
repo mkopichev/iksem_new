@@ -22,29 +22,73 @@
     <View
         android:id="@+id/protocols_plot_area"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_height="wrap_content"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@id/protocols_info_area"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
 
     <TableLayout
         android:id="@+id/protocols_info_area"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/rounded_box_framed"
         android:gravity="center"
-        android:paddingHorizontal="4dp"
+        android:paddingHorizontal="0dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/protocols_list_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.23"
+        app:layout_constraintHeight_percent="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/protocols_plot_area">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/header_text_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0.4"
+                android:gravity="center_vertical|end"
+                android:text="@string/protocols_info_operator" />
+
+            <TextView
+                android:id="@+id/protocols_info_area_operator"
+                style="@style/header_text_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="0.6"
+                android:gravity="center_vertical|start"
+                android:text="@string/unknown_value" />
+
+            <TextView
+                style="@style/header_text_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="0.4"
+                android:gravity="center_vertical|start"
+                android:text="@string/protocols_info_iksem_number" />
+
+            <TextView
+                android:id="@+id/protocols_info_area_iksem_number"
+                style="@style/header_text_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="0.6"
+                android:gravity="center_vertical|start"
+                android:text="@string/unknown_value" />
+
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -88,84 +132,6 @@
 
             <TextView
                 android:id="@+id/protocols_info_area_time"
-                style="@style/header_text_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|start"
-                android:text="@string/unknown_value" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <TextView
-                style="@style/header_text_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|end"
-                android:text="@string/protocols_info_operator" />
-
-            <TextView
-                android:id="@+id/protocols_info_area_operator"
-                style="@style/header_text_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|start"
-                android:text="@string/unknown_value" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <TextView
-                style="@style/header_text_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|end"
-                android:text="@string/protocols_info_iksem_number" />
-
-            <TextView
-                android:id="@+id/protocols_info_area_iksem_number"
-                style="@style/header_text_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|start"
-                android:text="@string/unknown_value" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <TextView
-                style="@style/header_text_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|end"
-                android:text="@string/protocols_info_slip_ratio" />
-
-            <TextView
-                android:id="@+id/protocols_info_area_slip_ratio"
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -240,6 +206,32 @@
                 android:layout_marginEnd="4dp"
                 android:layout_weight="0.5"
                 android:gravity="center_vertical|end"
+                android:text="@string/protocols_info_slip_ratio" />
+
+            <TextView
+                android:id="@+id/protocols_info_area_slip_ratio"
+                style="@style/header_text_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|start"
+                android:text="@string/unknown_value" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                style="@style/header_text_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|end"
                 android:text="@string/protocols_info_average_friction" />
 
             <TextView
@@ -260,12 +252,13 @@
         android:id="@+id/protocols_list_title"
         style="@style/header_text_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_height="0dp"
+        android:gravity="center"
         android:text="@string/protocols_list_title"
-        android:textAlignment="center"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/protocols_list"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/protocols_info_area" />
 
@@ -273,12 +266,11 @@
         android:id="@+id/protocols_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/protocols_switches_area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintHeight_percent="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/protocols_list_title" />
 
@@ -290,32 +282,36 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.08"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1">
 
         <com.google.android.material.materialswitch.MaterialSwitch
             style="@style/header_text_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
             android:checked="false"
             android:minHeight="50dp"
             android:text="@string/protocols_map_view"
             android:textAlignment="center"
             android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_change_view" />
+            app:thumbIcon="@drawable/ic_protocol_view" />
 
         <com.google.android.material.materialswitch.MaterialSwitch
             style="@style/header_text_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
             android:layout_weight="0.5"
             android:checked="false"
             android:minHeight="50dp"
             android:text="@string/protocols_split_both_ways_protocol"
             android:textAlignment="center"
             android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_split_view" />
+            app:thumbIcon="@drawable/ic_split_protocol" />
 
     </LinearLayout>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="title_charts">Charts</string>
+    <string name="title_protocols">Protocols</string>
     <string name="title_map">Map</string>
     <string name="title_main">Main</string>
     <string name="title_connection">Connect</string>
@@ -12,15 +12,13 @@
     <string name="map_iksem_coordinates">Coordinates</string>
     <string name="map_latitude">Latitude:</string>
     <string name="map_longitude">Longitude:</string>
-    <string name="settings_operator">Operator</string>
-    <string name="settings_measuring_wheel">Measuring wheel</string>
-    <string name="settings_transport_wheel">Transport wheel</string>
-    <string name="settings_slip_ratio">Slip ratio</string>
-    <string name="settings_input_password">Enter password</string>
+    <string name="settings_operator_hint">Operator`s name</string>
+    <string name="settings_measuring_wheel_hint">Measuring wheel radius</string>
+    <string name="settings_transport_wheel_hint">Transport wheels radius</string>
+    <string name="settings_slip_ratio_hint">Slip ratio</string>
+    <string name="settings_password_helper">Enter password</string>
     <string name="settings_password_warning">For settings access and calibration enter password</string>
-    <string name="button_apply">Apply</string>
-    <string name="button_cancel">Cancel</string>
-    <string name="settings_save_button">Save</string>
+    <string name="save_button">Apply</string>
     <string name="settings_calibration_button">Calibration</string>
     <string name="button_unlock_settings">Unblock</string>
     <string name="home_start_button">Start</string>
@@ -43,15 +41,14 @@
     <string name="home_info_box_battery_level">Battery:</string>
     <string name="protocols_info_date">Record date:</string>
     <string name="protocols_info_iksem_number">IKSEM #:</string>
-    <string name="protocols_info_time">Protocol start (end) time:</string>
-    <string name="protocols_info_average_friction">Fr. coef. average value:</string>
+    <string name="protocols_info_time">Start (stop) time:</string>
+    <string name="protocols_info_average_friction">Frict. coef. average value:</string>
     <string name="protocols_info_average_velocity">Average velocity:</string>
     <string name="protocols_info_slip_ratio">Slip ratio:</string>
     <string name="protocols_info_distance">Trip:</string>
     <string name="protocols_info_operator">Operator:</string>
-    <string name="protocols_map_view">Change view</string>
-    <string name="protocols_split_both_ways_protocol">Split protocol</string>
-    <string name="calibration_accept">Accept</string>
+    <string name="protocols_map_view">Protocol map view</string>
+    <string name="protocols_split_both_ways_protocol">Split rides</string>
     <string name="calibration_reset">Reset</string>
     <string name="calibration_next_step">Next</string>
     <string name="calibration_load_current_calibration">Download from tester</string>
@@ -75,8 +72,5 @@
     <string name="calibration_new_value">New val.</string>
     <string name="calibration_exit">Exit</string>
     <string name="settings_mm">mm</string>
-    <string name="settings_input_radius">Input radius</string>
-    <string name="settings_input_value">Input value</string>
-    <string name="settings_password">Password</string>
-    <string name="settings_input_name">Input name</string>
+    <string name="settings_password_hint">Password</string>
 </resources>

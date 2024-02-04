@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">ИКСЭМ</string>
-    <string name="title_charts">Графики</string>
+    <string name="title_protocols">Протоколы</string>
     <string name="title_map">Карта</string>
     <string name="title_main">Главная</string>
     <string name="title_connection">Связь</string>
@@ -15,15 +15,13 @@
     <string name="map_longitude">Долгота:</string>
     <string name="map_latitude_letter" translatable="false">N</string>
     <string name="map_longitude_letter" translatable="false">E</string>
-    <string name="settings_operator">Оператор</string>
-    <string name="settings_measuring_wheel">Измерительное колесо</string>
-    <string name="settings_transport_wheel">Транспортное колесо</string>
-    <string name="settings_slip_ratio">Проскальзывание</string>
-    <string name="settings_input_password">Введите пароль</string>
+    <string name="settings_operator_hint">Имя оператора</string>
+    <string name="settings_measuring_wheel_hint">Радиус измерительного колеса</string>
+    <string name="settings_transport_wheel_hint">Радиус транспортных колёс</string>
+    <string name="settings_slip_ratio_hint">Проскальзывание</string>
+    <string name="settings_password_helper">Введите пароль</string>
     <string name="settings_password_warning">Для доступа к настройкам и калибровке введите пароль</string>
-    <string name="button_apply">Готово</string>
-    <string name="button_cancel">Отмена</string>
-    <string name="settings_save_button">Сохранить</string>
+    <string name="save_button">Принять</string>
     <string name="settings_calibration_button">Калибровка</string>
     <string name="button_unlock_settings">Разблокировать</string>
     <string name="home_start_button">Старт</string>
@@ -52,15 +50,14 @@
     <string name="home_info_box_battery_level">Заряд:</string>
     <string name="protocols_info_date">Дата записи:</string>
     <string name="protocols_info_iksem_number">ИКСЭМ №:</string>
-    <string name="protocols_info_time">Время начала (конца) записи:</string>
+    <string name="protocols_info_time">Время старта (стопа):</string>
     <string name="protocols_info_average_friction">Среднее значение КСц:</string>
     <string name="protocols_info_average_velocity">Средняя скорость:</string>
     <string name="protocols_info_slip_ratio">Значение проскальзывания:</string>
     <string name="protocols_info_distance">Пройденное расстояние:</string>
     <string name="protocols_info_operator">Оператор:</string>
-    <string name="protocols_map_view">Переключить вид</string>
-    <string name="protocols_split_both_ways_protocol">Разделить протокол</string>
-    <string name="calibration_accept">Принять</string>
+    <string name="protocols_map_view">Протокол на карте</string>
+    <string name="protocols_split_both_ways_protocol">Разделить заезды</string>
     <string name="calibration_reset">Сбросить</string>
     <string name="calibration_next_step">Далее</string>
     <string name="calibration_load_current_calibration">Загрузить с измерителя</string>
@@ -95,8 +92,5 @@
     <string name="calibration_exit">Выйти</string>
     <string name="settings_mm">мм</string>
     <string name="settings_percent" translatable="false">%</string>
-    <string name="settings_input_radius">Введите радиус</string>
-    <string name="settings_input_value">Введите значение</string>
-    <string name="settings_password">Пароль</string>
-    <string name="settings_input_name">Введите имя</string>
+    <string name="settings_password_hint">Пароль</string>
 </resources>

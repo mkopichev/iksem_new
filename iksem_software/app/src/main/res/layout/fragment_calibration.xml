@@ -26,18 +26,19 @@
         style="@style/header_text_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="center"
         android:text="@string/calibration_table_title"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
 
     <LinearLayout
         android:id="@+id/calibration_table_area"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_constrainedHeight="true"
@@ -575,9 +576,9 @@
         android:minWidth="150dp"
         android:text="@string/calibration_next_step"
         app:icon="@drawable/ic_next"
-        app:layout_constraintBottom_toTopOf="@id/calibration_values_area"
+        app:layout_constraintBottom_toBottomOf="@id/calibration_weight_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calibration_info_area" />
+        app:layout_constraintTop_toTopOf="@id/calibration_weight_title" />
 
     <LinearLayout
         android:id="@+id/calibration_values_area"
@@ -631,14 +632,15 @@
         android:id="@+id/calibration_buttons_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/calibration_reset_progress"
-            style="@style/button_general_disabled"
+            style="@style/button_disabled"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
@@ -648,25 +650,14 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/calibration_accept_calibration"
-            style="@style/button_general_disabled"
+            style="@style/button_disabled"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="0.5"
-            android:text="@string/calibration_accept"
+            android:text="@string/save_button"
             app:icon="@drawable/ic_check" />
 
     </LinearLayout>
-
-    <!--    <com.google.android.material.button.MaterialButton-->
-    <!--        android:id="@+id/calibration_back"-->
-    <!--        style="@style/button_red"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text="@string/calibration_exit"-->
-    <!--        app:icon="@drawable/ic_back"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
