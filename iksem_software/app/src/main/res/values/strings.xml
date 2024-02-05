@@ -18,7 +18,7 @@
     <string name="settings_operator_hint">Имя оператора</string>
     <string name="settings_measuring_wheel_hint">Радиус измерительного колеса</string>
     <string name="settings_transport_wheel_hint">Радиус транспортных колёс</string>
-    <string name="settings_slip_ratio_hint">Проскальзывание</string>
+    <string name="settings_slip_ratio_hint">Скольжение</string>
     <string name="settings_password_helper">Введите пароль</string>
     <string name="settings_password_warning">Для доступа к настройкам и калибровке введите пароль</string>
     <string name="save_button">Принять</string>
@@ -47,20 +47,19 @@
     <string name="home_indicators_area_75" translatable="false">75</string>
     <string name="home_indicators_area_100" translatable="false">100</string>
     <string name="home_indicators_area_150" translatable="false">150</string>
-    <string name="home_info_box_battery_level">Заряд:</string>
-    <string name="protocols_info_date">Дата записи:</string>
+    <string name="home_info_box_battery_level">Заряд, [%]:</string>
+    <string name="protocols_info_date">Дата:</string>
     <string name="protocols_info_iksem_number">ИКСЭМ №:</string>
-    <string name="protocols_info_time">Время старта (стопа):</string>
-    <string name="protocols_info_average_friction">Среднее значение КСц:</string>
-    <string name="protocols_info_average_velocity">Средняя скорость:</string>
-    <string name="protocols_info_slip_ratio">Значение проскальзывания:</string>
-    <string name="protocols_info_distance">Пройденное расстояние:</string>
+    <string name="protocols_info_time">Длительность, [c]:</string>
+    <string name="protocols_info_average_friction">КСц:</string>
+    <string name="protocols_info_average_velocity">Скорость, [км/ч]:</string>
+    <string name="protocols_info_slip_ratio">Скольжение, [%]:</string>
+    <string name="protocols_info_distance">Расстояние, [м]:</string>
     <string name="protocols_info_operator">Оператор:</string>
     <string name="protocols_map_view">Протокол на карте</string>
     <string name="protocols_split_both_ways_protocol">Разделить заезды</string>
     <string name="calibration_reset">Сбросить</string>
     <string name="calibration_next_step">Далее</string>
-    <string name="calibration_load_current_calibration">Загрузить с измерителя</string>
     <string name="calibration_load_10_kg">Нагрузите 10 кг и нажмите кнопку \"Далее\"</string>
     <string name="calibration_enter_vertical_load">Введите значение вертикальной нагрузки в поле \"Вес\" и нажмите кнопку \"Далее\"</string>
     <string name="calibration_load_20_kg">Нагрузите 20 кг и нажмите кнопку \"Далее\"</string>
@@ -70,9 +69,9 @@
     <string name="calibration_unload_20_kg">Разгрузите до 20 кг и нажмите \"Далее\"</string>
     <string name="calibration_unload_10_kg">Разгрузите до 10 кг и нажмите \"Далее\"</string>
     <string name="calibration_finished_accept_or_decline">Калибровка завершена - примите или сбросьте результаты</string>
-    <string name="calibration_moment">Момент</string>
+    <string name="calibration_moment">Момент:</string>
     <string name="calibration_weight">Вес</string>
-    <string name="calibration_friction_coef">Ксц</string>
+    <string name="calibration_friction_coef">КCц:</string>
     <string name="calibration_input_weight">Введите вес</string>
     <string name="protocols_list_title">Список протоколов</string>
     <string name="calibration_table_title">Таблица калибровки</string>

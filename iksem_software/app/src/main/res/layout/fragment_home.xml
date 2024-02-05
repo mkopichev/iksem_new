@@ -351,7 +351,7 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.45"
                 android:gravity="center_vertical|start"
                 android:text="@string/home_info_box_operator" />
 
@@ -360,15 +360,16 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|start"
+                android:layout_weight="0.55"
+                android:gravity="center"
+                android:text="@string/unknown_value"
                 android:textStyle="bold" />
 
             <TextView
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.45"
                 android:gravity="center_vertical|start"
                 android:text="@string/home_info_box_iksem_number" />
 
@@ -377,8 +378,9 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.55"
                 android:gravity="center"
+                android:text="@string/unknown_value"
                 android:textStyle="bold" />
 
         </TableRow>
@@ -392,7 +394,7 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.45"
                 android:gravity="center_vertical|start"
                 android:text="@string/home_info_box_distance" />
 
@@ -401,15 +403,16 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|start"
+                android:layout_weight="0.55"
+                android:gravity="center"
+                android:text="@string/unknown_value"
                 android:textStyle="bold" />
 
             <TextView
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
+                android:layout_weight="0.45"
                 android:gravity="center_vertical|start"
                 android:text="@string/home_info_box_battery_level" />
 
@@ -418,8 +421,9 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:gravity="center_vertical|start"
+                android:layout_weight="0.55"
+                android:gravity="center"
+                android:text="@string/unknown_value"
                 android:textStyle="bold" />
 
         </TableRow>
@@ -488,18 +492,18 @@
             android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
             android:autoSizeMaxTextSize="32sp"
-            android:enabled="true"
             android:text="@string/home_start_button"
             android:textStyle="bold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/home_stop_protocol_button"
-            style="@style/button_disabled"
+            style="@style/button_red"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="4dp"
             android:layout_weight="0.5"
             android:autoSizeMaxTextSize="32sp"
+            android:enabled="false"
             android:text="@string/home_stop_button"
             android:textStyle="bold" />
 
