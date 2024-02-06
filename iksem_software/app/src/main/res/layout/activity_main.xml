@@ -5,18 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
-        app:defaultNavHost="true"
+        android:fillViewport="true"
+        android:isScrollContainer="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true" />
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

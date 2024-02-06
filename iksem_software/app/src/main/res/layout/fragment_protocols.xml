@@ -35,7 +35,7 @@
         android:id="@+id/protocols_info_area"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/rounded_box_framed"
+        android:background="@drawable/box_rounded_framed"
         android:padding="0dp"
         android:gravity="center"
         app:layout_constrainedHeight="true"
@@ -284,7 +284,7 @@
             android:text="@string/protocols_map_view"
             android:textAlignment="center"
             android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_protocol_view" />
+            app:thumbIcon="@drawable/ic_switch_protocol_view" />
 
         <com.google.android.material.materialswitch.MaterialSwitch
             style="@style/header_text_2"
@@ -297,7 +297,7 @@
             android:text="@string/protocols_split_both_ways_protocol"
             android:textAlignment="center"
             android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_split_protocol" />
+            app:thumbIcon="@drawable/ic_switch_split_protocol" />
 
     </LinearLayout>
 

@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/settings_operator_hint"
-        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconDrawable="@drawable/ic_input_clear"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0"
         app:startIconContentDescription="@string/settings_operator_hint"
-        app:startIconDrawable="@drawable/ic_name">
+        app:startIconDrawable="@drawable/ic_input_name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/settings_operator"
@@ -50,9 +50,9 @@
         style="@style/input_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:hint="@string/settings_password_hint"
-        app:endIconDrawable="@drawable/button_visibility"
+        app:endIconDrawable="@drawable/ic_input_visibility"
         app:endIconMode="password_toggle"
         app:helperText="@string/settings_password_helper"
         app:layout_constrainedWidth="true"
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@id/settings_operator_title"
         app:layout_constraintWidth_percent="0.8"
         app:startIconContentDescription="@string/settings_password_helper"
-        app:startIconDrawable="@drawable/ic_password">
+        app:startIconDrawable="@drawable/ic_input_password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/settings_password"
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/button_unlock_settings"
-        app:icon="@drawable/ic_unlock"
+        app:icon="@drawable/ic_button_unlock"
         app:layout_constraintBottom_toBottomOf="@id/settings_password_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/settings_password_title" />
@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@drawable/rounded_box_framed"
+        android:background="@drawable/box_rounded_framed"
         android:orientation="horizontal"
         android:paddingHorizontal="12dp"
         app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
@@ -121,12 +121,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_measuring_radius_title"
-        style="@style/input_edit_text_disabled"
+        style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:hint="@string/settings_measuring_wheel_hint"
-        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconDrawable="@drawable/ic_input_clear"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@id/settings_driving_radius_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -136,21 +136,22 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/settings_measuring_radius"
-            style="@style/input_edit_text_disabled"
+            style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textAlignment="textEnd" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_driving_radius_title"
-        style="@style/input_edit_text_disabled"
+        style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:hint="@string/settings_transport_wheel_hint"
-        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconDrawable="@drawable/ic_input_clear"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@id/settings_slip_ratio_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,21 +161,22 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/settings_driving_radius"
-            style="@style/input_edit_text_disabled"
+            style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textAlignment="textEnd" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_slip_ratio_title"
-        style="@style/input_edit_text_disabled"
+        style="@style/input_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:hint="@string/settings_slip_ratio_hint"
-        app:endIconDrawable="@drawable/ic_clear"
+        app:endIconDrawable="@drawable/ic_input_clear"
         app:endIconMode="clear_text"
         app:layout_constraintBottom_toTopOf="@id/settings_buttons_area"
         app:layout_constraintEnd_toEndOf="parent"
@@ -184,10 +186,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/settings_slip_ratio"
-            style="@style/input_edit_text_disabled"
+            style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:textAlignment="textEnd" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,9 +211,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
-            android:enabled="false"
             android:text="@string/settings_calibration_button"
-            app:icon="@drawable/ic_calibration" />
+            app:icon="@drawable/ic_button_calibration" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/settings_save_button"
@@ -219,9 +221,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="0.5"
-            android:enabled="false"
             android:text="@string/save_button"
-            app:icon="@drawable/ic_check" />
+            app:icon="@drawable/ic_button_apply" />
 
     </LinearLayout>
 

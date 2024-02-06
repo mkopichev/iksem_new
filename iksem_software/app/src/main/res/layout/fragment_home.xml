@@ -332,7 +332,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@drawable/rounded_box_framed"
+        android:background="@drawable/box_rounded_framed"
         android:gravity="center"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_switches_area"
@@ -435,7 +435,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@drawable/rounded_box_framed"
+        android:background="@drawable/box_rounded_framed"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constrainedHeight="true"
@@ -455,7 +455,7 @@
             android:text="@string/home_both_ways_protocol"
             android:textAlignment="textStart"
             android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_both_ways" />
+            app:thumbIcon="@drawable/ic_switch_both_ways" />
 
         <com.google.android.material.materialswitch.MaterialSwitch
             style="@style/header_text_2"
@@ -467,7 +467,7 @@
             android:text="@string/home_light_on"
             android:textAlignment="textStart"
             android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_strobe" />
+            app:thumbIcon="@drawable/ic_switch_strobe" />
 
     </LinearLayout>
 

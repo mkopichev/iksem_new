@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.IKSEMSoftware" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/blue_deep</item>
-        <item name="colorPrimaryVariant">@color/blue_dark</item>
+        <item name="colorPrimary">@color/background_text</item>
+        <item name="colorPrimaryVariant">@color/background_text_disabled</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/cyan_grayish</item>
@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/background</item>
         <item name="android:navigationBarColor">@color/background_over</item>
-        <item name="android:textColor">@color/background_text</item>
+        <item name="android:textColor">@drawable/background_text_color</item>
         <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
     </style>
 
@@ -38,30 +38,20 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="input_edit_text" parent="header_text_2">
+    <style name="input_edit_text" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="android:minHeight">50dp</item>
-        <item name="android:textColor">@color/background_text</item>
-        <item name="android:textColorHint">@color/background_text</item>
-        <item name="hintTextColor">@color/background_text</item>
-        <item name="android:backgroundTint">@color/background_over</item>
+        <item name="android:textColor">?android:attr/textColor</item>
+        <item name="android:textColorHint">?android:attr/textColor</item>
+        <item name="hintTextColor">?android:attr/textColor</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:cursorVisible">true</item>
-        <item name="startIconTint">@color/background_text</item>
-        <item name="endIconTint">@color/background_text</item>
+        <item name="startIconTint">?android:attr/textColor</item>
     </style>
 
-    <style name="input_edit_text_disabled" parent="input_edit_text">
-        <item name="android:backgroundTint">@color/background_over_disabled</item>
-        <item name="android:textColorHint">@color/background_text_hint_disabled</item>
-        <item name="android:clickable">false</item>
-        <item name="android:focusable">false</item>
-        <item name="android:cursorVisible">false</item>
-        <item name="startIconTint">@color/background_text_disabled</item>
-        <item name="endIconTint">@color/background_text_disabled</item>
-    </style>
-
-    <style name="button_general" parent="Widget.Material3.Button.Icon">
+    <style name="button_general" parent="Widget.Material3.Button">
         <item name="android:minHeight">50dp</item>
         <item name="android:minWidth">220dp</item>
         <item name="android:autoSizeMaxTextSize">20sp</item>
@@ -69,21 +59,22 @@
         <item name="android:autoSizeTextType">uniform</item>
         <item name="android:gravity">center</item>
         <item name="android:backgroundTint">@drawable/button_general</item>
-        <item name="android:textColor">@drawable/button_text</item>
+        <item name="android:textColor">@drawable/background_text_color</item>
+        <item name="iconTint">?android:attr/textColor</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:enabled">true</item>
+    </style>
+
+    <style name="button_icon" parent="button_general">
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+        <item name="layout_constraintDimensionRatio">1:1</item>
         <item name="iconSize">24dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetRight">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetLeft">0dp</item>
-    </style>
-
-    <style name="button_icon" parent="button_general">
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">-4dp</item>
-        <item name="layout_constraintDimensionRatio">1:1</item>
     </style>
 
     <style name="button_green" parent="button_general">
@@ -122,7 +113,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:backgroundTint">@drawable/button_toggle</item>
-        <item name="android:background">@drawable/rounded_box_unframed</item>
+        <item name="android:background">@drawable/box_rounded_unframed</item>
         <item name="android:textColor">@color/black</item>
     </style>
 

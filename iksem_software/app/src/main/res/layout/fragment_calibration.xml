@@ -506,7 +506,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:background="@drawable/rounded_box_framed"
+        android:background="@drawable/box_rounded_framed"
         android:orientation="horizontal"
         android:paddingHorizontal="12dp"
         app:layout_constrainedHeight="true"
@@ -554,11 +554,11 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_weight="0.5"
             android:hint="@string/calibration_weight"
-            app:endIconDrawable="@drawable/ic_clear"
+            app:endIconDrawable="@drawable/ic_input_clear"
             app:endIconMode="clear_text"
             app:helperText="@string/calibration_input_weight"
             app:startIconContentDescription="@string/calibration_input_weight"
-            app:startIconDrawable="@drawable/ic_weight"
+            app:startIconDrawable="@drawable/ic_input_weight"
             app:suffixText="@string/home_indicators_area_kg">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -578,9 +578,8 @@
             android:layout_marginStart="4dp"
             android:layout_marginBottom="16dp"
             android:layout_weight="0.5"
-            android:enabled="true"
             android:text="@string/calibration_next_step"
-            app:icon="@drawable/ic_next" />
+            app:icon="@drawable/ic_button_next" />
 
     </LinearLayout>
 
@@ -643,15 +642,14 @@
         app:layout_constraintVertical_bias="1">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/calibration_reset_progress"
+            android:id="@+id/calibration_erase_table"
             style="@style/button_general"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
-            android:enabled="true"
             android:text="@string/calibration_reset"
-            app:icon="@drawable/ic_erase" />
+            app:icon="@drawable/ic_button_erase" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/calibration_accept_calibration"
@@ -660,9 +658,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_weight="0.5"
-            android:enabled="false"
             android:text="@string/save_button"
-            app:icon="@drawable/ic_check" />
+            app:icon="@drawable/ic_button_apply" />
 
     </LinearLayout>
 

@@ -49,7 +49,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/bluetooth_refresh"
-        app:icon="@drawable/ic_refresh"
+        app:icon="@drawable/ic_button_refresh"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

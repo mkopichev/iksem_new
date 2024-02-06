@@ -70,6 +70,6 @@
     <string name="calibration_current_value">Cur. val.</string>
     <string name="calibration_new_value">New val.</string>
     <string name="calibration_exit">Exit</string>
-    <string name="settings_mm">mm</string>
+    <string name="settings_mm">" mm"</string>
     <string name="settings_password_hint">Password</string>
 </resources>
