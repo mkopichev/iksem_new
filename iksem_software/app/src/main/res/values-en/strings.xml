@@ -23,7 +23,6 @@
     <string name="button_unlock_settings">Unblock</string>
     <string name="home_start_button">Start</string>
     <string name="home_stop_button">Stop</string>
-    <string name="home_trip_type">Trip type</string>
     <string name="home_light_on">Flashing beacon</string>
     <string name="settings_set_new_password">Set new password</string>
     <string name="home_info_box_iksem_number">IKSEM #:</string>

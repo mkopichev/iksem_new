@@ -26,7 +26,6 @@
     <string name="button_unlock_settings">Разблокировать</string>
     <string name="home_start_button">Старт</string>
     <string name="home_stop_button">Стоп</string>
-    <string name="home_trip_type">Тип заезда</string>
     <string name="home_light_on">Проблесковый маяк</string>
     <string name="settings_set_new_password">Задайте новый пароль</string>
     <string name="home_info_box_iksem_number">ИКСЭМ №:</string>
@@ -92,6 +91,6 @@
     <string name="settings_mm">" мм"</string>
     <string name="settings_percent" translatable="false">" %"</string>
     <string name="settings_password_hint">Пароль</string>
-    <string name="home_trip_type_one_way">Туда</string>
-    <string name="home_trip_type_both_ways">Возврат</string>
+    <string name="home_trip_type_one_way">Только туда</string>
+    <string name="home_trip_type_both_ways">Туда и обратно</string>
 </resources>

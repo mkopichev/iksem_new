@@ -36,8 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/box_rounded_framed"
-        android:padding="0dp"
         android:gravity="center"
+        android:padding="0dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/protocols_list_title"
         app:layout_constraintEnd_toEndOf="parent"
@@ -263,7 +263,7 @@
     <LinearLayout
         android:id="@+id/protocols_switches_area"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -273,31 +273,89 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1">
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            style="@style/header_text_2"
+        <com.google.android.material.button.MaterialButtonToggleGroup
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
-            android:checked="false"
-            android:minHeight="50dp"
-            android:text="@string/protocols_map_view"
-            android:textAlignment="center"
-            android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_switch_protocol_view" />
+            android:contentDescription="@string/protocols_map_view"
+            android:gravity="center"
+            app:checkedButton="@id/protocols_view_plot"
+            app:selectionRequired="true"
+            app:singleSelection="true">
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            style="@style/header_text_2"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/protocols_view_plot"
+                style="@style/button_general_segmented"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                app:icon="@drawable/ic_protocol_plot_view" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/protocols_view_map"
+                style="@style/button_general_segmented"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                app:icon="@drawable/ic_protocol_map_view" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="4dp"
             android:layout_weight="0.5"
-            android:checked="false"
-            android:minHeight="50dp"
-            android:text="@string/protocols_split_both_ways_protocol"
-            android:textAlignment="center"
-            android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_switch_split_protocol" />
+            android:contentDescription="@string/protocols_split_both_ways_protocol"
+            android:gravity="center"
+            app:checkedButton="@id/protocols_split_view"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/protocols_split_view"
+                style="@style/button_general_segmented"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                app:icon="@drawable/ic_protocol_merge" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/protocols_merge_view"
+                style="@style/button_general_segmented"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                app:icon="@drawable/ic_protocol_split" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!--        <com.google.android.material.materialswitch.MaterialSwitch-->
+        <!--            style="@style/header_text_2"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginEnd="4dp"-->
+        <!--            android:layout_weight="0.5"-->
+        <!--            android:checked="false"-->
+        <!--            android:minHeight="50dp"-->
+        <!--            android:text="@string/protocols_map_view"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="@color/background_text"-->
+        <!--            app:thumbIcon="@drawable/ic_switch_protocol_view" />-->
+
+        <!--        <com.google.android.material.materialswitch.MaterialSwitch-->
+        <!--            style="@style/header_text_2"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginStart="4dp"-->
+        <!--            android:layout_weight="0.5"-->
+        <!--            android:checked="false"-->
+        <!--            android:minHeight="50dp"-->
+        <!--            android:text="@string/protocols_split_both_ways_protocol"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textColor="@color/background_text"-->
+        <!--            app:thumbIcon="@drawable/ic_switch_split_protocol" />-->
 
     </LinearLayout>
 
