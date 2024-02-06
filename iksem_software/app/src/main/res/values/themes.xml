@@ -77,6 +77,16 @@
         <item name="android:insetLeft">0dp</item>
     </style>
 
+    <style name="button_general_segmented" parent="Widget.Material3.Button.OutlinedButton.Icon">
+        <item name="android:minHeight">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/background_text_color</item>
+        <item name="iconTint">?android:attr/textColor</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:enabled">true</item>
+    </style>
+
     <style name="button_green" parent="button_general">
         <item name="android:backgroundTint">@drawable/button_green</item>
         <item name="android:focusable">true</item>

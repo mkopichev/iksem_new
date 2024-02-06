@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background">#040404</color>
     <color name="background_over">#1c1c1c</color>
-    <color name="background_over_disabled">#332d2f31</color>
+    <color name="background_over_disabled">#331c1c1c</color>
     <color name="background_text">#bfbfbf</color>
     <color name="background_text_disabled">#33bfbfbf</color>
     <color name="background_text_hint">#aabfbfbf</color>

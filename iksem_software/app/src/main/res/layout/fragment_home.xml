@@ -445,22 +445,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_info_box">
 
-        <com.google.android.material.materialswitch.MaterialSwitch
-            style="@style/header_text_2"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:checked="true"
-            android:minHeight="50dp"
-            android:text="@string/home_both_ways_protocol"
-            android:textAlignment="textStart"
-            android:textColor="@color/background_text"
-            app:thumbIcon="@drawable/ic_switch_both_ways" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/header_text_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:gravity="center|start"
+                android:text="@string/home_trip_type" />
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/button_general_segmented"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/home_trip_type_one_way"
+                    android:textSelectHandleLeft="@drawable/ic_button_apply" />
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/button_general_segmented"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/home_trip_type_both_ways"
+                    android:textSelectHandleLeft="@drawable/ic_button_apply" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        </TableRow>
 
         <com.google.android.material.materialswitch.MaterialSwitch
             style="@style/header_text_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="0.5"
             android:checked="false"
             android:minHeight="50dp"
