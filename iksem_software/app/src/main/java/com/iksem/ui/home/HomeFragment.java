@@ -1,5 +1,6 @@
 package com.iksem.ui.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.button.MaterialButton;
+import com.iksem.R;
 import com.iksem.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -26,6 +30,24 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        final MaterialButton homeOneWayProtocol = binding.homeOneWayProtocol, homeBothWaysProtocol = binding.homeBothWaysProtocol;
+
+        homeOneWayProtocol.addOnCheckedChangeListener((button, isChecked) -> {
+            if (isChecked) {
+                homeOneWayProtocol.setTextColor(getResources().getColor(R.color.background_over, requireActivity().getTheme()));
+            } else {
+                homeOneWayProtocol.setTextColor(getResources().getColor(R.color.background_text, requireActivity().getTheme()));
+            }
+        });
+
+        homeBothWaysProtocol.addOnCheckedChangeListener((button, isChecked) -> {
+            if (isChecked) {
+                homeBothWaysProtocol.setTextColor(getResources().getColor(R.color.background_over, requireActivity().getTheme()));
+            } else {
+                homeBothWaysProtocol.setTextColor(getResources().getColor(R.color.background_text, requireActivity().getTheme()));
+            }
+        });
 
         return root;
     }

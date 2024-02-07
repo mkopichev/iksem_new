@@ -4,13 +4,11 @@ import static com.iksem.R.id.navigation_map;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.button.MaterialButton;
 import com.iksem.ui.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {

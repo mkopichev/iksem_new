@@ -100,6 +100,7 @@
                         android:layout_weight="0.33"
                         android:gravity="center|end"
                         android:text="@string/home_indicators_area_100" />
+
                 </TableRow>
 
             </LinearLayout>
@@ -170,6 +171,7 @@
                         android:layout_weight="0.33"
                         android:gravity="center|end"
                         android:text="@string/home_indicators_area_100" />
+
                 </TableRow>
 
             </LinearLayout>
@@ -241,6 +243,7 @@
                         android:layout_weight="0.33"
                         android:gravity="center|end"
                         android:text="@string/home_indicators_area_150" />
+
                 </TableRow>
 
             </LinearLayout>
@@ -311,6 +314,7 @@
                         android:layout_weight="0.33"
                         android:text="@string/home_indicators_area_100"
                         android:textAlignment="textEnd" />
+
                 </TableRow>
 
             </LinearLayout>
@@ -448,7 +452,7 @@
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:checkedButton="@id/home_one_way_protocol"
+            app:checkedButton="@id/home_both_ways_protocol"
             app:selectionRequired="true"
             app:singleSelection="true">
 
@@ -458,7 +462,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/home_trip_type_one_way" />
+                android:text="@string/home_trip_type_one_way"
+                android:textColor="@color/background_text" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/home_both_ways_protocol"
@@ -466,7 +471,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="@string/home_trip_type_both_ways" />
+                android:text="@string/home_trip_type_both_ways"
+                android:textColor="@color/background_over" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 

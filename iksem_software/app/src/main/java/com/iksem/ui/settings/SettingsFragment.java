@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.button.MaterialButton;
 import com.iksem.databinding.FragmentSettingsBinding;
 
 public class SettingsFragment extends Fragment {
@@ -28,6 +29,14 @@ public class SettingsFragment extends Fragment {
 
         final TextView textView = binding.textSettings;
         settingsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        MaterialButton calibration = binding.settingsCalibrationButton;
+
+        calibration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
         return root;
     }
