@@ -13,6 +13,9 @@ import com.iksem.ui.settings.SettingsFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
+    public static final int PROTOCOLS_FRAGMENT = 0, MAP_FRAGMENT = 1, HOME_FRAGMENT = 2,
+            BLUETOOTH_FRAGMENT = 3, SETTINGS_FRAGMENT = 4;
+
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -22,13 +25,13 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
 
         switch (position) {
-            case 0:
+            case PROTOCOLS_FRAGMENT:
                 return new ProtocolsFragment();
-            case 1:
+            case MAP_FRAGMENT:
                 return new MapFragment();
-            case 3:
+            case BLUETOOTH_FRAGMENT:
                 return new BluetoothFragment();
-            case 4:
+            case SETTINGS_FRAGMENT:
                 return new SettingsFragment();
             default:
                 return new HomeFragment();

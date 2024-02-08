@@ -73,7 +73,7 @@
     <string name="calibration_friction_coef">КCц:</string>
     <string name="calibration_input_weight">Введите вес</string>
     <string name="protocols_list_title">Список протоколов</string>
-    <string name="calibration_table_title">Калибровочная таблица</string>
+    <string name="calibration_table_title">Заполните таблицу калибровки</string>
     <string name="calibration_force">Сила</string>
     <string name="calibration_current_value">Тек. знач.</string>
     <string name="calibration_new_value">Нов. знач.</string>

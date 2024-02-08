@@ -13,6 +13,11 @@
         android:theme="@style/Theme.IKSEMSoftware"
         tools:targetApi="31">
         <activity
+            android:name=".CalibrationActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
@@ -20,15 +25,8 @@
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".CalibrationActivity"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
     </application>
-
 </manifest>

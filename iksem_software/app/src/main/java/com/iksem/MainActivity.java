@@ -1,27 +1,22 @@
 package com.iksem;
 
-import static com.iksem.R.id.container_main;
 import static com.iksem.R.id.navigation_map;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.iksem.ui.GetSystemBarsHeight;
 import com.iksem.ui.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-    ConstraintLayout constraintLayout;
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
     BottomNavigationView bottomNavigationView;
-    private View decorView;
+    boolean calibrationReturnFlag = false;
 
     @SuppressLint({"NonConstantResourceId", "MissingInflatedId"})
     @Override
@@ -31,34 +26,36 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(hideNavigationBar());
-
-        constraintLayout = findViewById(container_main);
-        constraintLayout.setPadding(0, GetSystemBarsHeight.getStatusBarHeight(MainActivity.this) , 0, 0);
+        this.getWindow().setStatusBarColor(getColor(R.color.background));
+        this.getWindow().setNavigationBarColor(getColor(R.color.background_over));
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) bottomNavigationView.getLayoutParams();
-        params.setMargins(0, 0, 0, -GetSystemBarsHeight.getNavigationBarHeight(MainActivity.this));
-        bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         viewPager2 = findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(viewPagerAdapter);
-        viewPager2.setCurrentItem(2);
+
+        if (!calibrationReturnFlag) {
+            bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
+            viewPager2.setCurrentItem(ViewPagerAdapter.HOME_FRAGMENT);
+        } else {
+            bottomNavigationView.getMenu().findItem(R.id.navigation_settings).setChecked(true);
+            viewPager2.setCurrentItem(ViewPagerAdapter.SETTINGS_FRAGMENT);
+            calibrationReturnFlag = false;
+        }
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.navigation_protocols) {
-                viewPager2.setCurrentItem(0);
+                viewPager2.setCurrentItem(ViewPagerAdapter.PROTOCOLS_FRAGMENT);
             } else if (id == navigation_map) {
-                viewPager2.setCurrentItem(1);
+                viewPager2.setCurrentItem(ViewPagerAdapter.MAP_FRAGMENT);
             } else if (id == R.id.navigation_home) {
-                viewPager2.setCurrentItem(2);
+                viewPager2.setCurrentItem(ViewPagerAdapter.HOME_FRAGMENT);
             } else if (id == R.id.navigation_bluetooth) {
-                viewPager2.setCurrentItem(3);
+                viewPager2.setCurrentItem(ViewPagerAdapter.BLUETOOTH_FRAGMENT);
             } else if (id == R.id.navigation_settings) {
-                viewPager2.setCurrentItem(4);
+                viewPager2.setCurrentItem(ViewPagerAdapter.SETTINGS_FRAGMENT);
             }
             return false;
         });
@@ -68,19 +65,19 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
 
                 switch (position) {
-                    case 0:
+                    case ViewPagerAdapter.PROTOCOLS_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_protocols).setChecked(true);
                         break;
-                    case 1:
+                    case ViewPagerAdapter.MAP_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(navigation_map).setChecked(true);
                         break;
-                    case 2:
+                    case ViewPagerAdapter.HOME_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
                         break;
-                    case 3:
+                    case ViewPagerAdapter.BLUETOOTH_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_bluetooth).setChecked(true);
                         break;
-                    case 4:
+                    case ViewPagerAdapter.SETTINGS_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_settings).setChecked(true);
                         break;
                 }
@@ -90,17 +87,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
+    public void onStart() {
 
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus)
-            decorView.setSystemUiVisibility(hideNavigationBar());
-    }
+        super.onStart();
 
-    private int hideNavigationBar() {
-
-        return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        calibrationReturnFlag = true;
     }
 }

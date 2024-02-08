@@ -5,6 +5,7 @@
     android:id="@+id/container_calibration"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:keepScreenOn="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/background_over"
+            android:textAlignment="center"
             app:navigationIcon="@drawable/ic_bar_close"
             app:navigationIconTint="@color/background_text"
             app:title="@string/title_calibration"

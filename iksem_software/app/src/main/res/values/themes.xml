@@ -9,13 +9,10 @@
         <item name="colorSecondary">@color/cyan_grayish</item>
         <item name="colorSecondaryVariant">@color/cyan_dark</item>
         <item name="colorOnSecondary">@color/red_grayish_dark</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/background</item>
         <item name="android:textColor">@drawable/background_text_color</item>
         <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
-        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">

@@ -21,19 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/calibration_table_title"
-        style="@style/header_text_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/calibration_table_title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0" />
-
     <LinearLayout
         android:id="@+id/calibration_table_area"
         android:layout_width="match_parent"
@@ -42,11 +29,12 @@
         android:baselineAligned="false"
         android:orientation="horizontal"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@id/calibration_info_area"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calibration_table_title">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
 
         <TableLayout
             android:layout_width="0dp"
@@ -566,7 +554,8 @@
                 style="@style/input_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

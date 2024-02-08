@@ -64,7 +64,7 @@
     <string name="calibration_friction_coef">CFr:</string>
     <string name="calibration_input_weight">Input weight</string>
     <string name="protocols_list_title">Protocols list</string>
-    <string name="calibration_table_title">Calibration table</string>
+    <string name="calibration_table_title">Complete calibration table</string>
     <string name="calibration_force">Force</string>
     <string name="calibration_current_value">Cur. val.</string>
     <string name="calibration_new_value">New val.</string>
