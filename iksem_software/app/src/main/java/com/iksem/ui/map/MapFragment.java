@@ -18,6 +18,7 @@ public class MapFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         MapViewModel mapViewModel =
                 new ViewModelProvider(this).get(MapViewModel.class);
 
@@ -31,6 +32,7 @@ public class MapFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         binding = null;
     }

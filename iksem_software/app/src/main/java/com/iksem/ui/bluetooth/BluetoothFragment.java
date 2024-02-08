@@ -19,6 +19,7 @@ public class BluetoothFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         BluetoothViewModel bluetoothViewModel =
                 new ViewModelProvider(this).get(BluetoothViewModel.class);
 
@@ -32,6 +33,7 @@ public class BluetoothFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         binding = null;
     }

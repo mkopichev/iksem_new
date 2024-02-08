@@ -9,6 +9,7 @@ public class ProtocolsViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
     public ProtocolsViewModel() {
+
         mText = new MutableLiveData<>();
         mText.setValue("This is protocols fragment");
     }

@@ -22,7 +22,6 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
         SettingsViewModel settingsViewModel =
                 new ViewModelProvider(this).get(SettingsViewModel.class);
 
@@ -41,6 +40,7 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         binding = null;
     }

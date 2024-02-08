@@ -9,6 +9,7 @@ public class CalibrationViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
     public CalibrationViewModel() {
+
         mText = new MutableLiveData<>();
         mText.setValue("This is calibration fragment");
     }

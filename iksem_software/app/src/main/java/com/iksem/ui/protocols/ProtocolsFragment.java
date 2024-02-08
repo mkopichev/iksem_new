@@ -22,6 +22,7 @@ public class ProtocolsFragment extends Fragment {
 
     @SuppressLint("ResourceAsColor")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         ProtocolsViewModel protocolsViewModel = new ViewModelProvider(this).get(ProtocolsViewModel.class);
 
         binding = FragmentProtocolsBinding.inflate(inflater, container, false);
@@ -70,6 +71,7 @@ public class ProtocolsFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         binding = null;
     }
