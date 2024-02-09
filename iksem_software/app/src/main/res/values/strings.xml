@@ -96,4 +96,10 @@
     <string name="settings_input_radius_helper">Введите радиус, мм</string>
     <string name="settings_input_slip_ratio_helper">Введите значние, %</string>
     <string name="settings_operator_helper">Введите имя</string>
+    <string name="home_trip_type_one_way_toast">Протокол в одну сторону</string>
+    <string name="home_trip_type_both_ways_toast">Протокол в обе стороны</string>
+    <string name="protocols_map_view_toast">Протокол на карте</string>
+    <string name="protocols_split_both_ways_protocol_toast">Двухсторонние протоколы раздельно</string>
+    <string name="protocols_merge_both_ways_protocol_toast">Двухсторонние протоколы как один</string>
+    <string name="protocols_plot_view_toast">Протокол в виде графика</string>
 </resources>

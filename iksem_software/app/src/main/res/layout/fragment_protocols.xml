@@ -325,12 +325,12 @@
             android:layout_weight="0.5"
             android:contentDescription="@string/protocols_split_both_ways_protocol"
             android:gravity="bottom"
-            app:checkedButton="@id/protocols_split_view"
+            app:checkedButton="@id/protocols_merge_view"
             app:selectionRequired="true"
             app:singleSelection="true">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/protocols_split_view"
+                android:id="@+id/protocols_merge_view"
                 style="@style/button_general_segmented"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -339,7 +339,7 @@
                 app:iconTint="@color/background_over" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/protocols_merge_view"
+                android:id="@+id/protocols_split_view"
                 style="@style/button_general_segmented"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
