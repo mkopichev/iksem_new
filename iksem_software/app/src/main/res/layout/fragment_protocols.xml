@@ -35,7 +35,7 @@
         android:id="@+id/protocols_info_area"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/box_all_side_framed"
+        android:background="@drawable/box_rounded_framed"
         android:gravity="center"
         android:padding="0dp"
         app:layout_constrainedHeight="true"
@@ -88,7 +88,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.45"
-                android:background="@drawable/box_br_side_framed"
+                android:background="@drawable/box_b_side_framed"
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/activity_horizontal_margin"
                 android:text="@string/unknown_value" />
@@ -137,7 +137,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.45"
-                android:background="@drawable/box_br_side_framed"
+                android:background="@drawable/box_b_side_framed"
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/activity_horizontal_margin"
                 android:text="@string/unknown_value" />
@@ -187,7 +187,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.45"
-                android:background="@drawable/box_br_side_framed"
+                android:background="@drawable/box_b_side_framed"
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/activity_horizontal_margin"
                 android:text="@string/unknown_value" />
@@ -204,7 +204,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.55"
-                android:background="@drawable/box_b_side_framed"
                 android:gravity="center_vertical|end"
                 android:letterSpacing="-0.05"
                 android:paddingHorizontal="2dp"
@@ -216,7 +215,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.45"
-                android:background="@drawable/box_br_side_framed"
+                android:background="@drawable/box_r_side_framed"
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/activity_horizontal_margin"
                 android:text="@string/unknown_value" />
@@ -226,7 +225,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.55"
-                android:background="@drawable/box_b_side_framed"
                 android:gravity="center_vertical|end"
                 android:letterSpacing="-0.05"
                 android:paddingHorizontal="2dp"
@@ -238,7 +236,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.45"
-                android:background="@drawable/box_br_side_framed"
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/activity_horizontal_margin"
                 android:text="@string/unknown_value" />
