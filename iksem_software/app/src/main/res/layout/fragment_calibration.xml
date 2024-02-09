@@ -631,24 +631,24 @@
         app:layout_constraintVertical_bias="1">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/calibration_erase_table"
-            style="@style/button_general"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="0.5"
-            android:text="@string/calibration_reset"
-            app:icon="@drawable/ic_button_erase" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/calibration_accept_calibration"
             style="@style/button_green"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
             android:text="@string/save_button"
             app:icon="@drawable/ic_button_apply" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/calibration_erase_table"
+            style="@style/button_general"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="0.5"
+            android:text="@string/calibration_reset"
+            app:icon="@drawable/ic_button_erase" />
 
     </LinearLayout>
 

@@ -42,7 +42,7 @@
             style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
+            android:inputType="textCapWords" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -209,24 +209,24 @@
         app:layout_constraintVertical_bias="1">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/settings_calibration_button"
-            style="@style/button_general"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="0.5"
-            android:text="@string/settings_calibration_button"
-            app:icon="@drawable/ic_button_calibration" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/settings_save_button"
             style="@style/button_green"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
             android:text="@string/save_button"
             app:icon="@drawable/ic_button_apply" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings_calibration_button"
+            style="@style/button_general"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="0.5"
+            android:text="@string/settings_calibration_button"
+            app:icon="@drawable/ic_button_calibration" />
 
     </LinearLayout>
 

@@ -10,6 +10,7 @@
         <item name="colorSecondaryVariant">@color/cyan_dark</item>
         <item name="colorOnSecondary">@color/red_grayish_dark</item>
         <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:textColor">@drawable/background_text_color</item>
         <item name="materialSwitchStyle">@style/Widget.App.Switch</item>

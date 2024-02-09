@@ -12,8 +12,6 @@ import com.iksem.ui.calibration.CalibrationFragment;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 
-import java.util.Objects;
-
 public class CalibrationActivity extends AppCompatActivity {
 
     MaterialToolbar materialToolbar;
@@ -32,8 +30,7 @@ public class CalibrationActivity extends AppCompatActivity {
         materialToolbar = findViewById(R.id.calibration_toolbar);
         setSupportActionBar(materialToolbar);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        materialToolbar.setNavigationOnClickListener(view -> finish());
 
         getSupportFragmentManager()
                 .beginTransaction()

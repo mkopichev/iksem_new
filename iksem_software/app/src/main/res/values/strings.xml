@@ -32,7 +32,7 @@
     <string name="home_info_box_date">Дата:</string>
     <string name="home_info_box_time">Время:</string>
     <string name="home_info_box_operator">Оператор:</string>
-    <string name="home_info_box_distance">Пробег, [м]:</string>
+    <string name="home_info_box_distance">Заезд, [м]:</string>
     <string name="unknown_value" translatable="false">- - -</string>
     <string name="home_indicators_area_M">Нагрузка</string>
     <string name="home_indicators_area_I">Ток</string>
@@ -47,10 +47,10 @@
     <string name="home_indicators_area_100" translatable="false">100</string>
     <string name="home_indicators_area_150" translatable="false">150</string>
     <string name="home_info_box_battery_level">Заряд, [%]:</string>
-    <string name="protocols_info_date">Дата:</string>
+    <string name="protocols_info_date">Дата записи:</string>
     <string name="protocols_info_iksem_number">ИКСЭМ №:</string>
     <string name="protocols_info_time">Длительность, [c]:</string>
-    <string name="protocols_info_average_friction">КСц:</string>
+    <string name="protocols_info_average_friction">Коэф. сцеп.:</string>
     <string name="protocols_info_average_velocity">Скорость, [км/ч]:</string>
     <string name="protocols_info_slip_ratio">Скольжение, [%]:</string>
     <string name="protocols_info_distance">Расстояние, [м]:</string>
@@ -94,7 +94,7 @@
     <string name="home_trip_type_one_way">Только туда</string>
     <string name="home_trip_type_both_ways">Туда и обратно</string>
     <string name="settings_input_radius_helper">Введите радиус, мм</string>
-    <string name="settings_input_slip_ratio_helper">Введите значние, %</string>
+    <string name="settings_input_slip_ratio_helper">Введите значение, %</string>
     <string name="settings_operator_helper">Введите имя</string>
     <string name="home_trip_type_one_way_toast">Протокол в одну сторону</string>
     <string name="home_trip_type_both_ways_toast">Протокол в обе стороны</string>

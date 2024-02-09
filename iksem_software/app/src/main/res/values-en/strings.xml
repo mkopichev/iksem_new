@@ -29,7 +29,7 @@
     <string name="home_info_box_date">"Date: "</string>
     <string name="home_info_box_time">"Time: "</string>
     <string name="home_info_box_operator">"Operator: "</string>
-    <string name="home_info_box_distance">"Run, [m]: "</string>
+    <string name="home_info_box_distance">"Trip, [m]: "</string>
     <string name="home_indicators_area_M">Load</string>
     <string name="home_indicators_area_I">Current</string>
     <string name="home_indicators_area_Vmw">MW velocity</string>
@@ -38,7 +38,7 @@
     <string name="home_indicators_area_A">A</string>
     <string name="home_indicators_area_kg">kg</string>
     <string name="home_info_box_battery_level">Battery, [%]:</string>
-    <string name="protocols_info_date">Date:</string>
+    <string name="protocols_info_date">Record date:</string>
     <string name="protocols_info_iksem_number">IKSEM #:</string>
     <string name="protocols_info_time">Duration, [s]:</string>
     <string name="protocols_info_average_friction">Friction coef.:</string>
