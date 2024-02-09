@@ -24,7 +24,7 @@
     <string name="home_start_button">Start</string>
     <string name="home_stop_button">Stop</string>
     <string name="home_light_on">Flashing beacon</string>
-    <string name="settings_set_new_password">Set new password</string>
+    <string name="settings_set_new_password_helper">Set new password</string>
     <string name="home_info_box_iksem_number">IKSEM #:</string>
     <string name="home_info_box_date">"Date: "</string>
     <string name="home_info_box_time">"Time: "</string>
@@ -50,7 +50,7 @@
     <string name="protocols_split_both_ways_protocol">Split rides</string>
     <string name="calibration_reset">Reset</string>
     <string name="calibration_next_step">Next</string>
-    <string name="calibration_load_10_kg">Load 10 kg and press \"Next\" button</string>
+    <string name="calibration_load_10_kg">Fill in the calibration table. Load 10 kg and press \"Next\" button</string>
     <string name="calibration_enter_vertical_load">Enter vertical load to the \"Weight\" field and press \"Next\" button</string>
     <string name="calibration_load_20_kg">Load 20 kg and press \"Next\" button</string>
     <string name="calibration_load_30_kg">Load 30 kg and press \"Next\" button</string>
@@ -58,7 +58,7 @@
     <string name="calibration_unload_30_kg">Unload down to 30 kg and press \"Next\"</string>
     <string name="calibration_unload_20_kg">Unload down to 20 kg and press \"Next\"</string>
     <string name="calibration_unload_10_kg">Unload down to 10 kg and press \"Next\"</string>
-    <string name="calibration_finished_accept_or_decline">Calibration finished - either accept or reset results</string>
+    <string name="calibration_finished_accept_or_decline">Calibration finished - either apply or reset results</string>
     <string name="calibration_moment">Moment:</string>
     <string name="calibration_weight">Weight</string>
     <string name="calibration_friction_coef">CFr:</string>
@@ -73,4 +73,7 @@
     <string name="settings_password_hint">Password</string>
     <string name="home_trip_type_one_way">One way</string>
     <string name="home_trip_type_both_ways">Return</string>
+    <string name="settings_input_radius_helper">Input radius, mm</string>
+    <string name="settings_input_slip_ratio_helper">Input value, %</string>
+    <string name="settings_operator_helper">Input name</string>
 </resources>

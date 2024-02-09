@@ -4,6 +4,7 @@ import static com.iksem.R.id.navigation_map;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
@@ -11,12 +12,13 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.iksem.ui.ViewPagerAdapter;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+
 public class MainActivity extends AppCompatActivity {
 
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
     BottomNavigationView bottomNavigationView;
-    boolean calibrationReturnFlag = false;
 
     @SuppressLint({"NonConstantResourceId", "MissingInflatedId"})
     @Override
@@ -24,25 +26,19 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-
         this.getWindow().setStatusBarColor(getColor(R.color.background));
         this.getWindow().setNavigationBarColor(getColor(R.color.background_over));
 
+        setContentView(R.layout.activity_main);
+
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
+
+        viewPagerAdapter = new ViewPagerAdapter(this);
 
         viewPager2 = findViewById(R.id.viewPager);
-        viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager2.setAdapter(viewPagerAdapter);
-
-        if (!calibrationReturnFlag) {
-            bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
-            viewPager2.setCurrentItem(ViewPagerAdapter.HOME_FRAGMENT);
-        } else {
-            bottomNavigationView.getMenu().findItem(R.id.navigation_settings).setChecked(true);
-            viewPager2.setCurrentItem(ViewPagerAdapter.SETTINGS_FRAGMENT);
-            calibrationReturnFlag = false;
-        }
+        viewPager2.setCurrentItem(ViewPagerAdapter.HOME_FRAGMENT);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -84,13 +80,13 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageSelected(position);
             }
         });
-    }
 
-    @Override
-    public void onStart() {
+        KeyboardVisibilityEvent.setEventListener(this, isOpen -> {
 
-        super.onStart();
-
-        calibrationReturnFlag = true;
+            if (isOpen)
+                bottomNavigationView.setVisibility(View.GONE);
+            else
+                bottomNavigationView.setVisibility(View.VISIBLE);
+        });
     }
 }

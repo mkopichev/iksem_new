@@ -2,12 +2,15 @@ package com.iksem;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.iksem.ui.calibration.CalibrationFragment;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 
 import java.util.Objects;
 
@@ -37,5 +40,13 @@ public class CalibrationActivity extends AppCompatActivity {
                 .setReorderingAllowed(true)
                 .add(R.id.calibration_fragment_container, CalibrationFragment.class, null)
                 .commit();
+
+        KeyboardVisibilityEvent.setEventListener(this, isOpen -> {
+
+            if (isOpen)
+                materialToolbar.setVisibility(View.GONE);
+            else
+                materialToolbar.setVisibility(View.VISIBLE);
+        });
     }
 }

@@ -1,13 +1,15 @@
 package com.iksem.ui.calibration;
 
+import static net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -28,6 +30,16 @@ public class CalibrationFragment extends Fragment {
 
         final TextView textView = binding.textCalibration;
         calibrationViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        LinearLayout calibrationButtonsArea = binding.calibrationButtonsArea;
+
+        setEventListener(requireActivity(), isOpen -> {
+
+            if (isOpen)
+                calibrationButtonsArea.setVisibility(View.GONE);
+            else
+                calibrationButtonsArea.setVisibility(View.VISIBLE);
+        });
 
         return root;
     }

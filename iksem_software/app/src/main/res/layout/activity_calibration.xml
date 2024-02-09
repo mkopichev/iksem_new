@@ -19,20 +19,28 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/background_over"
             android:textAlignment="center"
-            app:navigationIcon="@drawable/ic_bar_close"
+            app:navigationIcon="@drawable/ic_appbar_back"
             app:navigationIconTint="@color/background_text"
             app:title="@string/title_calibration"
             app:titleTextColor="@color/background_text" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/calibration_fragment_container"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:layout="@layout/fragment_calibration" />
+        android:fillViewport="true"
+        android:isScrollContainer="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/calibration_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_calibration" />
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

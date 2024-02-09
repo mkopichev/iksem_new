@@ -1,10 +1,13 @@
 package com.iksem.ui.settings;
 
+import static net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +36,17 @@ public class SettingsFragment extends Fragment {
 
         MaterialButton calibration = binding.settingsCalibrationButton;
 
+        LinearLayout settingsButtonsArea = binding.settingsButtonsArea;
+
         calibration.setOnClickListener(v -> startActivity(new Intent(getActivity(), CalibrationActivity.class)));
+
+        setEventListener(requireActivity(), isOpen -> {
+
+            if (isOpen)
+                settingsButtonsArea.setVisibility(View.GONE);
+            else
+                settingsButtonsArea.setVisibility(View.VISIBLE);
+        });
 
         return root;
     }

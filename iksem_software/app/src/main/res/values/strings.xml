@@ -27,7 +27,7 @@
     <string name="home_start_button">Старт</string>
     <string name="home_stop_button">Стоп</string>
     <string name="home_light_on">Проблесковый маяк</string>
-    <string name="settings_set_new_password">Задайте новый пароль</string>
+    <string name="settings_set_new_password_helper">Задайте новый пароль</string>
     <string name="home_info_box_iksem_number">ИКСЭМ №:</string>
     <string name="home_info_box_date">Дата:</string>
     <string name="home_info_box_time">Время:</string>
@@ -59,7 +59,7 @@
     <string name="protocols_split_both_ways_protocol">Разделить заезды</string>
     <string name="calibration_reset">Сбросить</string>
     <string name="calibration_next_step">Далее</string>
-    <string name="calibration_load_10_kg">Нагрузите 10 кг и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_load_10_kg">Заполните таблицу калибровки. Нагрузите 10 кг и нажмите кнопку \"Далее\"</string>
     <string name="calibration_enter_vertical_load">Введите значение вертикальной нагрузки в поле \"Вес\" и нажмите кнопку \"Далее\"</string>
     <string name="calibration_load_20_kg">Нагрузите 20 кг и нажмите кнопку \"Далее\"</string>
     <string name="calibration_load_30_kg">Нагрузите 30 кг и нажмите кнопку \"Далее\"</string>
@@ -93,4 +93,7 @@
     <string name="settings_password_hint">Пароль</string>
     <string name="home_trip_type_one_way">Только туда</string>
     <string name="home_trip_type_both_ways">Туда и обратно</string>
+    <string name="settings_input_radius_helper">Введите радиус, мм</string>
+    <string name="settings_input_slip_ratio_helper">Введите значние, %</string>
+    <string name="settings_operator_helper">Введите имя</string>
 </resources>
