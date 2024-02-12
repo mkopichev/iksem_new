@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
+    <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/protocols_plot_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -249,14 +249,13 @@
         android:id="@+id/protocols_list_title"
         style="@style/header_text_1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:gravity="center"
         android:text="@string/protocols_list_title"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/protocols_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/protocols_info_area" />
 

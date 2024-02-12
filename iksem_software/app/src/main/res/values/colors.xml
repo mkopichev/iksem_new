@@ -5,8 +5,8 @@
     <color name="background">#040404</color>
     <color name="background_over">#1c1c1c</color>
     <color name="background_over_disabled">#331c1c1c</color>
-    <color name="background_text">#bfbfbf</color>
-    <color name="background_text_disabled">#33bfbfbf</color>
+    <color name="background_text">@android:color/white</color>
+    <color name="background_text_disabled">#33ffffff</color>
     <color name="background_text_hint">#aabfbfbf</color>
     <color name="background_text_hint_disabled">#33bfbfbf</color>
     <color name="green_pale">#a5ffc9</color>

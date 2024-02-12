@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/background_text</item>
         <item name="colorPrimaryVariant">@color/background_text_disabled</item>
