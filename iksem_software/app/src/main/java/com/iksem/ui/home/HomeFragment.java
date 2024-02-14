@@ -1,6 +1,7 @@
 package com.iksem.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.compose.foundation.layout.LayoutWeightElement;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -38,6 +40,8 @@ public class HomeFragment extends Fragment {
         homeOneWayProtocol.addOnCheckedChangeListener((button, isChecked) -> {
             if (isChecked) {
                 homeOneWayProtocol.setTextColor(getResources().getColor(R.color.background_over, requireActivity().getTheme()));
+                homeOneWayProtocol.setIcon(getResources().getDrawable(R.drawable.ic_button_apply_no_frame, requireActivity().getTheme()));
+                homeOneWayProtocol.setLayoutParams(new Layou);
                 Toast.makeText(requireActivity(), R.string.home_trip_type_one_way_toast, Toast.LENGTH_SHORT).show();
             } else {
                 homeOneWayProtocol.setTextColor(getResources().getColor(R.color.background_text, requireActivity().getTheme()));
@@ -47,6 +51,7 @@ public class HomeFragment extends Fragment {
         homeBothWaysProtocol.addOnCheckedChangeListener((button, isChecked) -> {
             if (isChecked) {
                 homeBothWaysProtocol.setTextColor(getResources().getColor(R.color.background_over, requireActivity().getTheme()));
+                homeBothWaysProtocol.setIcon(getResources().getDrawable(R.drawable.ic_button_apply_no_frame, requireActivity().getTheme()));
                 Toast.makeText(requireActivity(), R.string.home_trip_type_both_ways_toast, Toast.LENGTH_SHORT).show();
             } else {
                 homeBothWaysProtocol.setTextColor(getResources().getColor(R.color.background_text, requireActivity().getTheme()));

@@ -461,7 +461,7 @@
                 style="@style/button_general_segmented"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.4"
                 android:text="@string/home_trip_type_one_way"
                 android:textColor="@color/background_text" />
 
@@ -470,17 +470,17 @@
                 style="@style/button_general_segmented"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
+                android:layout_weight="0.6"
                 android:text="@string/home_trip_type_both_ways"
+                app:icon="@drawable/ic_button_apply_no_frame"
                 android:textColor="@color/background_over" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <com.google.android.material.materialswitch.MaterialSwitch
             style="@style/header_text_2"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:checked="false"
             android:minHeight="50dp"
             android:text="@string/home_light_on"
