@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/background_text</item>
         <item name="colorPrimaryVariant">@color/background_text_disabled</item>
@@ -42,7 +42,6 @@
         <item name="android:textColorHint">?android:attr/textColor</item>
         <item name="hintTextColor">?android:attr/textColor</item>
         <item name="android:textSize">16sp</item>
-        <item name="android:textAlignment">center</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:cursorVisible">true</item>

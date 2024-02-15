@@ -266,14 +266,14 @@
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@id/protocols_switches_area"
+        app:layout_constraintBottom_toTopOf="@id/protocols_control_area"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/protocols_list_title" />
 
     <LinearLayout
-        android:id="@+id/protocols_switches_area"
+        android:id="@+id/protocols_control_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -284,71 +284,91 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1">
 
-        <com.google.android.material.button.MaterialButtonToggleGroup
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/protocols_view_mode_button"
+            style="@style/button_general"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
             android:layout_weight="0.5"
-            android:contentDescription="@string/protocols_map_view"
-            android:gravity="bottom"
-            app:checkedButton="@id/protocols_view_plot"
-            app:selectionRequired="true"
-            app:singleSelection="true">
+            android:text="@string/protocols_view_mode"
+            app:icon="@drawable/ic_button_protocols_view" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/protocols_view_plot"
-                style="@style/button_general_segmented"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:contentDescription="@string/protocols_plot_view_toast"
-                app:icon="@drawable/ic_protocol_plot_view"
-                app:iconTint="@color/background_over" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/protocols_view_map"
-                style="@style/button_general_segmented"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:contentDescription="@string/protocols_map_view_toast"
-                app:icon="@drawable/ic_protocol_map_view"
-                app:iconTint="@color/background_text" />
-
-        </com.google.android.material.button.MaterialButtonToggleGroup>
-
-        <com.google.android.material.button.MaterialButtonToggleGroup
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/protocols_search_button"
+            style="@style/button_general"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="4dp"
             android:layout_weight="0.5"
-            android:contentDescription="@string/protocols_split_both_ways_protocol"
-            android:gravity="bottom"
-            app:checkedButton="@id/protocols_merge_view"
-            app:selectionRequired="true"
-            app:singleSelection="true">
+            android:text="@string/protocols_search_button"
+            app:icon="@drawable/ic_button_search" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/protocols_merge_view"
-                style="@style/button_general_segmented"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:contentDescription="@string/protocols_merge_both_ways_protocol_toast"
-                app:icon="@drawable/ic_protocol_merge"
-                app:iconTint="@color/background_over" />
+        <!--        <com.google.android.material.button.MaterialButtonToggleGroup-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginEnd="4dp"-->
+        <!--            android:layout_weight="0.5"-->
+        <!--            android:contentDescription="@string/protocols_view_mode"-->
+        <!--            android:gravity="bottom"-->
+        <!--            app:checkedButton="@id/protocols_view_plot"-->
+        <!--            app:selectionRequired="true"-->
+        <!--            app:singleSelection="true">-->
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/protocols_split_view"
-                style="@style/button_general_segmented"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:contentDescription="@string/protocols_split_both_ways_protocol_toast"
-                app:icon="@drawable/ic_protocol_split"
-                app:iconTint="@color/background_text" />
+        <!--            <com.google.android.material.button.MaterialButton-->
+        <!--                android:id="@+id/protocols_view_plot"-->
+        <!--                style="@style/button_general_segmented"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="0.5"-->
+        <!--                android:contentDescription="@string/protocols_plot_view_toast"-->
+        <!--                app:icon="@drawable/ic_protocol_plot_view"-->
+        <!--                app:iconTint="@color/background_over" />-->
 
-        </com.google.android.material.button.MaterialButtonToggleGroup>
+        <!--            <com.google.android.material.button.MaterialButton-->
+        <!--                android:id="@+id/protocols_view_map"-->
+        <!--                style="@style/button_general_segmented"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="0.5"-->
+        <!--                android:contentDescription="@string/protocols_map_view_toast"-->
+        <!--                app:icon="@drawable/ic_protocol_map_view"-->
+        <!--                app:iconTint="@color/background_text" />-->
+
+        <!--        </com.google.android.material.button.MaterialButtonToggleGroup>-->
+
+        <!--        <com.google.android.material.button.MaterialButtonToggleGroup-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginStart="4dp"-->
+        <!--            android:layout_weight="0.5"-->
+        <!--            android:contentDescription="@string/protocols_split_both_ways_protocol"-->
+        <!--            android:gravity="bottom"-->
+        <!--            app:checkedButton="@id/protocols_merge_view"-->
+        <!--            app:selectionRequired="true"-->
+        <!--            app:singleSelection="true">-->
+
+        <!--            <com.google.android.material.button.MaterialButton-->
+        <!--                android:id="@+id/protocols_merge_view"-->
+        <!--                style="@style/button_general_segmented"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="0.5"-->
+        <!--                android:contentDescription="@string/protocols_merge_both_ways_protocol_toast"-->
+        <!--                app:icon="@drawable/ic_protocol_merge"-->
+        <!--                app:iconTint="@color/background_over" />-->
+
+        <!--            <com.google.android.material.button.MaterialButton-->
+        <!--                android:id="@+id/protocols_split_view"-->
+        <!--                style="@style/button_general_segmented"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_weight="0.5"-->
+        <!--                android:contentDescription="@string/protocols_split_both_ways_protocol_toast"-->
+        <!--                app:icon="@drawable/ic_protocol_split"-->
+        <!--                app:iconTint="@color/background_text" />-->
+
+        <!--        </com.google.android.material.button.MaterialButtonToggleGroup>-->
 
     </LinearLayout>
 

@@ -461,19 +461,20 @@
                 style="@style/button_general_segmented"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.4"
+                android:layout_weight="0.5"
                 android:text="@string/home_trip_type_one_way"
-                android:textColor="@color/background_text" />
+                android:textColor="@color/background_text_disabled"
+                tools:ignore="TextContrastCheck" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/home_both_ways_protocol"
                 style="@style/button_general_segmented"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.6"
+                android:layout_weight="0.5"
                 android:text="@string/home_trip_type_both_ways"
-                app:icon="@drawable/ic_button_apply_no_frame"
-                android:textColor="@color/background_over" />
+                android:textColor="@color/background_over"
+                app:icon="@drawable/ic_button_apply_no_frame" />
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
 

@@ -46,7 +46,7 @@
     <string name="protocols_info_slip_ratio">Slip ratio, [%]:</string>
     <string name="protocols_info_distance">Trip, [m]:</string>
     <string name="protocols_info_operator">Operator:</string>
-    <string name="protocols_map_view">Protocol on map</string>
+    <string name="protocols_view_mode">View</string>
     <string name="protocols_split_both_ways_protocol">Split rides</string>
     <string name="calibration_reset">Reset</string>
     <string name="calibration_next_step">Next</string>
@@ -82,4 +82,5 @@
     <string name="protocols_split_both_ways_protocol_toast">Split both ways protocols</string>
     <string name="protocols_merge_both_ways_protocol_toast">Merge both ways protocols</string>
     <string name="protocols_plot_view_toast">Protocol plot view</string>
+    <string name="protocols_search_button">Search</string>
 </resources>
