@@ -56,7 +56,7 @@
     <string name="protocols_info_distance">Расстояние, [м]:</string>
     <string name="protocols_info_operator">Оператор:</string>
     <string name="protocols_view_mode">Вид протокола</string>
-    <string name="protocols_split_both_ways_protocol">Разделить заезды</string>
+    <string name="protocols_split_both_ways_protocol">Заезды туда и обратно</string>
     <string name="calibration_reset">Сбросить</string>
     <string name="calibration_next_step">Далее</string>
     <string name="calibration_load_10_kg">Заполните таблицу калибровки. Нагрузите 10 кг и нажмите кнопку \"Далее\"</string>
@@ -99,8 +99,8 @@
     <string name="home_trip_type_one_way_toast">Заезд в одну сторону</string>
     <string name="home_trip_type_both_ways_toast">Заезд в обе стороны</string>
     <string name="protocols_map_view_toast">Протокол на карте</string>
-    <string name="protocols_split_both_ways_protocol_toast">Разделить</string>
-    <string name="protocols_merge_both_ways_protocol_toast">Как один</string>
+    <string name="protocols_split_both_ways_protocol_toast">Разделить двухсторонние</string>
+    <string name="protocols_merge_both_ways_protocol_toast">Объединить двухсторонние</string>
     <string name="protocols_plot_view_toast">Протокол на графике</string>
     <string name="protocols_search_button">Поиск</string>
     <string name="protocols_view_mode_button">Вид</string>

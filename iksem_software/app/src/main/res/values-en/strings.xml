@@ -47,7 +47,7 @@
     <string name="protocols_info_distance">Trip, [m]:</string>
     <string name="protocols_info_operator">Operator:</string>
     <string name="protocols_view_mode">Protocol view</string>
-    <string name="protocols_split_both_ways_protocol">Split rides</string>
+    <string name="protocols_split_both_ways_protocol">Both ways trips</string>
     <string name="calibration_reset">Reset</string>
     <string name="calibration_next_step">Next</string>
     <string name="calibration_load_10_kg">Fill in the calibration table. Load 10 kg and press \"Next\" button</string>
@@ -77,11 +77,11 @@
     <string name="settings_input_slip_ratio_helper">Input value, %</string>
     <string name="settings_operator_helper">Input name</string>
     <string name="home_trip_type_one_way_toast">One way trip</string>
-    <string name="home_trip_type_both_ways_toast">Both ways trip</string>
-    <string name="protocols_map_view_toast">Protocol map view</string>
+    <string name="home_trip_type_both_ways_toast">Return trip</string>
+    <string name="protocols_map_view_toast">Map view</string>
     <string name="protocols_split_both_ways_protocol_toast">Split view</string>
     <string name="protocols_merge_both_ways_protocol_toast">Merge view</string>
-    <string name="protocols_plot_view_toast">Protocol plot view</string>
+    <string name="protocols_plot_view_toast">Plot view</string>
     <string name="protocols_search_button">Search</string>
     <string name="protocols_view_mode_button">View mode</string>
 </resources>
