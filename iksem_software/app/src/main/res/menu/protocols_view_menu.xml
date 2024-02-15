@@ -8,12 +8,16 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/protocols_plot_view"
+                    android:checked="true"
                     android:icon="@drawable/ic_protocol_plot_view"
+                    android:iconTint="?android:attr/textColor"
                     android:orderInCategory="1"
                     android:title="@string/protocols_plot_view_toast" />
                 <item
                     android:id="@+id/protocols_map_view"
+                    android:checked="false"
                     android:icon="@drawable/ic_protocol_map_view"
+                    android:iconTint="?android:attr/textColor"
                     android:orderInCategory="2"
                     android:title="@string/protocols_map_view_toast" />
             </group>
@@ -25,15 +29,19 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/protocols_split_view"
-                    android:icon="@drawable/ic_protocol_split"
-                    android:orderInCategory="3"
-                    android:title="@string/protocols_split_both_ways_protocol_toast" />
-                <item
                     android:id="@+id/protocols_merge_view"
+                    android:checked="true"
                     android:icon="@drawable/ic_protocol_merge"
-                    android:orderInCategory="4"
+                    android:iconTint="?android:attr/textColor"
+                    android:orderInCategory="3"
                     android:title="@string/protocols_merge_both_ways_protocol_toast" />
+                <item
+                    android:id="@+id/protocols_split_view"
+                    android:checked="false"
+                    android:icon="@drawable/ic_protocol_split"
+                    android:iconTint="?android:attr/textColor"
+                    android:orderInCategory="4"
+                    android:title="@string/protocols_split_both_ways_protocol_toast" />
             </group>
         </menu>
     </item>

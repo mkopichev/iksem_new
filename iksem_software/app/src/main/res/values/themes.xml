@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/background_text</item>
         <item name="colorPrimaryVariant">@color/background_text_disabled</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/cyan_grayish</item>
         <item name="colorSecondaryVariant">@color/cyan_dark</item>
@@ -14,6 +14,7 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="android:textColor">@drawable/background_text_color</item>
         <item name="materialSwitchStyle">@style/Widget.App.Switch</item>
+        <item name="android:popupMenuStyle">@style/popup_menu</item>
     </style>
 
     <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
@@ -22,6 +23,11 @@
 
     <style name="ThemeOverlay.App.Switch" parent="">
         <item name="colorPrimary">@color/green_light</item>
+    </style>
+
+    <style name="popup_menu" parent="Widget.Material3.PopupMenu">
+        <item name="android:popupBackground">@color/background_over</item>
+        <item name="android:textColor">?android:attr/textColor</item>
     </style>
 
     <style name="header_text_1">

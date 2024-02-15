@@ -55,7 +55,7 @@
     <string name="protocols_info_slip_ratio">Скольжение, [%]:</string>
     <string name="protocols_info_distance">Расстояние, [м]:</string>
     <string name="protocols_info_operator">Оператор:</string>
-    <string name="protocols_view_mode">Вид</string>
+    <string name="protocols_view_mode">Вид протокола</string>
     <string name="protocols_split_both_ways_protocol">Разделить заезды</string>
     <string name="calibration_reset">Сбросить</string>
     <string name="calibration_next_step">Далее</string>
@@ -99,8 +99,9 @@
     <string name="home_trip_type_one_way_toast">Заезд в одну сторону</string>
     <string name="home_trip_type_both_ways_toast">Заезд в обе стороны</string>
     <string name="protocols_map_view_toast">Протокол на карте</string>
-    <string name="protocols_split_both_ways_protocol_toast">Двухсторонние протоколы раздельно</string>
-    <string name="protocols_merge_both_ways_protocol_toast">Двухсторонние протоколы как один</string>
+    <string name="protocols_split_both_ways_protocol_toast">Разделить</string>
+    <string name="protocols_merge_both_ways_protocol_toast">Как один</string>
     <string name="protocols_plot_view_toast">Протокол на графике</string>
     <string name="protocols_search_button">Поиск</string>
+    <string name="protocols_view_mode_button">Вид</string>
 </resources>
