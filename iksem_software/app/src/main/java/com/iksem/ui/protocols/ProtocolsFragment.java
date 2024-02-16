@@ -3,7 +3,6 @@ package com.iksem.ui.protocols;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
@@ -16,8 +15,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.button.MaterialButton;
 import com.iksem.R;
 import com.iksem.databinding.FragmentProtocolsBinding;
-
-import java.util.Objects;
 
 public class ProtocolsFragment extends Fragment {
 
@@ -38,8 +35,9 @@ public class ProtocolsFragment extends Fragment {
         final MaterialButton protocolsSearchButton = binding.protocolsSearchButton;
 
         protocolsViewMode.setOnClickListener(v -> {
-            PopupMenu popupMenu = new PopupMenu(requireActivity(), v);
+            final PopupMenu popupMenu = new PopupMenu(requireActivity(), protocolsViewMode);
             popupMenu.getMenuInflater().inflate(R.menu.protocols_view_menu, popupMenu.getMenu());
+            popupMenu.getMenu().setGroupDividerEnabled(true);
             popupMenu.show();
         });
 
