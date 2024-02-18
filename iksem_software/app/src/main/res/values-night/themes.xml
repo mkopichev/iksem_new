@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.IKSEMSoftware" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/background_text</item>
         <item name="colorPrimaryVariant">@color/background_text_disabled</item>
@@ -9,7 +9,10 @@
         <item name="colorSecondary">@color/cyan_grayish</item>
         <item name="colorSecondaryVariant">@color/cyan_dark</item>
         <item name="colorOnSecondary">@color/red_grayish_dark</item>
+        <item name="colorSecondaryContainer">@color/white</item>
+        <item name="colorOnSecondaryContainer">@color/black</item>
         <!-- Customize your theme here. -->
+        <item name="colorOnSurfaceVariant">@color/background_text_disabled</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowBackground">@color/background</item>
         <item name="android:textColor">@drawable/background_text_color</item>
@@ -23,6 +26,8 @@
 
     <style name="ThemeOverlay.App.Switch" parent="">
         <item name="colorPrimary">@color/green_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimaryContainer">@color/black</item>
     </style>
 
     <style name="popup_menu" parent="Widget.Material3.PopupMenu">
@@ -45,7 +50,7 @@
     <style name="input_edit_text" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="android:minHeight">50dp</item>
         <item name="android:textColor">?android:attr/textColor</item>
-        <item name="android:textColorHint">?android:attr/textColor</item>
+        <item name="android:textColorHint">@color/background_text_hint</item>
         <item name="hintTextColor">?android:attr/textColor</item>
         <item name="android:textSize">16sp</item>
         <item name="android:clickable">true</item>
@@ -99,6 +104,10 @@
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
         <item name="layout_constraintDimensionRatio">1:1</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
     </style>
 
     <style name="button_red" parent="button_general">
@@ -113,6 +122,10 @@
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
         <item name="layout_constraintDimensionRatio">1:1</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
     </style>
 
     <style name="button_toggle">

@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0" />
 
-    <TableLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_indicators_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,13 +40,19 @@
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_info_box"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_plot_area">
 
         <TableRow
+            android:id="@+id/home_indicators_area_transport_velocity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2">
+            app:layout_constraintBottom_toTopOf="@id/home_indicators_area_measuring_velocity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 style="@style/header_text_3"
@@ -115,9 +121,14 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/home_indicators_area_measuring_velocity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2">
+            app:layout_constraintBottom_toTopOf="@id/home_indicators_area_current"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_indicators_area_transport_velocity">
 
             <TextView
                 style="@style/header_text_3"
@@ -186,9 +197,14 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/home_indicators_area_current"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2">
+            app:layout_constraintBottom_toTopOf="@id/home_indicators_area_load"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_indicators_area_measuring_velocity">
 
             <TextView
                 style="@style/header_text_3"
@@ -258,9 +274,14 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/home_indicators_area_load"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.2">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_indicators_area_current">
 
             <TextView
                 style="@style/header_text_3"
@@ -328,9 +349,9 @@
 
         </TableRow>
 
-    </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TableLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_info_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -344,16 +365,19 @@
         app:layout_constraintTop_toBottomOf="@id/home_indicators_area">
 
         <TableRow
+            android:id="@+id/home_info_box_operator_and_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_weight="0.5">
+            app:layout_constraintBottom_toTopOf="@id/home_info_box_trip_and_battery"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.45"
+                android:layout_weight="0.4"
                 android:gravity="center_vertical|start"
                 android:text="@string/home_info_box_operator" />
 
@@ -362,7 +386,7 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.55"
+                android:layout_weight="0.6"
                 android:gravity="center"
                 android:text="@string/unknown_value"
                 android:textStyle="bold" />
@@ -371,7 +395,7 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.45"
+                android:layout_weight="0.4"
                 android:gravity="center_vertical|start"
                 android:text="@string/home_info_box_iksem_number" />
 
@@ -380,7 +404,7 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.55"
+                android:layout_weight="0.6"
                 android:gravity="center"
                 android:text="@string/unknown_value"
                 android:textStyle="bold" />
@@ -388,15 +412,19 @@
         </TableRow>
 
         <TableRow
+            android:id="@+id/home_info_box_trip_and_battery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_info_box_operator_and_number">
 
             <TextView
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.45"
+                android:layout_weight="0.4"
                 android:gravity="center_vertical|start"
                 android:text="@string/home_info_box_distance" />
 
@@ -405,7 +433,7 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.55"
+                android:layout_weight="0.6"
                 android:gravity="center"
                 android:text="@string/unknown_value"
                 android:textStyle="bold" />
@@ -414,7 +442,7 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.45"
+                android:layout_weight="0.4"
                 android:gravity="center_vertical|start"
                 android:text="@string/home_info_box_battery_level" />
 
@@ -423,33 +451,38 @@
                 style="@style/header_text_3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.55"
+                android:layout_weight="0.6"
                 android:gravity="center"
                 android:text="@string/unknown_value"
                 android:textStyle="bold" />
 
         </TableRow>
 
-    </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_switches_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@drawable/box_rounded_framed"
         android:gravity="center"
-        android:orientation="vertical"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/home_start_stop_buttons_area"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_info_box">
 
         <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/home_switches_area_trip_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:checkedButton="@id/home_both_ways_protocol"
+            app:layout_constraintBottom_toTopOf="@id/home_switches_area_strobe_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:selectionRequired="true"
             app:singleSelection="true">
 
@@ -476,6 +509,7 @@
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
         <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/home_switches_area_strobe_light"
             style="@style/header_text_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -484,9 +518,13 @@
             android:text="@string/home_light_on"
             android:textAlignment="textStart"
             android:textColor="@color/background_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_switches_area_trip_type"
             app:thumbIcon="@drawable/ic_switch_strobe" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/home_start_stop_buttons_area"

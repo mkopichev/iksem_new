@@ -84,4 +84,15 @@
     <string name="protocols_plot_view_toast">Plot view</string>
     <string name="protocols_search_button">Search</string>
     <string name="protocols_view_mode_button">View mode</string>
+    <string name="dialog_search_protocols_date_from_hint">Date FROM</string>
+    <string name="dialog_protocols_search_date_till_hint">Date TILL</string>
+    <string name="dialog_search_protocols_iksem_number_hint">Device</string>
+    <string name="dialog_search_protocols_operator_hint">Operator</string>
+    <string name="dialog_search_protocols_date_from_helper">Start date</string>
+    <string name="dialog_protocols_search_date_till_helper">End date</string>
+    <string name="dialog_search_protocols_iksem_number_helper">IKSEM number</string>
+    <string name="dialog_search_protocols_operator_helper">Input name</string>
+    <string name="dialog_search_protocols_apply">Start search</string>
+    <string name="dialog_search_protocols_title">Input data for filtering</string>
+    <string name="dialog_search_protocols_clear">Clear search</string>
 </resources>
