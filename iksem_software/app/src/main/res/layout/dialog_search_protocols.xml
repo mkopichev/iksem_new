@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
     android:background="@drawable/box_rounded_framed"
     android:backgroundTint="@color/background_over">
 
@@ -13,6 +12,7 @@
         style="@style/header_text_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:gravity="center"
         android:text="@string/dialog_search_protocols_title"
         app:layout_constraintBottom_toTopOf="@id/dialog_search_protocols_date_from_title"
@@ -32,8 +32,7 @@
         app:layout_constraintBottom_toTopOf="@id/dialog_search_protocols_iksem_number_title"
         app:layout_constraintEnd_toStartOf="@id/dialog_search_protocols_date_till_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_search_protocols_title"
-        app:layout_constraintWidth_percent="0.45">
+        app:layout_constraintTop_toBottomOf="@id/dialog_search_protocols_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_search_protocols_date_from"
@@ -49,15 +48,13 @@
         style="@style/input_edit_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:layout_marginStart="4dp"
         android:hint="@string/dialog_protocols_search_date_till_hint"
         app:helperText="@string/dialog_protocols_search_date_till_helper"
         app:layout_constraintBottom_toBottomOf="@id/dialog_search_protocols_date_from_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/dialog_search_protocols_date_from_title"
-        app:layout_constraintTop_toTopOf="@id/dialog_search_protocols_date_from_title"
-        app:layout_constraintWidth_percent="0.45">
+        app:layout_constraintTop_toTopOf="@id/dialog_search_protocols_date_from_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_search_protocols_date_till"
@@ -80,15 +77,14 @@
         app:layout_constraintBottom_toTopOf="@id/dialog_search_protocols_apply"
         app:layout_constraintEnd_toStartOf="@id/dialog_search_protocols_operator_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_search_protocols_date_from_title"
-        app:layout_constraintWidth_percent="0.45">
+        app:layout_constraintTop_toBottomOf="@id/dialog_search_protocols_date_from_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_search_protocols_iksem_number"
             style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date" />
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,22 +93,20 @@
         style="@style/input_edit_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:layout_marginStart="4dp"
         android:hint="@string/dialog_search_protocols_operator_hint"
         app:helperText="@string/dialog_search_protocols_operator_helper"
         app:layout_constraintBottom_toBottomOf="@id/dialog_search_protocols_iksem_number_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/dialog_search_protocols_iksem_number_title"
-        app:layout_constraintTop_toTopOf="@id/dialog_search_protocols_iksem_number_title"
-        app:layout_constraintWidth_percent="0.45">
+        app:layout_constraintTop_toTopOf="@id/dialog_search_protocols_iksem_number_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_search_protocols_operator"
             style="@style/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date" />
+            android:inputType="textCapWords" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +115,7 @@
         style="@style/button_icon_green"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
         android:contentDescription="@string/dialog_search_protocols_apply"
         app:icon="@drawable/ic_button_filter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -134,7 +128,6 @@
         style="@style/button_icon_red"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:contentDescription="@string/dialog_search_protocols_clear"
         app:icon="@drawable/ic_button_no_filter"
         app:layout_constraintBottom_toBottomOf="@id/dialog_search_protocols_apply"

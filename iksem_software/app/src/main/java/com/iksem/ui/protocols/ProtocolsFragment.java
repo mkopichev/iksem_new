@@ -1,6 +1,9 @@
 package com.iksem.ui.protocols;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +18,16 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.button.MaterialButton;
 import com.iksem.R;
 import com.iksem.databinding.FragmentProtocolsBinding;
+import com.iksem.ui.DialogBoxListener;
+import com.iksem.ui.DialogBoxProtocolsSearch;
+
+import java.util.Objects;
 
 public class ProtocolsFragment extends Fragment {
 
     private FragmentProtocolsBinding binding;
 
-    @SuppressLint("ResourceAsColor")
+    @SuppressLint({"ResourceAsColor", "NonConstantResourceId"})
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         ProtocolsViewModel protocolsViewModel = new ViewModelProvider(this).get(ProtocolsViewModel.class);
@@ -32,53 +39,44 @@ public class ProtocolsFragment extends Fragment {
         protocolsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         final MaterialButton protocolsViewMode = binding.protocolsViewModeButton;
-        final MaterialButton protocolsSearchButton = binding.protocolsSearchButton;
+        final MaterialButton protocolsSearch = binding.protocolsSearchButton;
+
+        final PopupMenu popupMenu = new PopupMenu(requireActivity(), protocolsViewMode);
+        popupMenu.getMenuInflater().inflate(R.menu.protocols_view_menu, popupMenu.getMenu());
+        popupMenu.getMenu().setGroupDividerEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            popupMenu.setForceShowIcon(true);
+        }
 
         protocolsViewMode.setOnClickListener(v -> {
-            final PopupMenu popupMenu = new PopupMenu(requireActivity(), protocolsViewMode);
-            popupMenu.getMenuInflater().inflate(R.menu.protocols_view_menu, popupMenu.getMenu());
-            popupMenu.getMenu().setGroupDividerEnabled(true);
+
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+
+                menuItem.setChecked(true);
+                return true;
+            });
             popupMenu.show();
         });
 
-//        final MaterialButton protocolsViewPlot = binding.protocolsViewPlot, protocolsViewMap = binding.protocolsViewMap;
-//        final MaterialButton protocolsSplitView = binding.protocolsSplitView, protocolsMergeView = binding.protocolsMergeView;
-//
-//        protocolsViewPlot.addOnCheckedChangeListener((button, isChecked) -> {
-//            if (isChecked) {
-//                protocolsViewPlot.setIconTintResource(R.color.background_over);
-//                Toast.makeText(requireActivity(), R.string.protocols_plot_view_toast, Toast.LENGTH_SHORT).show();
-//            } else {
-//                protocolsViewPlot.setIconTintResource(R.color.background_text);
-//            }
-//        });
-//
-//        protocolsViewMap.addOnCheckedChangeListener((button, isChecked) -> {
-//            if (isChecked) {
-//                protocolsViewMap.setIconTintResource(R.color.background_over);
-//                Toast.makeText(requireActivity(), R.string.protocols_map_view_toast, Toast.LENGTH_SHORT).show();
-//            } else {
-//                protocolsViewMap.setIconTintResource(R.color.background_text);
-//            }
-//        });
-//
-//        protocolsSplitView.addOnCheckedChangeListener((button, isChecked) -> {
-//            if (isChecked) {
-//                protocolsSplitView.setIconTintResource(R.color.background_over);
-//                Toast.makeText(requireActivity(), R.string.protocols_split_both_ways_protocol_toast, Toast.LENGTH_SHORT).show();
-//            } else {
-//                protocolsSplitView.setIconTintResource(R.color.background_text);
-//            }
-//        });
-//
-//        protocolsMergeView.addOnCheckedChangeListener((button, isChecked) -> {
-//            if (isChecked) {
-//                protocolsMergeView.setIconTintResource(R.color.background_over);
-//                Toast.makeText(requireActivity(), R.string.protocols_merge_both_ways_protocol_toast, Toast.LENGTH_SHORT).show();
-//            } else {
-//                protocolsMergeView.setIconTintResource(R.color.background_text);
-//            }
-//        });
+        DialogBoxListener dialogBoxListener = new DialogBoxListener() {
+            @Override
+            public void rightButtonPressed(Object object) {
+
+            }
+
+            @Override
+            public void leftButtonPressed() {
+
+            }
+        };
+
+        protocolsSearch.setOnClickListener(view -> {
+
+            DialogBoxProtocolsSearch dialogBoxProtocolsSearch = new DialogBoxProtocolsSearch(requireActivity(), dialogBoxListener);
+            Objects.requireNonNull(dialogBoxProtocolsSearch.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialogBoxProtocolsSearch.show();
+
+        });
 
         return root;
     }

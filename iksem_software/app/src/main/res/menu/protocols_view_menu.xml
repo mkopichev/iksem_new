@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/protocols_view_mode"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/protocols_plot_view"
             android:checked="true"
@@ -16,7 +18,9 @@
             android:orderInCategory="2"
             android:title="@string/protocols_map_view_toast" />
     </group>
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/protocols_both_ways_show_mode"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/protocols_merge_view"
             android:checked="true"

@@ -111,7 +111,7 @@
     <string name="dialog_search_protocols_date_from_helper">Начальная дата</string>
     <string name="dialog_protocols_search_date_till_helper">Конечная дата</string>
     <string name="dialog_search_protocols_iksem_number_helper">Номер ИКСЭМ</string>
-    <string name="dialog_search_protocols_operator_helper">Вевдите имя</string>
+    <string name="dialog_search_protocols_operator_helper">Ввeдите имя</string>
     <string name="dialog_search_protocols_apply">Начать поиск</string>
     <string name="dialog_search_protocols_title">Введите данные для фильтрации</string>
     <string name="dialog_search_protocols_clear">Сбросить поиск</string>
