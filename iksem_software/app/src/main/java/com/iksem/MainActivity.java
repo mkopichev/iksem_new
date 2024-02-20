@@ -4,6 +4,7 @@ import static com.iksem.R.id.navigation_map;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
@@ -11,37 +12,46 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.iksem.ui.ViewPagerAdapter;
 
-import java.util.Objects;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 
 public class MainActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
+
     ViewPager2 viewPager2;
     ViewPagerAdapter viewPagerAdapter;
+    BottomNavigationView bottomNavigationView;
 
-    @SuppressLint("NonConstantResourceId")
+    @SuppressLint({"NonConstantResourceId", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        this.getWindow().setStatusBarColor(getColor(R.color.background));
+        this.getWindow().setNavigationBarColor(getColor(R.color.background_over));
+
         setContentView(R.layout.activity_main);
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
-        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_home);
-        viewPager2 = findViewById(R.id.viewPager);
+
         viewPagerAdapter = new ViewPagerAdapter(this);
+
+        viewPager2 = findViewById(R.id.viewPager);
         viewPager2.setAdapter(viewPagerAdapter);
-        viewPager2.setCurrentItem(2);
+        viewPager2.setCurrentItem(ViewPagerAdapter.HOME_FRAGMENT);
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.navigation_protocols) {
-                viewPager2.setCurrentItem(0);
+                viewPager2.setCurrentItem(ViewPagerAdapter.PROTOCOLS_FRAGMENT);
             } else if (id == navigation_map) {
-                viewPager2.setCurrentItem(1);
+                viewPager2.setCurrentItem(ViewPagerAdapter.MAP_FRAGMENT);
             } else if (id == R.id.navigation_home) {
-                viewPager2.setCurrentItem(2);
+                viewPager2.setCurrentItem(ViewPagerAdapter.HOME_FRAGMENT);
             } else if (id == R.id.navigation_bluetooth) {
-                viewPager2.setCurrentItem(3);
+                viewPager2.setCurrentItem(ViewPagerAdapter.BLUETOOTH_FRAGMENT);
             } else if (id == R.id.navigation_settings) {
-                viewPager2.setCurrentItem(4);
+                viewPager2.setCurrentItem(ViewPagerAdapter.SETTINGS_FRAGMENT);
             }
             return false;
         });
@@ -49,30 +59,34 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
+
                 switch (position) {
-                    case 0:
+                    case ViewPagerAdapter.PROTOCOLS_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_protocols).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_protocols);
                         break;
-                    case 1:
+                    case ViewPagerAdapter.MAP_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(navigation_map).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_map);
                         break;
-                    case 2:
+                    case ViewPagerAdapter.HOME_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_home);
                         break;
-                    case 3:
+                    case ViewPagerAdapter.BLUETOOTH_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_bluetooth).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_bluetooth);
                         break;
-                    case 4:
+                    case ViewPagerAdapter.SETTINGS_FRAGMENT:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_settings).setChecked(true);
-                        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_settings);
                         break;
                 }
                 super.onPageSelected(position);
             }
+        });
+
+        KeyboardVisibilityEvent.setEventListener(this, isOpen -> {
+
+            if (isOpen)
+                bottomNavigationView.setVisibility(View.GONE);
+            else
+                bottomNavigationView.setVisibility(View.VISIBLE);
         });
     }
 }

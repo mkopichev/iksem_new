@@ -1,9 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">ИКСЭМ</string>
-    <string name="title_home">Управление</string>
     <string name="title_protocols">Протоколы</string>
-    <string name="title_map">Местоположение</string>
-    <string name="title_bluetooth">Подключение</string>
+    <string name="title_map">Карта</string>
+    <string name="title_main">Главная</string>
+    <string name="title_connection">Связь</string>
     <string name="title_settings">Настройки</string>
     <string name="title_calibration">Калибровка</string>
+    <string name="bluetooth_refresh">Обновить</string>
+    <string name="bluetooth_devices_available">Доступные устройства</string>
+    <string name="map_iksem_location">Местоположение измерителя</string>
+    <string name="map_iksem_coordinates">Координаты</string>
+    <string name="map_latitude">Широта:</string>
+    <string name="map_longitude">Долгота:</string>
+    <string name="map_latitude_letter" translatable="false">N</string>
+    <string name="map_longitude_letter" translatable="false">E</string>
+    <string name="settings_operator_hint">Имя оператора</string>
+    <string name="settings_measuring_wheel_hint">Радиус измерительного колеса</string>
+    <string name="settings_transport_wheel_hint">Радиус транспортных колёс</string>
+    <string name="settings_slip_ratio_hint">Скольжение</string>
+    <string name="settings_password_helper">Введите пароль</string>
+    <string name="settings_password_warning">Для доступа к настройкам и калибровке введите пароль</string>
+    <string name="save_button">Принять</string>
+    <string name="settings_calibration_button">Калибровка</string>
+    <string name="button_unlock_settings">Разблокировать</string>
+    <string name="home_start_button">Старт</string>
+    <string name="home_stop_button">Стоп</string>
+    <string name="home_light_on">Проблесковый маяк</string>
+    <string name="settings_set_new_password_helper">Задайте новый пароль</string>
+    <string name="home_info_box_iksem_number">ИКСЭМ №:</string>
+    <string name="home_info_box_date">Дата:</string>
+    <string name="home_info_box_time">Время:</string>
+    <string name="home_info_box_operator">Оператор:</string>
+    <string name="home_info_box_distance">Заезд, [м]:</string>
+    <string name="unknown_value" translatable="false">- - -</string>
+    <string name="home_indicators_area_M">Нагрузка</string>
+    <string name="home_indicators_area_I">Ток</string>
+    <string name="home_indicators_area_Vmw">Скорость ИК</string>
+    <string name="home_indicators_area_Vtw">Скорость ТК</string>
+    <string name="home_indicators_area_km_h">км/ч</string>
+    <string name="home_indicators_area_A">А</string>
+    <string name="home_indicators_area_kg">кг</string>
+    <string name="home_indicators_area_0" translatable="false">0</string>
+    <string name="home_indicators_area_50" translatable="false">50</string>
+    <string name="home_indicators_area_75" translatable="false">75</string>
+    <string name="home_indicators_area_100" translatable="false">100</string>
+    <string name="home_indicators_area_150" translatable="false">150</string>
+    <string name="home_info_box_battery_level">Заряд, [%]:</string>
+    <string name="protocols_info_date">Дата записи:</string>
+    <string name="protocols_info_iksem_number">ИКСЭМ №:</string>
+    <string name="protocols_info_time">Длительность, [c]:</string>
+    <string name="protocols_info_average_friction">Коэф. сцеп.:</string>
+    <string name="protocols_info_average_velocity">Скорость, [км/ч]:</string>
+    <string name="protocols_info_slip_ratio">Скольжение, [%]:</string>
+    <string name="protocols_info_distance">Расстояние, [м]:</string>
+    <string name="protocols_info_operator">Оператор:</string>
+    <string name="protocols_view_mode">Вид протокола</string>
+    <string name="protocols_split_both_ways_protocol">Заезды туда и обратно</string>
+    <string name="calibration_reset">Сбросить</string>
+    <string name="calibration_next_step">Далее</string>
+    <string name="calibration_load_10_kg">Заполните таблицу калибровки. Нагрузите 10 кг и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_enter_vertical_load">Введите значение вертикальной нагрузки в поле \"Вес\" и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_load_20_kg">Нагрузите 20 кг и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_load_30_kg">Нагрузите 30 кг и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_load_35_kg">Нагрузите 35 кг и нажмите кнопку \"Далее\"</string>
+    <string name="calibration_unload_30_kg">Разгрузите до 30 кг и нажмите \"Далее\"</string>
+    <string name="calibration_unload_20_kg">Разгрузите до 20 кг и нажмите \"Далее\"</string>
+    <string name="calibration_unload_10_kg">Разгрузите до 10 кг и нажмите \"Далее\"</string>
+    <string name="calibration_finished_accept_or_decline">Калибровка завершена - примите или сбросьте результаты</string>
+    <string name="calibration_moment">Момент:</string>
+    <string name="calibration_weight">Вес</string>
+    <string name="calibration_friction_coef">КCц:</string>
+    <string name="calibration_input_weight">Введите вес</string>
+    <string name="protocols_list_title">Список протоколов</string>
+    <string name="calibration_table_title">Заполните таблицу калибровки</string>
+    <string name="calibration_force">Сила</string>
+    <string name="calibration_current_value">Тек. знач.</string>
+    <string name="calibration_new_value">Нов. знач.</string>
+    <string name="calibration_10_r" translatable="false">10 &gt;</string>
+    <string name="calibration_10_l" translatable="false">10 &lt;</string>
+    <string name="calibration_20_r" translatable="false">20 &gt;</string>
+    <string name="calibration_20_l" translatable="false">20 &lt;</string>
+    <string name="calibration_30_r" translatable="false">30 &gt;</string>
+    <string name="calibration_30_l" translatable="false">30 &lt;</string>
+    <string name="calibration_delta_M" translatable="false">ΔM</string>
+    <string name="calibration_delta_W" translatable="false">ΔW</string>
+    <string name="calibration_zero_M" translatable="false">0M</string>
+    <string name="calibration_zero_W" translatable="false">0W</string>
+    <string name="calibration_exit">Выйти</string>
+    <string name="settings_mm">" мм"</string>
+    <string name="settings_percent" translatable="false">" %"</string>
+    <string name="settings_password_hint">Пароль</string>
+    <string name="home_trip_type_one_way">Только туда</string>
+    <string name="home_trip_type_both_ways">Туда и назад</string>
+    <string name="settings_input_radius_helper">Введите радиус, мм</string>
+    <string name="settings_input_slip_ratio_helper">Введите значение, %</string>
+    <string name="settings_operator_helper">Введите имя</string>
+    <string name="home_trip_type_one_way_toast">Заезд в одну сторону</string>
+    <string name="home_trip_type_both_ways_toast">Заезд в обе стороны</string>
+    <string name="protocols_map_view_toast">Протокол на карте</string>
+    <string name="protocols_split_both_ways_protocol_toast">Разделить двухсторонние</string>
+    <string name="protocols_merge_both_ways_protocol_toast">Объединить двухсторонние</string>
+    <string name="protocols_plot_view_toast">Протокол на графике</string>
+    <string name="protocols_search_button">Поиск</string>
+    <string name="protocols_view_mode_button">Вид</string>
+    <string name="dialog_search_protocols_date_from_hint">Дата ОТ</string>
+    <string name="dialog_protocols_search_date_till_hint">Дата ДО</string>
+    <string name="dialog_search_protocols_iksem_number_hint">Измеритель</string>
+    <string name="dialog_search_protocols_operator_hint">Оператор</string>
+    <string name="dialog_search_protocols_date_from_helper">Начальная дата</string>
+    <string name="dialog_protocols_search_date_till_helper">Конечная дата</string>
+    <string name="dialog_search_protocols_iksem_number_helper">Номер ИКСЭМ</string>
+    <string name="dialog_search_protocols_operator_helper">Ввeдите имя</string>
+    <string name="dialog_search_protocols_apply">Начать поиск</string>
+    <string name="dialog_search_protocols_title">Введите данные для фильтрации</string>
+    <string name="dialog_search_protocols_clear">Сбросить поиск</string>
 </resources>

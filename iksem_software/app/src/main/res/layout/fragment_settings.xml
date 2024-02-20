@@ -10,13 +10,224 @@
         android:id="@+id/text_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginHorizontal="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/settings_operator_title"
+        style="@style/input_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/settings_operator_hint"
+        app:endIconDrawable="@drawable/ic_input_clear"
+        app:endIconMode="clear_text"
+        app:helperText="@string/settings_operator_helper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:startIconContentDescription="@string/settings_operator_hint"
+        app:startIconDrawable="@drawable/ic_input_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settings_operator"
+            style="@style/input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/settings_password_title"
+        style="@style/input_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/activity_vertical_margin"
+        android:hint="@string/settings_password_hint"
+        app:endIconDrawable="@drawable/ic_input_visibility"
+        app:endIconMode="password_toggle"
+        app:helperText="@string/settings_password_helper"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/settings_password_warning"
+        app:layout_constraintEnd_toStartOf="@id/settings_password_button"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_operator_title"
+        app:layout_constraintWidth_percent="0.8"
+        app:startIconContentDescription="@string/settings_password_helper"
+        app:startIconDrawable="@drawable/ic_input_password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settings_password"
+            style="@style/input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/settings_password_button"
+        style="@style/button_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/button_unlock_settings"
+        app:icon="@drawable/ic_button_unlock"
+        app:layout_constraintBottom_toBottomOf="@id/settings_password_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/settings_password_title" />
+
+    <LinearLayout
+        android:id="@+id/settings_password_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/box_rounded_framed"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        app:layout_constraintBottom_toTopOf="@id/settings_measuring_radius_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_password_title">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:contentDescription="@string/settings_password_warning"
+            android:src="@drawable/ic_info"
+            android:tint="@color/background_text" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/header_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:paddingHorizontal="@dimen/activity_horizontal_margin"
+            android:text="@string/settings_password_warning"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/settings_measuring_radius_title"
+        style="@style/input_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:hint="@string/settings_measuring_wheel_hint"
+        app:endIconDrawable="@drawable/ic_input_clear"
+        app:endIconMode="clear_text"
+        app:helperText="@string/settings_input_radius_helper"
+        app:layout_constraintBottom_toTopOf="@id/settings_driving_radius_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_password_warning"
+        app:suffixText="@string/settings_mm">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settings_measuring_radius"
+            style="@style/input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textAlignment="textEnd" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/settings_driving_radius_title"
+        style="@style/input_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:hint="@string/settings_transport_wheel_hint"
+        app:endIconDrawable="@drawable/ic_input_clear"
+        app:endIconMode="clear_text"
+        app:helperText="@string/settings_input_radius_helper"
+        app:layout_constraintBottom_toTopOf="@id/settings_slip_ratio_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_measuring_radius_title"
+        app:suffixText="@string/settings_mm">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settings_driving_radius"
+            style="@style/input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textAlignment="textEnd" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/settings_slip_ratio_title"
+        style="@style/input_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:hint="@string/settings_slip_ratio_hint"
+        app:endIconDrawable="@drawable/ic_input_clear"
+        app:endIconMode="clear_text"
+        app:helperText="@string/settings_input_slip_ratio_helper"
+        app:layout_constraintBottom_toTopOf="@id/settings_buttons_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_driving_radius_title"
+        app:suffixText="@string/settings_percent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/settings_slip_ratio"
+            style="@style/input_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:textAlignment="textEnd" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/settings_buttons_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings_save_button"
+            style="@style/button_green"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="0.5"
+            android:text="@string/save_button"
+            app:icon="@drawable/ic_button_apply" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings_calibration_button"
+            style="@style/button_general"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_weight="0.5"
+            android:text="@string/settings_calibration_button"
+            app:icon="@drawable/ic_button_calibration" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

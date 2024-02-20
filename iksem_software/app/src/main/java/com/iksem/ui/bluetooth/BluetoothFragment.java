@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.iksem.databinding.FragmentBluetoothBinding;
 
 public class BluetoothFragment extends Fragment {
@@ -16,6 +19,7 @@ public class BluetoothFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
         BluetoothViewModel bluetoothViewModel =
                 new ViewModelProvider(this).get(BluetoothViewModel.class);
 
@@ -29,6 +33,7 @@ public class BluetoothFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         binding = null;
     }
