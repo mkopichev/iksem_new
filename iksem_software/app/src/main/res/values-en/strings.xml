@@ -47,7 +47,6 @@
     <string name="protocols_info_distance">Trip, [m]:</string>
     <string name="protocols_info_operator">Operator:</string>
     <string name="protocols_view_mode">Protocol view</string>
-    <string name="protocols_split_both_ways_protocol">Both ways trips</string>
     <string name="calibration_reset">Reset</string>
     <string name="calibration_next_step">Next</string>
     <string name="calibration_load_10_kg">Fill in the calibration table. Load 10 kg and press \"Next\" button</string>
@@ -95,4 +94,5 @@
     <string name="dialog_search_protocols_apply">Start search</string>
     <string name="dialog_search_protocols_title">Input data for filtering</string>
     <string name="dialog_search_protocols_clear">Clear search</string>
+    <string name="bluetooth_permission_required">Bluetooth permission required for connection</string>
 </resources>

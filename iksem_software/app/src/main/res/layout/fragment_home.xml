@@ -503,6 +503,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="@string/home_trip_type_both_ways"
+                android:letterSpacing="-0.025"
                 android:textColor="@color/background_over"
                 app:icon="@drawable/ic_button_apply_no_frame" />
 

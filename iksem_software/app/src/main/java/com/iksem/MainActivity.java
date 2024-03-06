@@ -2,7 +2,6 @@ package com.iksem;
 
 import static com.iksem.R.id.navigation_map;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     ViewPagerAdapter viewPagerAdapter;
     BottomNavigationView bottomNavigationView;
 
-    @SuppressLint({"NonConstantResourceId", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -83,10 +81,8 @@ public class MainActivity extends AppCompatActivity {
 
         KeyboardVisibilityEvent.setEventListener(this, isOpen -> {
 
-            if (isOpen)
-                bottomNavigationView.setVisibility(View.GONE);
-            else
-                bottomNavigationView.setVisibility(View.VISIBLE);
+            if (isOpen) bottomNavigationView.setVisibility(View.GONE);
+            else bottomNavigationView.setVisibility(View.VISIBLE);
         });
     }
 }
