@@ -15,21 +15,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
-import com.iksem.R;
 import com.iksem.databinding.FragmentBluetoothBinding;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class BluetoothFragment extends Fragment implements View.OnClickListener {
 
@@ -39,30 +36,26 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
     public static ActivityResultLauncher<String[]> bluetoothGpsPermissionRequestLauncher;
     public static boolean bluetoothGpsPermissionGranted = false;
     BluetoothAdapter bluetoothAdapter;
-    public ArrayList<BluetoothDevice> btDevices = new ArrayList<>();
+    public HashSet<BluetoothDevice> btDevices = new HashSet<>();
     public DeviceListAdapter deviceListAdapter;
-    ListView lvNewDevices;
-
+    RecyclerView bluetoothDiscoveredDevicesList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        BluetoothViewModel bluetoothViewModel =
-                new ViewModelProvider(this).get(BluetoothViewModel.class);
-
         binding = FragmentBluetoothBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textBluetooth;
-        bluetoothViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         bluetoothPermissionWarning = binding.bluetoothPermissionWarning;
-        bluetoothPermissionWarning.setOnClickListener(view -> requestBluetoothGpsPermissions());
+        bluetoothPermissionWarning.setOnClickListener(view -> bluetoothGpsPermissionsRequest());
 
         bluetoothRefresh = binding.bluetoothRefreshButton;
         bluetoothRefresh.setOnClickListener(this);
 
+        bluetoothDiscoveredDevicesList = binding.bluetoothDiscoveredDevicesList;
+
         bluetoothGpsPermissionRequestLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+
             boolean areAllGranted = true;
             for (Boolean b : result.values()) {
                 areAllGranted = areAllGranted && b;
@@ -72,6 +65,7 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
                 bluetoothGpsPermissionGranted = true;
                 bluetoothPermissionWarning.setVisibility(View.GONE);
                 bluetoothRefresh.setVisibility(View.VISIBLE);
+                //TODO: turn on geolocation
                 Log.i("permissions", "Bluetooth permission granted");
             } else {
                 bluetoothGpsPermissionGranted = false;
@@ -81,7 +75,8 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
             }
         });
 
-        requestBluetoothGpsPermissions();
+        bluetoothGpsPermissionsRequest();
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         return root;
     }
@@ -91,6 +86,9 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
 
         super.onDestroyView();
         binding = null;
+        requireActivity().unregisterReceiver(broadcastReceiver1);
+        requireActivity().unregisterReceiver(broadcastReceiver2);
+        requireActivity().unregisterReceiver(broadcastReceiver3);
     }
 
     private final BroadcastReceiver broadcastReceiver1 = new BroadcastReceiver() {
@@ -154,7 +152,7 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
         }
     };
 
-    private BroadcastReceiver broadcastReceiver3 = new BroadcastReceiver() {
+    private final BroadcastReceiver broadcastReceiver3 = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
@@ -164,14 +162,18 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 btDevices.add(device);
-                if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                    requestBluetoothGpsPermissions();
-                    return;
-                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                    if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                        bluetoothGpsPermissionsRequest();
+                        return;
+                    } else if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+                        bluetoothGpsPermissionsRequest();
+                        return;
+                    }
                 assert device != null;
                 Log.i("broadcastReceiver3", "onReceive: " + device.getName() + ": " + device.getAddress());
-                deviceListAdapter = new DeviceListAdapter(context, R.layout.item_from_list, btDevices);
-                lvNewDevices.setAdapter(deviceListAdapter);
+                deviceListAdapter = new DeviceListAdapter(context, btDevices);
+                bluetoothDiscoveredDevicesList.setAdapter(deviceListAdapter);
             }
         }
     };
@@ -179,25 +181,41 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
 
-        Log.i("bluetooth", "Looking for unpaired devices");
-        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-            requestBluetoothGpsPermissions();
-            return;
-        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+            if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                bluetoothGpsPermissionsRequest();
+                return;
+            } else if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+                bluetoothGpsPermissionsRequest();
+                return;
+            }
         if (bluetoothAdapter.isDiscovering()) {
             Log.i("bluetooth", "Cancel discovery");
             bluetoothAdapter.cancelDiscovery();
         }
-        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-            requestBluetoothGpsPermissions();
-            return;
-        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+            if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                bluetoothGpsPermissionsRequest();
+                return;
+            } else if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+                bluetoothGpsPermissionsRequest();
+                return;
+            }
+        Log.i("bluetooth", "Looking for unpaired devices");
+        IntentFilter discoveryStartedIntent = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        requireActivity().registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.i("TAG", "Discovering...");
+            }
+        }, discoveryStartedIntent);
+        btDevices.clear();
         bluetoothAdapter.startDiscovery();
         IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-//        registerReceiver(broadcastReceiver3, discoverDevicesIntent);
+        requireActivity().registerReceiver(broadcastReceiver3, discoverDevicesIntent);
     }
 
-    public static void requestBluetoothGpsPermissions() {
+    public static void bluetoothGpsPermissionsRequest() {
 
         if (!bluetoothGpsPermissionGranted) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -217,6 +235,4 @@ public class BluetoothFragment extends Fragment implements View.OnClickListener 
             }
         }
     }
-
-
 }

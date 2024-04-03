@@ -114,5 +114,5 @@
     <string name="dialog_search_protocols_apply">Начать поиск</string>
     <string name="dialog_search_protocols_title">Введите данные для фильтрации</string>
     <string name="dialog_search_protocols_clear">Сбросить поиск</string>
-    <string name="bluetooth_permission_required">Для подключения к измерителю требуется разрешение</string>
+    <string name="bluetooth_permission_required">Для подключения к измерителю требуется доступ к Bluetooth</string>
 </resources>

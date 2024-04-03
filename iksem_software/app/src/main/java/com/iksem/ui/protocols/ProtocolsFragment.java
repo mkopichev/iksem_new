@@ -9,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.button.MaterialButton;
 import com.iksem.R;
@@ -30,13 +28,8 @@ public class ProtocolsFragment extends Fragment {
     @SuppressLint({"ResourceAsColor", "NonConstantResourceId"})
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        ProtocolsViewModel protocolsViewModel = new ViewModelProvider(this).get(ProtocolsViewModel.class);
-
         binding = FragmentProtocolsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textProtocols;
-        protocolsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
         final MaterialButton protocolsViewMode = binding.protocolsViewModeButton;
         final MaterialButton protocolsSearch = binding.protocolsSearchButton;

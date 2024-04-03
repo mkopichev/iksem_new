@@ -1,58 +1,74 @@
 package com.iksem.ui.bluetooth;
 
+import static com.iksem.ui.bluetooth.BluetoothFragment.bluetoothGpsPermissionsRequest;
+
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.iksem.MainActivity;
 import com.iksem.R;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
-public class DeviceListAdapter extends ArrayAdapter<BluetoothDevice> {
+public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.BluetoothDeviceViewHolder> {
 
-    private LayoutInflater layoutInflater;
-    private ArrayList<BluetoothDevice> devices;
-    private int viewResourceId;
+    final private ArrayList<BluetoothDevice> devices;
+    final private Context context;
 
-    public DeviceListAdapter(Context context, int tvResourceId, ArrayList<BluetoothDevice> devices) {
-        super(context, tvResourceId, devices);
-        this.devices = devices;
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        viewResourceId = tvResourceId;
+    public DeviceListAdapter(Context context, HashSet<BluetoothDevice> devices) {
+
+        this.devices = new ArrayList<>(devices);
+        this.context = context;
     }
 
     @NonNull
-    @SuppressLint("ViewHolder")
-    public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(viewResourceId, null);
+    @Override
+    public BluetoothDeviceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        BluetoothDevice device = devices.get(position);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.item_from_list, parent, false);
+        return new BluetoothDeviceViewHolder(view);
+    }
 
-        if (device != null) {
-            ToggleButton deviceName = convertView.findViewById(R.id.item_of_interest);
+    @Override
+    public void onBindViewHolder(@NonNull BluetoothDeviceViewHolder holder, int position) {
 
-            if (deviceName != null) {
-
-//                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-//                   BluetoothFragment.requestBluetoothGpsPermissions();
-//                    return convertView;
-//                }
-//                deviceName.setText(device.getName());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                bluetoothGpsPermissionsRequest();
+                return;
+            } else if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+                bluetoothGpsPermissionsRequest();
+                return;
             }
-        }
+        holder.device.setText(devices.get(position).getName());
+    }
 
-        return convertView;
+    @Override
+    public int getItemCount() {
+
+        return devices.size();
+    }
+
+    public static class BluetoothDeviceViewHolder extends RecyclerView.ViewHolder {
+
+        ToggleButton device;
+
+        public BluetoothDeviceViewHolder(@NonNull View itemView) {
+
+            super(itemView);
+            device = itemView.findViewById(R.id.item_of_interest);
+        }
     }
 }

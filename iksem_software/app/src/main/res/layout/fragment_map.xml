@@ -7,19 +7,6 @@
     tools:context=".ui.map.MapFragment">
 
     <TextView
-        android:id="@+id/text_map"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/map_location_here"
         style="@style/header_text_1"
         android:layout_width="match_parent"
